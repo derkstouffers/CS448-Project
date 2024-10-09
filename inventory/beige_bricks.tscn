@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://iitkfg8l2dec"]
+
+[ext_resource type="PackedScene" uid="uid://d2crpwk3cv4in" path="res://item_texture.tscn" id="1_4iwt6"]
+[ext_resource type="Texture2D" uid="uid://kq152i03ag18" path="res://tiles/Bricks-3.png.png" id="2_xbesl"]
+
+[node name="beige_bricks" instance=ExtResource("1_4iwt6")]
+texture = ExtResource("2_xbesl")
+tile = true
+tile_coords = Vector2i(2, 0)

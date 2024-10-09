@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dunq761x7qh06"]
+
+[ext_resource type="PackedScene" uid="uid://d2crpwk3cv4in" path="res://item_texture.tscn" id="1_cbc54"]
+[ext_resource type="Texture2D" uid="uid://ce0yneey4cfdc" path="res://tiles/Dark Gray Bricks.png" id="2_40do1"]
+
+[node name="dark_gray_bricks" instance=ExtResource("1_cbc54")]
+texture = ExtResource("2_40do1")
+tile = true
+tile_coords = Vector2i(4, 0)

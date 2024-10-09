@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://fhum8d0to3tu"]
+
+[ext_resource type="Script" path="res://top_menu_bar.gd" id="1_evjx0"]
+
+[node name="TopMenuBar" type="MenuBar"]
+offset_right = 716.0
+offset_bottom = 33.0
+script = ExtResource("1_evjx0")
+
+[node name="clear" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Clear"
+
+[connection signal="pressed" from="clear" to="." method="_on_clear_pressed"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmnt1ejlq7f0a"]
+
+[ext_resource type="PackedScene" uid="uid://d2crpwk3cv4in" path="res://item_texture.tscn" id="1_2hwd8"]
+[ext_resource type="Texture2D" uid="uid://b8o3gnifw238j" path="res://backgrounds/game_background_3. 2.png" id="2_iiq23"]
+
+[node name="nighttime_forest" instance=ExtResource("1_2hwd8")]
+texture = ExtResource("2_iiq23")
+expand_mode = 1
+background = true

@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://tq2alciy160l"]
+
+[ext_resource type="Script" path="res://editor_object.gd" id="1_wpuem"]
+[ext_resource type="PackedScene" uid="uid://dxssqfgm75gwx" path="res://item_select.tscn" id="2_l65c2"]
+[ext_resource type="Texture2D" uid="uid://b83d3yikkqejb" path="res://tiles/floor_walls_tileset.png" id="2_puqjg"]
+[ext_resource type="AudioStream" uid="uid://g3ph88u4m1y6" path="res://audio/Viking Folk Music Pack/Loops/wav/4. Frostbound Horizons.wav" id="6_fpjb5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0uhnk"]
+texture = ExtResource("2_puqjg")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_hrhor"]
+physics_layer_0/collision_layer = 1
+sources/5 = SubResource("TileSetAtlasSource_0uhnk")
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [5, Vector2i(0, 0)], [1, Vector2i(0, 0)], [5, Vector2i(1, 0)], [2, Vector2i(0, 0)], [5, Vector2i(2, 0)], [3, Vector2i(0, 0)], [5, Vector2i(3, 0)], [4, Vector2i(0, 0)], [5, Vector2i(4, 0)]]
+
+[node name="main" type="Node2D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fpjb5")
+autoplay = true
+
+[node name="level" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="level"]
+offset_right = 715.0
+offset_bottom = 281.0
+expand_mode = 1
+
+[node name="tile_map_layer" type="TileMapLayer" parent="level"]
+tile_set = SubResource("TileSet_hrhor")
+
+[node name="editor_object" type="Node2D" parent="."]
+script = ExtResource("1_wpuem")
+
+[node name="Sprite2D" type="Sprite2D" parent="editor_object"]
+
+[node name="item_select" parent="." instance=ExtResource("2_l65c2")]

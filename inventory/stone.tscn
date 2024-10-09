@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnejqi2nj1l85"]
+
+[ext_resource type="PackedScene" uid="uid://d2crpwk3cv4in" path="res://item_texture.tscn" id="1_i2l6y"]
+[ext_resource type="Texture2D" uid="uid://bv7jgajhhau2r" path="res://tiles/Stone.png" id="2_tvu87"]
+
+[node name="stone" instance=ExtResource("1_i2l6y")]
+texture = ExtResource("2_tvu87")
+tile = true

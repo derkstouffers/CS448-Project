@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://rysjljvj3mqg"]
+
+[ext_resource type="PackedScene" uid="uid://d2crpwk3cv4in" path="res://item_texture.tscn" id="1_h77cc"]
+[ext_resource type="Texture2D" uid="uid://eyn4a35obc3e" path="res://tiles/Lava.png" id="2_ps06p"]
+
+[node name="lava" instance=ExtResource("1_h77cc")]
+texture = ExtResource("2_ps06p")
+tile = true
+tile_coords = Vector2i(1, 0)

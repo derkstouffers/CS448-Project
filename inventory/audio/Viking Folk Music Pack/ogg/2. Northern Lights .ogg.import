@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://crtyyw1s3x3yg"
+path="res://.godot/imported/2. Northern Lights .ogg-d1a3ad04f1261f98634eff8902edc5ca.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/Viking Folk Music Pack/ogg/2. Northern Lights .ogg"
+dest_files=["res://.godot/imported/2. Northern Lights .ogg-d1a3ad04f1261f98634eff8902edc5ca.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
