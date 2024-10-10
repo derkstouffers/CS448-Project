@@ -1,14 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxssqfgm75gwx"]
+[gd_scene load_steps=12 format=3 uid="uid://dxssqfgm75gwx"]
 
-[ext_resource type="Script" path="res://tab_container.gd" id="1_pjrsu"]
-[ext_resource type="Script" path="res://scroll_container.gd" id="2_lje62"]
+[ext_resource type="Script" path="res://scripts/tab_container.gd" id="1_pjrsu"]
+[ext_resource type="Script" path="res://scripts/scroll_container.gd" id="2_lje62"]
 [ext_resource type="Texture2D" uid="uid://bv7jgajhhau2r" path="res://ground_walls/Stone.png" id="6_aggcn"]
 [ext_resource type="Texture2D" uid="uid://kq152i03ag18" path="res://ground_walls/Bricks-3.png.png" id="7_33v51"]
 [ext_resource type="Texture2D" uid="uid://eyn4a35obc3e" path="res://hazards/Lava.png" id="7_b3me1"]
 [ext_resource type="Texture2D" uid="uid://b5m05i75vitx5" path="res://Decor/Jack o Lantern.png" id="7_odyyf"]
 [ext_resource type="Texture2D" uid="uid://c5vjke2hstjr3" path="res://hazards/Medium Spikes.png" id="7_rauv7"]
 [ext_resource type="Texture2D" uid="uid://efdftgp8ywix" path="res://ground_walls/Beige Bricks.png" id="8_2hewr"]
-[ext_resource type="Texture2D" uid="uid://b8o3gnifw238j" path="res://backgrounds/game_background_3. 2.png" id="8_t06l3"]
 [ext_resource type="Texture2D" uid="uid://ce0yneey4cfdc" path="res://ground_walls/Dark Gray Bricks.png" id="9_q84sy"]
 [ext_resource type="Texture2D" uid="uid://bc8lf1h2su71w" path="res://interactive/Coin.png" id="10_yjolw"]
 [ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://interactive/Ladder.png" id="12_fqggb"]
@@ -149,37 +148,10 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Sprites/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Background" type="TabBar" parent="TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 4
-
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Background"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 2.0
-offset_right = 722.0
-offset_bottom = 77.0
-script = ExtResource("2_lje62")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Background/ScrollContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Background/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="NightForest" type="Button" parent="TabContainer/Background/ScrollContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Forest Nighttime"
-icon = ExtResource("8_t06l3")
-icon_alignment = 1
-vertical_icon_alignment = 0
-expand_icon = true
-
 [node name="Interactives" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 5
+metadata/_tab_index = 4
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Interactives"]
 layout_mode = 0
@@ -227,7 +199,6 @@ expand_icon = true
 [connection signal="pressed" from="TabContainer/Hazards/ScrollContainer/VBoxContainer/HBoxContainer/lava2" to="TabContainer" method="_on_lava_2_pressed"]
 [connection signal="pressed" from="TabContainer/Hazards/ScrollContainer/VBoxContainer/HBoxContainer/MedSpikes" to="TabContainer" method="_on_med_spikes_pressed"]
 [connection signal="pressed" from="TabContainer/Decor/ScrollContainer/VBoxContainer/HBoxContainer/JackOLantern" to="TabContainer" method="_on_jack_o_lantern_pressed"]
-[connection signal="pressed" from="TabContainer/Background/ScrollContainer/VBoxContainer/HBoxContainer/NightForest" to="TabContainer" method="_on_night_forest_pressed"]
 [connection signal="pressed" from="TabContainer/Interactives/ScrollContainer/VBoxContainer/HBoxContainer/Coin" to="TabContainer" method="_on_coin_pressed"]
 [connection signal="pressed" from="TabContainer/Interactives/ScrollContainer/VBoxContainer/HBoxContainer/Ladder" to="TabContainer" method="_on_ladder_pressed"]
 [connection signal="pressed" from="TabContainer/Interactives/ScrollContainer/VBoxContainer/HBoxContainer/Chest" to="TabContainer" method="_on_chest_pressed"]

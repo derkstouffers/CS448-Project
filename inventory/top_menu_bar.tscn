@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://fhum8d0to3tu"]
 
-[ext_resource type="Script" path="res://top_menu_bar.gd" id="1_evjx0"]
+[ext_resource type="Script" path="res://scripts/top_menu_bar.gd" id="1_evjx0"]
 
 [node name="TopMenuBar" type="MenuBar"]
 offset_right = 716.0

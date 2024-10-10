@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddo538bhvuq0x"]
 
-[ext_resource type="Script" path="res://layer_menu_bar.gd" id="1_7utft"]
+[ext_resource type="Script" path="res://scripts/layer_menu_bar.gd" id="1_7utft"]
 
 [node name="LayerMenuBar" type="MenuBar"]
 offset_left = 8.0
