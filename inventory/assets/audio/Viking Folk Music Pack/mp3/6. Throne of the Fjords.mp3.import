@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://3fyb7rn1tdbg"
+path="res://.godot/imported/6. Throne of the Fjords.mp3-56d9cddadd6570aa286320c8cf8a3100.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Viking Folk Music Pack/mp3/6. Throne of the Fjords.mp3"
+dest_files=["res://.godot/imported/6. Throne of the Fjords.mp3-56d9cddadd6570aa286320c8cf8a3100.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

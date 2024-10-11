@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bsl73khn588sf"
+path="res://.godot/imported/6. Throne of the Fjords.wav-86f6bcb142475aedc2e5e02539b5e130.sample"
+
+[deps]
+
+source_file="res://assets/audio/Viking Folk Music Pack/Loops/wav/6. Throne of the Fjords.wav"
+dest_files=["res://.godot/imported/6. Throne of the Fjords.wav-86f6bcb142475aedc2e5e02539b5e130.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

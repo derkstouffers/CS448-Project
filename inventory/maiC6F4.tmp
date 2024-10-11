@@ -1,0 +1,220 @@
+[gd_scene load_steps=44 format=3 uid="uid://tq2alciy160l"]
+
+[ext_resource type="Script" path="res://scripts/editor_object.gd" id="1_wpuem"]
+[ext_resource type="Texture2D" uid="uid://b83d3yikkqejb" path="res://assets/ground_walls/floor_walls_tileset.png" id="2_puqjg"]
+[ext_resource type="Texture2D" uid="uid://b5m05i75vitx5" path="res://assets/Decor/Jack o Lantern.png" id="3_cu8dp"]
+[ext_resource type="Texture2D" uid="uid://c5vjke2hstjr3" path="res://assets/hazards/Medium Spikes.png" id="4_fmfrm"]
+[ext_resource type="Texture2D" uid="uid://iiln0nowibo2" path="res://assets/Decor/Top Left Spider Web.png" id="4_si4kx"]
+[ext_resource type="Texture2D" uid="uid://bc8lf1h2su71w" path="res://assets/interactive/Coin.png" id="5_fgl4h"]
+[ext_resource type="Texture2D" uid="uid://sn38dwnnki6h" path="res://assets/Decor/Top Right Spider Web.png" id="5_i55d1"]
+[ext_resource type="AudioStream" uid="uid://g3ph88u4m1y6" path="res://assets/audio/Viking Folk Music Pack/Loops/wav/4. Frostbound Horizons.wav" id="6_fpjb5"]
+[ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://assets/interactive/Ladder.png" id="6_lbfon"]
+[ext_resource type="Texture2D" uid="uid://dsy72tq0hynln" path="res://assets/interactive/Treasure Chest.png" id="7_5w7e2"]
+[ext_resource type="PackedScene" uid="uid://fhum8d0to3tu" path="res://top_menu_bar.tscn" id="7_akbwm"]
+[ext_resource type="Texture2D" uid="uid://cparvpn3jpvka" path="res://assets/hazards/Small Spikes.png" id="8_8au0h"]
+[ext_resource type="PackedScene" uid="uid://ddo538bhvuq0x" path="res://layer_menu_bar.tscn" id="8_wwway"]
+[ext_resource type="Texture2D" uid="uid://6ep81gwfwa0j" path="res://assets/hazards/Big Spike.png" id="9_ie0rf"]
+[ext_resource type="PackedScene" uid="uid://c8nd67wu05kv3" path="res://inventory.tscn" id="11_wpa6r"]
+[ext_resource type="Texture2D" uid="uid://batxptd4pen1m" path="res://assets/Decor/Bottom Left Spider Web.png" id="12_i5nsn"]
+[ext_resource type="Texture2D" uid="uid://dp5c6e8452lo4" path="res://assets/Decor/Bottom Right Spider Web.png" id="13_pkv33"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r164v"]
+texture = ExtResource("2_puqjg")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3lgo4"]
+texture = ExtResource("3_cu8dp")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_apvn0"]
+texture = ExtResource("4_si4kx")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wsab8"]
+texture = ExtResource("5_i55d1")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8f4ef"]
+texture = ExtResource("4_fmfrm")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_of7cv"]
+texture = ExtResource("5_fgl4h")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7h55c"]
+texture = ExtResource("6_lbfon")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l66ey"]
+texture = ExtResource("7_5w7e2")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdyja"]
+texture = ExtResource("8_8au0h")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_56xnb"]
+texture = ExtResource("9_ie0rf")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ouc6"]
+texture = ExtResource("12_i5nsn")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hoe0g"]
+texture = ExtResource("13_pkv33")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_arguf"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_r164v")
+sources/1 = SubResource("TileSetAtlasSource_3lgo4")
+sources/2 = SubResource("TileSetAtlasSource_8f4ef")
+sources/5 = SubResource("TileSetAtlasSource_l66ey")
+sources/4 = SubResource("TileSetAtlasSource_7h55c")
+sources/3 = SubResource("TileSetAtlasSource_of7cv")
+sources/6 = SubResource("TileSetAtlasSource_xdyja")
+sources/7 = SubResource("TileSetAtlasSource_56xnb")
+sources/8 = SubResource("TileSetAtlasSource_0ouc6")
+sources/9 = SubResource("TileSetAtlasSource_hoe0g")
+sources/10 = SubResource("TileSetAtlasSource_apvn0")
+sources/11 = SubResource("TileSetAtlasSource_wsab8")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_77p2k"]
+texture = ExtResource("2_puqjg")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g4gbg"]
+texture = ExtResource("3_cu8dp")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wusf6"]
+texture = ExtResource("4_fmfrm")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xrnbq"]
+texture = ExtResource("5_fgl4h")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4tqj0"]
+texture = ExtResource("6_lbfon")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ptbtp"]
+texture = ExtResource("7_5w7e2")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ixfhj"]
+texture = ExtResource("8_8au0h")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o7vh"]
+texture = ExtResource("9_ie0rf")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_bh4qv"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_77p2k")
+sources/2 = SubResource("TileSetAtlasSource_wusf6")
+sources/3 = SubResource("TileSetAtlasSource_xrnbq")
+sources/1 = SubResource("TileSetAtlasSource_g4gbg")
+sources/4 = SubResource("TileSetAtlasSource_4tqj0")
+sources/5 = SubResource("TileSetAtlasSource_ptbtp")
+sources/6 = SubResource("TileSetAtlasSource_ixfhj")
+sources/7 = SubResource("TileSetAtlasSource_5o7vh")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3qx0w"]
+texture = ExtResource("2_puqjg")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fbm0a"]
+texture = ExtResource("3_cu8dp")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rwrn0"]
+texture = ExtResource("4_fmfrm")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_oxem5"]
+sources/0 = SubResource("TileSetAtlasSource_3qx0w")
+sources/1 = SubResource("TileSetAtlasSource_fbm0a")
+sources/2 = SubResource("TileSetAtlasSource_rwrn0")
+
+[node name="main" type="Node2D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fpjb5")
+autoplay = true
+
+[node name="level" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="level"]
+tile_set = SubResource("TileSet_arguf")
+collision_animatable = true
+format = 2
+layer_1/name = "Layer2"
+layer_2/name = "Layer3"
+
+[node name="Background" type="TileMapLayer" parent="level/TileMap"]
+use_parent_material = true
+tile_set = SubResource("TileSet_arguf")
+
+[node name="Player Area" type="TileMapLayer" parent="level/TileMap"]
+tile_set = SubResource("TileSet_bh4qv")
+
+[node name="foreground" type="TileMapLayer" parent="level/TileMap"]
+tile_set = SubResource("TileSet_oxem5")
+
+[node name="editor_object" type="Node2D" parent="."]
+script = ExtResource("1_wpuem")
+
+[node name="Sprite2D" type="Sprite2D" parent="editor_object"]
+
+[node name="TopMenuBar" parent="." instance=ExtResource("7_akbwm")]
+offset_left = 660.0
+offset_top = 5.0
+offset_right = 713.0
+offset_bottom = 36.0
+
+[node name="LayerMenuBar" parent="." instance=ExtResource("8_wwway")]
+offset_left = 235.0
+offset_top = 2.0
+offset_right = 541.0
+offset_bottom = 35.0
+
+[node name="inventory" parent="." instance=ExtResource("11_wpa6r")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(359, 169)

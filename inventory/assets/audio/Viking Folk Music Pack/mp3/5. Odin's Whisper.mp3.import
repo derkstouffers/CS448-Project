@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dwvqvja3plmby"
+path="res://.godot/imported/5. Odin's Whisper.mp3-6d9a609db6df3330390e7b14ad00e211.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Viking Folk Music Pack/mp3/5. Odin's Whisper.mp3"
+dest_files=["res://.godot/imported/5. Odin's Whisper.mp3-6d9a609db6df3330390e7b14ad00e211.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

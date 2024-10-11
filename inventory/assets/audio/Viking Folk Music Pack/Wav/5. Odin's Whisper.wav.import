@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://56vscfhlnbqb"
+path="res://.godot/imported/5. Odin's Whisper.wav-6da985bf5f1b3507e3e11297c047ebfd.sample"
+
+[deps]
+
+source_file="res://assets/audio/Viking Folk Music Pack/Wav/5. Odin's Whisper.wav"
+dest_files=["res://.godot/imported/5. Odin's Whisper.wav-6da985bf5f1b3507e3e11297c047ebfd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

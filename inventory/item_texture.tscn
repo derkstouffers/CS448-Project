@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2crpwk3cv4in"]
-
-[ext_resource type="Script" path="res://item_texture.gd" id="1_pk41j"]
-
-[node name="item_texture" type="TextureRect"]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_pk41j")
