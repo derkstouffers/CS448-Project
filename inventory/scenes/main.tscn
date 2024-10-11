@@ -203,16 +203,15 @@ script = ExtResource("1_wpuem")
 [node name="Sprite2D" type="Sprite2D" parent="editor_object"]
 
 [node name="TopMenuBar" parent="." instance=ExtResource("7_akbwm")]
-offset_left = 660.0
-offset_top = 5.0
-offset_right = 713.0
-offset_bottom = 36.0
+offset_left = 516.0
+offset_right = 568.0
+offset_bottom = 31.0
 
 [node name="LayerMenuBar" parent="." instance=ExtResource("8_wwway")]
-offset_left = 235.0
-offset_top = 2.0
-offset_right = 541.0
-offset_bottom = 35.0
+offset_left = 177.0
+offset_top = -2.0
+offset_right = 483.0
+offset_bottom = 31.0
 
 [node name="inventory" parent="." instance=ExtResource("11_wpa6r")]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8nd67wu05kv3"]
+[gd_scene load_steps=19 format=3 uid="uid://c8nd67wu05kv3"]
 
 [ext_resource type="Texture2D" uid="uid://bv7jgajhhau2r" path="res://assets/ground_walls/Stone.png" id="1_cx0tv"]
 [ext_resource type="Script" path="res://scripts/tab_container.gd" id="1_x61br"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bc8lf1h2su71w" path="res://assets/interactive/Coin.png" id="14_hdwix"]
 [ext_resource type="Texture2D" uid="uid://curxra5askb1" path="res://assets/interactive/Treasure Chest_1.png" id="15_khxaa"]
 [ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://assets/interactive/Ladder.png" id="16_h12mi"]
+[ext_resource type="Texture2D" uid="uid://cuiaq8wwhnuil" path="res://characters/dwarf/Dwarf 1.png" id="18_o5uwn"]
 
 [node name="inventory" type="CanvasLayer"]
 
@@ -24,12 +25,11 @@
 offset_top = 61.0
 offset_right = 139.0
 offset_bottom = 276.0
-current_tab = 2
+current_tab = 0
 script = ExtResource("1_x61br")
 metadata/_edit_group_ = true
 
 [node name="Walls" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -64,6 +64,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 selected = 0
+allow_reselect = true
 item_count = 3
 popup/item_0/text = "Bricks"
 popup/item_0/icon = ExtResource("2_wud1s")
@@ -107,6 +108,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 selected = 0
+allow_reselect = true
 item_count = 3
 popup/item_0/text = "sm. Spike"
 popup/item_0/icon = ExtResource("6_n6j0o")
@@ -118,6 +120,7 @@ popup/item_2/icon = ExtResource("8_wywxn")
 popup/item_2/id = 2
 
 [node name="Decor" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -148,6 +151,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 selected = 0
+allow_reselect = true
 item_count = 4
 popup/item_0/text = "Btm. L Web"
 popup/item_0/icon = ExtResource("9_8x7tw")
@@ -202,6 +206,31 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
+[node name="Character" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Character"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Character/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Dwarf" type="Button" parent="TabContainer/Character/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Dwarf"
+icon = ExtResource("18_o5uwn")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
 [connection signal="pressed" from="TabContainer/Walls/ScrollContainer/GridContainer/Stone" to="TabContainer" method="_on_stone_pressed"]
 [connection signal="item_selected" from="TabContainer/Walls/ScrollContainer/GridContainer/Bricks" to="TabContainer" method="_on_bricks_item_selected"]
 [connection signal="pressed" from="TabContainer/Walls/ScrollContainer/GridContainer/Bricks" to="TabContainer" method="_on_bricks_pressed"]
@@ -214,3 +243,4 @@ expand_icon = true
 [connection signal="pressed" from="TabContainer/Interactive/ScrollContainer/GridContainer/Coin" to="TabContainer" method="_on_coin_pressed"]
 [connection signal="pressed" from="TabContainer/Interactive/ScrollContainer/GridContainer/Chest" to="TabContainer" method="_on_chest_pressed"]
 [connection signal="pressed" from="TabContainer/Interactive/ScrollContainer/GridContainer/Ladder" to="TabContainer" method="_on_ladder_pressed"]
+[connection signal="pressed" from="TabContainer/Character/ScrollContainer/GridContainer/Dwarf" to="TabContainer" method="_on_dwarf_pressed"]

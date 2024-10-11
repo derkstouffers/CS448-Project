@@ -1,8 +1,9 @@
 extends TabContainer
-#@onready var item_select = get_node("/root/main/item_select")
+@onready var level = get_node("/root/main/level")
 @onready var object_cursor = get_node("/root/main/editor_object")
-#@onready var  background = get_node("/root/main/background")
-#@onready var button_icon = get_node("TabContainer/Background/ScrollContainer/VBoxContainer/HBoxContainer/NightForest")
+
+const player1 = preload("res://scenes/dwarf.tscn")
+
 
 func _ready():
 	connect("mouse_entered", mouse_enter)
@@ -152,4 +153,17 @@ func _on_chest_pressed() -> void:
 	Global.place_tile = true
 	Global.TileID = 5
 	Global.current_tile_coords = Vector2i(0,0)
+	pass # Replace with function body.
+
+
+###
+### CHARACTERS
+###
+
+func _on_dwarf_pressed() -> void:
+	var player
+	player = player1.instantiate()
+	level.add_child(player)
+	player.global_position = get_global_mouse_position()
+	
 	pass # Replace with function body.
