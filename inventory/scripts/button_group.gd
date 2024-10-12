@@ -479,8 +479,34 @@ func _on_clear_mouse_entered() -> void:
 func _on_clear_mouse_exited() -> void:
 	object_cursor.can_place = true
 	pass # Replace with function body.	
+
+func _on_lwr__l_stone_stair_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_lwr__l_stone_stair_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.	
 	
+
+func _on_lwr_r_stone_stair_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_lwr_r_stone_stair_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.	
 	
+func _on_torch_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_torch_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
 	
 ###
 ### GROUND BLOCKS
@@ -491,9 +517,24 @@ func _on_stone_pressed() -> void:
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
+
+func _on_lwr__l_stone_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.TileID = 12
+	Global.current_tile_coords = Vector2i(0,0)
+	pass # Replace with function body.
+
 	
-	
-	
+func _on_lwr_r_stone_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.TileID = 13
+	Global.current_tile_coords = Vector2i(0,0)
+	pass # Replace with function body.
+
+
+
+
+
 ###
 ### WALLS
 ###
@@ -587,6 +628,15 @@ func _on_top_r_web_pressed() -> void:
 	Global.TileID = 11
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.	
+
+func _on_torch_pressed() -> void:
+	Global.place_tile = true
+	Global.TileID = 14
+	Global.current_tile_coords = Vector2i(0,0)
+	pass # Replace with function body.
+
+
+
 	
 ###
 ### INTERACTIVE
@@ -606,7 +656,7 @@ func _on_ladder_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_chest_pressed() -> void:
+func _on_chest_pressed() -> void:	
 	Global.place_tile = true
 	Global.TileID = 5
 	Global.current_tile_coords = Vector2i(0,0)

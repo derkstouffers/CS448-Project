@@ -1,11 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://cb3lrjvf7tumy"]
+[gd_scene load_steps=32 format=3 uid="uid://cb3lrjvf7tumy"]
 
 [ext_resource type="Texture2D" uid="uid://b83d3yikkqejb" path="res://assets/ground_walls/floor_walls_tileset.png" id="1_0mro5"]
 [ext_resource type="Texture2D" uid="uid://b5m05i75vitx5" path="res://assets/Decor/Jack o Lantern.png" id="2_lrehj"]
 [ext_resource type="Texture2D" uid="uid://iiln0nowibo2" path="res://assets/Decor/Top Left Spider Web.png" id="3_v0v5l"]
 [ext_resource type="Texture2D" uid="uid://sn38dwnnki6h" path="res://assets/Decor/Top Right Spider Web.png" id="4_68vei"]
+[ext_resource type="Texture2D" uid="uid://n1xolcpjkixx" path="res://assets/ground_walls/Lower Left Stone Stair.png" id="5_i2clb"]
 [ext_resource type="Texture2D" uid="uid://c5vjke2hstjr3" path="res://assets/hazards/Medium Spikes.png" id="5_kdvn3"]
 [ext_resource type="Texture2D" uid="uid://bc8lf1h2su71w" path="res://assets/interactive/Coin.png" id="6_roam7"]
+[ext_resource type="Texture2D" uid="uid://cpd15dlr0mp4n" path="res://assets/ground_walls/Lower Right Stone Stair.png" id="6_wr7yh"]
+[ext_resource type="Texture2D" uid="uid://baqyrabmfnw0x" path="res://assets/Decor/Torch.png" id="7_0wwi8"]
 [ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://assets/interactive/Ladder.png" id="7_vpnal"]
 [ext_resource type="Texture2D" uid="uid://dsy72tq0hynln" path="res://assets/interactive/Treasure Chest.png" id="8_bx2yr"]
 [ext_resource type="Texture2D" uid="uid://cparvpn3jpvka" path="res://assets/hazards/Small Spikes.png" id="9_wk63w"]
@@ -38,6 +41,21 @@ texture = ExtResource("3_v0v5l")
 texture = ExtResource("4_68vei")
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8yatj"]
+texture = ExtResource("5_i2clb")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_werda"]
+texture = ExtResource("6_wr7yh")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85gpb"]
+texture = ExtResource("7_0wwi8")
+0:0/animation_frame_0/duration = 0.33
+0:0/animation_frame_1/duration = 0.3
+0:0/animation_frame_2/duration = 0.3
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_013iy"]
 texture = ExtResource("5_kdvn3")
 0:0/0 = 0
@@ -46,7 +64,6 @@ texture = ExtResource("5_kdvn3")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_savqx"]
 texture = ExtResource("6_roam7")
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3wvnl"]
 texture = ExtResource("7_vpnal")
@@ -55,14 +72,15 @@ texture = ExtResource("7_vpnal")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_416xh"]
 texture = ExtResource("8_bx2yr")
+0:0/animation_frame_0/duration = 0.2
+0:0/animation_frame_1/duration = 0.2
+0:0/animation_frame_2/duration = 0.2
+0:0/animation_frame_3/duration = 0.2
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 0.2
+0:0/animation_frame_6/duration = 0.2
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x1eg3"]
 texture = ExtResource("9_wk63w")
@@ -96,6 +114,9 @@ sources/8 = SubResource("TileSetAtlasSource_3w6dj")
 sources/9 = SubResource("TileSetAtlasSource_k36hc")
 sources/10 = SubResource("TileSetAtlasSource_0w5p2")
 sources/11 = SubResource("TileSetAtlasSource_e6ly2")
+sources/12 = SubResource("TileSetAtlasSource_8yatj")
+sources/13 = SubResource("TileSetAtlasSource_werda")
+sources/14 = SubResource("TileSetAtlasSource_85gpb")
 
 [node name="level" type="Node2D"]
 

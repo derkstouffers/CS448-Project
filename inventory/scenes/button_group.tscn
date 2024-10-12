@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://clrvdmfbg0bne"]
+[gd_scene load_steps=22 format=3 uid="uid://clrvdmfbg0bne"]
 
 [ext_resource type="Script" path="res://scripts/button_group.gd" id="1_jed0n"]
 [ext_resource type="Texture2D" uid="uid://cuiaq8wwhnuil" path="res://characters/dwarf/Dwarf 1.png" id="2_jtfji"]
 [ext_resource type="Texture2D" uid="uid://bv7jgajhhau2r" path="res://assets/ground_walls/Stone.png" id="2_rvp3f"]
 [ext_resource type="Texture2D" uid="uid://kq152i03ag18" path="res://assets/ground_walls/Bricks-3.png.png" id="3_fn584"]
 [ext_resource type="Texture2D" uid="uid://efdftgp8ywix" path="res://assets/ground_walls/Beige Bricks.png" id="4_nk11e"]
+[ext_resource type="Texture2D" uid="uid://n1xolcpjkixx" path="res://assets/ground_walls/Lower Left Stone Stair.png" id="4_tliso"]
 [ext_resource type="Texture2D" uid="uid://ce0yneey4cfdc" path="res://assets/ground_walls/Dark Gray Bricks.png" id="5_cjwlv"]
+[ext_resource type="Texture2D" uid="uid://cpd15dlr0mp4n" path="res://assets/ground_walls/Lower Right Stone Stair.png" id="5_jle0s"]
 [ext_resource type="Texture2D" uid="uid://eyn4a35obc3e" path="res://assets/hazards/Lava.png" id="6_is2u5"]
 [ext_resource type="Texture2D" uid="uid://cparvpn3jpvka" path="res://assets/hazards/Small Spikes.png" id="7_xu64y"]
 [ext_resource type="Texture2D" uid="uid://c5vjke2hstjr3" path="res://assets/hazards/Medium Spikes.png" id="8_kcqcc"]
@@ -18,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bc8lf1h2su71w" path="res://assets/interactive/Coin.png" id="15_lguei"]
 [ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://assets/interactive/Ladder.png" id="16_d6hhi"]
 [ext_resource type="Texture2D" uid="uid://curxra5askb1" path="res://assets/interactive/Treasure Chest_1.png" id="17_mlhbe"]
+[ext_resource type="Texture2D" uid="uid://c26j48mqlyv4p" path="res://assets/Decor/Torch-1.png" id="18_puwac"]
 
 [node name="button_group" type="CanvasLayer"]
 script = ExtResource("1_jed0n")
@@ -147,6 +150,24 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Stone"
 icon = ExtResource("2_rvp3f")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lwr_ L Stone Stair" type="Button" parent="Block_menu/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left Stair"
+icon = ExtResource("4_tliso")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lwr_R_Stone Stair" type="Button" parent="Block_menu/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right Stair"
+icon = ExtResource("5_jle0s")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
@@ -287,6 +308,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Top R Web"
 icon = ExtResource("14_ms5nt")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Torch" type="Button" parent="Block_menu/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Torch"
+icon = ExtResource("18_puwac")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
@@ -446,6 +476,12 @@ text = "Level 1"
 [connection signal="mouse_entered" from="Block_menu/Ground/Stone" to="." method="_on_stone_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/Ground/Stone" to="." method="_on_stone_mouse_exited"]
 [connection signal="pressed" from="Block_menu/Ground/Stone" to="." method="_on_stone_pressed"]
+[connection signal="mouse_entered" from="Block_menu/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_mouse_exited"]
+[connection signal="pressed" from="Block_menu/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_pressed"]
+[connection signal="mouse_entered" from="Block_menu/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_mouse_exited"]
+[connection signal="pressed" from="Block_menu/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_pressed"]
 [connection signal="mouse_entered" from="Block_menu/Walls/Beige Bricks" to="." method="_on_beige_bricks_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/Walls/Beige Bricks" to="." method="_on_beige_bricks_mouse_exited"]
 [connection signal="pressed" from="Block_menu/Walls/Beige Bricks" to="." method="_on_beige_bricks_pressed"]
@@ -482,6 +518,9 @@ text = "Level 1"
 [connection signal="mouse_entered" from="Block_menu/Decor/Top_R_Web" to="." method="_on_top_r_web_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/Decor/Top_R_Web" to="." method="_on_top_r_web_mouse_exited"]
 [connection signal="pressed" from="Block_menu/Decor/Top_R_Web" to="." method="_on_top_r_web_pressed"]
+[connection signal="mouse_entered" from="Block_menu/Decor/Torch" to="." method="_on_torch_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/Decor/Torch" to="." method="_on_torch_mouse_exited"]
+[connection signal="pressed" from="Block_menu/Decor/Torch" to="." method="_on_torch_pressed"]
 [connection signal="mouse_entered" from="Block_menu/Interactive/Coin" to="." method="_on_coin_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/Interactive/Coin" to="." method="_on_coin_mouse_exited"]
 [connection signal="pressed" from="Block_menu/Interactive/Coin" to="." method="_on_coin_pressed"]
