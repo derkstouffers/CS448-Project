@@ -10,7 +10,7 @@ const JUMP_VELOCITY = -400.0
 func _physics_process(delta: float) -> void:
 	
 	if init == false:
-		start_pos = global_position
+		start_pos = get_global_mouse_position()
 		init = true
 	
 	if(Global.playing):

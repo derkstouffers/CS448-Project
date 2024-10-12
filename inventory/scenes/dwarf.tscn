@@ -130,7 +130,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wt5hr"]
-radius = 9.0
+radius = 5.0
 height = 18.0
 
 [node name="dwarf" type="CharacterBody2D"]

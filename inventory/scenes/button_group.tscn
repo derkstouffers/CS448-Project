@@ -1,19 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://clrvdmfbg0bne"]
+[gd_scene load_steps=6 format=3 uid="uid://clrvdmfbg0bne"]
 
 [ext_resource type="Script" path="res://scripts/button_group.gd" id="1_jed0n"]
+[ext_resource type="Texture2D" uid="uid://bv7jgajhhau2r" path="res://assets/ground_walls/Stone.png" id="2_rvp3f"]
+[ext_resource type="Texture2D" uid="uid://kq152i03ag18" path="res://assets/ground_walls/Bricks-3.png.png" id="3_fn584"]
+[ext_resource type="Texture2D" uid="uid://efdftgp8ywix" path="res://assets/ground_walls/Beige Bricks.png" id="4_nk11e"]
+[ext_resource type="Texture2D" uid="uid://ce0yneey4cfdc" path="res://assets/ground_walls/Dark Gray Bricks.png" id="5_cjwlv"]
 
 [node name="button_group" type="CanvasLayer"]
 script = ExtResource("1_jed0n")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 3.0
-offset_top = 292.0
-offset_right = 720.0
-offset_bottom = 338.0
+[node name="Top_menu" type="ColorRect" parent="."]
+offset_top = -2.0
+offset_right = 717.0
+offset_bottom = 44.0
 color = Color(0.190762, 0.190762, 0.190762, 1)
 metadata/_edit_group_ = true
 
-[node name="Container" type="GridContainer" parent="ColorRect"]
+[node name="GridContainer" type="GridContainer" parent="Top_menu"]
 layout_mode = 0
 offset_left = 104.0
 offset_top = 8.0
@@ -21,23 +24,23 @@ offset_right = 620.0
 offset_bottom = 39.0
 columns = 6
 
-[node name="Play" type="Button" parent="ColorRect/Container"]
+[node name="Play" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
 text = "Play"
 
-[node name="Background" type="Button" parent="ColorRect/Container"]
+[node name="Background" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
 text = "Background"
 
-[node name="Player Area" type="Button" parent="ColorRect/Container"]
+[node name="Player Area" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
 text = "Player Area"
 
-[node name="Foreground" type="Button" parent="ColorRect/Container"]
+[node name="Foreground" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
 text = "Foreground"
 
-[node name="Player Select" type="OptionButton" parent="ColorRect/Container"]
+[node name="Player Select" type="OptionButton" parent="Top_menu/GridContainer"]
 layout_mode = 2
 selected = 0
 allow_reselect = true
@@ -47,6 +50,170 @@ popup/item_0/disabled = true
 popup/item_1/text = "Dwarf"
 popup/item_1/id = 1
 
-[node name="Clear" type="Button" parent="ColorRect/Container"]
+[node name="Clear" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
 text = "Clear"
+
+[node name="Block_menu" type="ColorRect" parent="."]
+offset_left = 2.0
+offset_top = 43.0
+offset_right = 349.0
+offset_bottom = 250.0
+color = Color(0.192157, 0.192157, 0.192157, 1)
+metadata/_edit_group_ = true
+
+[node name="GridContainer" type="GridContainer" parent="Block_menu"]
+layout_mode = 1
+offset_right = 92.0
+offset_bottom = 206.0
+metadata/_edit_group_ = true
+
+[node name="Ground" type="Button" parent="Block_menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ground"
+
+[node name="Walls" type="Button" parent="Block_menu/GridContainer"]
+layout_mode = 2
+text = "Walls"
+
+[node name="Hazards" type="Button" parent="Block_menu/GridContainer"]
+layout_mode = 2
+text = "Hazards"
+
+[node name="Decor" type="Button" parent="Block_menu/GridContainer"]
+layout_mode = 2
+text = "Decor"
+
+[node name="Interactive" type="Button" parent="Block_menu/GridContainer"]
+layout_mode = 2
+text = "Interactive"
+
+[node name="Sprite" type="Button" parent="Block_menu/GridContainer"]
+layout_mode = 2
+text = "Sprite"
+
+[node name="Ground" type="GridContainer" parent="."]
+offset_left = 111.0
+offset_top = 42.0
+offset_right = 340.0
+offset_bottom = 239.0
+columns = 2
+metadata/_edit_group_ = true
+
+[node name="Stone" type="Button" parent="Ground"]
+layout_mode = 2
+text = "Stone"
+icon = ExtResource("2_rvp3f")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Walls" type="GridContainer" parent="."]
+visible = false
+offset_left = 105.0
+offset_top = 67.0
+offset_right = 356.0
+offset_bottom = 270.0
+columns = 2
+
+[node name="Beige Bricks" type="Button" parent="Walls"]
+layout_mode = 2
+text = "Beige Bricks"
+icon = ExtResource("3_fn584")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Brown Bricks" type="Button" parent="Walls"]
+layout_mode = 2
+text = "Brown Bricks"
+icon = ExtResource("4_nk11e")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Dark Gray Bricks" type="Button" parent="Walls"]
+layout_mode = 2
+text = "Dark Gray Bricks"
+icon = ExtResource("5_cjwlv")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Hazards" type="GridContainer" parent="."]
+visible = false
+offset_left = 105.0
+offset_top = 67.0
+offset_right = 271.0
+offset_bottom = 259.0
+columns = 2
+
+[node name="Stone" type="Button" parent="Hazards"]
+layout_mode = 2
+text = "Stone"
+icon = ExtResource("2_rvp3f")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Decor" type="GridContainer" parent="."]
+visible = false
+offset_left = 105.0
+offset_top = 67.0
+offset_right = 271.0
+offset_bottom = 259.0
+columns = 2
+
+[node name="Stone" type="Button" parent="Decor"]
+layout_mode = 2
+text = "Stone"
+icon = ExtResource("2_rvp3f")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Interactive" type="GridContainer" parent="."]
+visible = false
+offset_left = 105.0
+offset_top = 67.0
+offset_right = 271.0
+offset_bottom = 259.0
+columns = 2
+
+[node name="Stone" type="Button" parent="Interactive"]
+layout_mode = 2
+text = "Stone"
+icon = ExtResource("2_rvp3f")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Sprite" type="GridContainer" parent="."]
+visible = false
+offset_left = 105.0
+offset_top = 67.0
+offset_right = 271.0
+offset_bottom = 259.0
+columns = 2
+
+[node name="Stone" type="Button" parent="Sprite"]
+layout_mode = 2
+text = "Stone"
+icon = ExtResource("2_rvp3f")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Edit" type="Button" parent="."]
+visible = false
+offset_left = 664.0
+offset_top = 5.0
+offset_right = 672.0
+offset_bottom = 13.0
+text = "Edit"
+
+[connection signal="pressed" from="Top_menu/GridContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Block_menu/GridContainer/Ground" to="." method="_on_ground_pressed"]
+[connection signal="pressed" from="Block_menu/GridContainer/Walls" to="." method="_on_walls_pressed"]
+[connection signal="pressed" from="Edit" to="." method="_on_edit_pressed"]
