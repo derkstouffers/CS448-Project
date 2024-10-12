@@ -1,0 +1,117 @@
+[gd_scene load_steps=26 format=3 uid="uid://cb3lrjvf7tumy"]
+
+[ext_resource type="Texture2D" uid="uid://b83d3yikkqejb" path="res://assets/ground_walls/floor_walls_tileset.png" id="1_0mro5"]
+[ext_resource type="Texture2D" uid="uid://b5m05i75vitx5" path="res://assets/Decor/Jack o Lantern.png" id="2_lrehj"]
+[ext_resource type="Texture2D" uid="uid://iiln0nowibo2" path="res://assets/Decor/Top Left Spider Web.png" id="3_v0v5l"]
+[ext_resource type="Texture2D" uid="uid://sn38dwnnki6h" path="res://assets/Decor/Top Right Spider Web.png" id="4_68vei"]
+[ext_resource type="Texture2D" uid="uid://c5vjke2hstjr3" path="res://assets/hazards/Medium Spikes.png" id="5_kdvn3"]
+[ext_resource type="Texture2D" uid="uid://bc8lf1h2su71w" path="res://assets/interactive/Coin.png" id="6_roam7"]
+[ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://assets/interactive/Ladder.png" id="7_vpnal"]
+[ext_resource type="Texture2D" uid="uid://dsy72tq0hynln" path="res://assets/interactive/Treasure Chest.png" id="8_bx2yr"]
+[ext_resource type="Texture2D" uid="uid://cparvpn3jpvka" path="res://assets/hazards/Small Spikes.png" id="9_wk63w"]
+[ext_resource type="Texture2D" uid="uid://6ep81gwfwa0j" path="res://assets/hazards/Big Spike.png" id="10_u8iob"]
+[ext_resource type="Texture2D" uid="uid://batxptd4pen1m" path="res://assets/Decor/Bottom Left Spider Web.png" id="11_6xnn3"]
+[ext_resource type="Texture2D" uid="uid://dp5c6e8452lo4" path="res://assets/Decor/Bottom Right Spider Web.png" id="12_yuul7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxfop"]
+texture = ExtResource("1_0mro5")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85oju"]
+texture = ExtResource("2_lrehj")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0w5p2"]
+texture = ExtResource("3_v0v5l")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e6ly2"]
+texture = ExtResource("4_68vei")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_013iy"]
+texture = ExtResource("5_kdvn3")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_savqx"]
+texture = ExtResource("6_roam7")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3wvnl"]
+texture = ExtResource("7_vpnal")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_416xh"]
+texture = ExtResource("8_bx2yr")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x1eg3"]
+texture = ExtResource("9_wk63w")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4rq4u"]
+texture = ExtResource("10_u8iob")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3w6dj"]
+texture = ExtResource("11_6xnn3")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k36hc"]
+texture = ExtResource("12_yuul7")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gtnwp"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_qxfop")
+sources/1 = SubResource("TileSetAtlasSource_85oju")
+sources/2 = SubResource("TileSetAtlasSource_013iy")
+sources/5 = SubResource("TileSetAtlasSource_416xh")
+sources/4 = SubResource("TileSetAtlasSource_3wvnl")
+sources/3 = SubResource("TileSetAtlasSource_savqx")
+sources/6 = SubResource("TileSetAtlasSource_x1eg3")
+sources/7 = SubResource("TileSetAtlasSource_4rq4u")
+sources/8 = SubResource("TileSetAtlasSource_3w6dj")
+sources/9 = SubResource("TileSetAtlasSource_k36hc")
+sources/10 = SubResource("TileSetAtlasSource_0w5p2")
+sources/11 = SubResource("TileSetAtlasSource_e6ly2")
+
+[node name="level" type="Node2D"]
+
+[node name="worldMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_gtnwp")
+collision_animatable = true
+format = 2
+layer_1/name = "Layer2"
+layer_2/name = "Layer3"
+
+[node name="Background" type="TileMapLayer" parent="worldMap"]
+use_parent_material = true
+tile_set = SubResource("TileSet_gtnwp")
+
+[node name="Player Area" type="TileMapLayer" parent="worldMap"]
+tile_set = SubResource("TileSet_gtnwp")
+
+[node name="foreground" type="TileMapLayer" parent="worldMap"]
+tile_set = SubResource("TileSet_gtnwp")

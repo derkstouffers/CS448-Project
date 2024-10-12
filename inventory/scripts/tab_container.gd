@@ -1,5 +1,5 @@
 extends TabContainer
-@onready var level = get_node("/root/main/level")
+@onready var level = get_node("/root/main/level2")
 @onready var object_cursor = get_node("/root/main/editor_object")
 
 const player1 = preload("res://scenes/dwarf.tscn")

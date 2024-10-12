@@ -1,19 +1,19 @@
 extends CharacterBody2D
+@onready var sprite = $AnimatedSprite2D
 
-var start_pos = Vector2(0,0)
-var init = false
+var is_dragging = false
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 
 func _physics_process(delta: float) -> void:
-	
-	if init == false:
-		start_pos = get_global_mouse_position()
-		init = true
-	
+
+	if is_dragging:
+		global_position = get_global_mouse_position()
+			
 	if(Global.playing):
+		
 	# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -24,10 +24,21 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	
 		var direction := Input.get_axis("left", "right")
 		if direction:
 			velocity.x = direction * SPEED
+			if direction > 0:
+				sprite.flip_h = false
+			elif direction < 0:
+				sprite.flip_h = true
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 		move_and_slide()
+		
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
+		if event.pressed:
+			is_dragging = false
+	
