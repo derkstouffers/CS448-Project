@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://clrvdmfbg0bne"]
+[gd_scene load_steps=29 format=3 uid="uid://clrvdmfbg0bne"]
 
 [ext_resource type="Script" path="res://scripts/button_group.gd" id="1_jed0n"]
 [ext_resource type="Texture2D" uid="uid://cuiaq8wwhnuil" path="res://characters/dwarf/Dwarf 1.png" id="2_jtfji"]
 [ext_resource type="Texture2D" uid="uid://bv7jgajhhau2r" path="res://assets/ground_walls/Stone.png" id="2_rvp3f"]
+[ext_resource type="FontFile" uid="uid://dfnj0s4uiru6a" path="res://assets/ui_ux/Bungee-Regular.ttf" id="2_uuyxx"]
 [ext_resource type="Texture2D" uid="uid://kq152i03ag18" path="res://assets/ground_walls/Bricks-3.png.png" id="3_fn584"]
 [ext_resource type="Texture2D" uid="uid://efdftgp8ywix" path="res://assets/ground_walls/Beige Bricks.png" id="4_nk11e"]
 [ext_resource type="Texture2D" uid="uid://n1xolcpjkixx" path="res://assets/ground_walls/Lower Left Stone Stair.png" id="4_tliso"]
@@ -22,27 +23,50 @@
 [ext_resource type="Texture2D" uid="uid://curxra5askb1" path="res://assets/interactive/Treasure Chest_1.png" id="17_mlhbe"]
 [ext_resource type="Texture2D" uid="uid://c26j48mqlyv4p" path="res://assets/Decor/Torch-1.png" id="18_puwac"]
 
+[sub_resource type="Theme" id="Theme_ha7l0"]
+default_font = ExtResource("2_uuyxx")
+
+[sub_resource type="Theme" id="Theme_fkkqm"]
+default_font = ExtResource("2_uuyxx")
+
+[sub_resource type="Theme" id="Theme_olnhu"]
+default_font = ExtResource("2_uuyxx")
+
+[sub_resource type="Theme" id="Theme_wmi0e"]
+default_font = ExtResource("2_uuyxx")
+default_font_size = 12
+
+[sub_resource type="Theme" id="Theme_3bojt"]
+default_font = ExtResource("2_uuyxx")
+
+[sub_resource type="Theme" id="Theme_eog21"]
+default_font = ExtResource("2_uuyxx")
+
 [node name="button_group" type="CanvasLayer"]
 script = ExtResource("1_jed0n")
 
 [node name="Top_menu" type="ColorRect" parent="."]
-offset_left = -12.0
-offset_top = -2.0
-offset_right = 1281.0
-offset_bottom = 44.0
-color = Color(0.192157, 0.192157, 0.192157, 1)
+offset_right = 1280.0
+offset_bottom = 46.0
+theme = SubResource("Theme_ha7l0")
+color = Color(0.145098, 0.192157, 0.278431, 1)
 metadata/_edit_group_ = true
 
 [node name="GridContainer" type="GridContainer" parent="Top_menu"]
-layout_mode = 0
-offset_left = 308.0
-offset_top = 6.0
-offset_right = 824.0
-offset_bottom = 37.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
 columns = 6
 
 [node name="Play" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
+theme = SubResource("Theme_fkkqm")
 text = "Play"
 
 [node name="player_select_window" type="Window" parent="Top_menu/GridContainer/Play"]
@@ -67,47 +91,70 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Background" type="Button" parent="Top_menu/GridContainer"]
+[node name="Save" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
-text = "Background"
+text = "Save"
 
-[node name="Player Area" type="Button" parent="Top_menu/GridContainer"]
+[node name="Load" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
-text = "Player Area"
-
-[node name="Foreground" type="Button" parent="Top_menu/GridContainer"]
-layout_mode = 2
-text = "Foreground"
-
-[node name="Player Select" type="OptionButton" parent="Top_menu/GridContainer"]
-visible = false
-layout_mode = 2
-selected = 0
-allow_reselect = true
-item_count = 2
-popup/item_0/text = "Character"
-popup/item_0/disabled = true
-popup/item_1/text = "Dwarf"
-popup/item_1/icon = ExtResource("2_jtfji")
-popup/item_1/id = 1
+text = "Load"
 
 [node name="Clear" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
 text = "Clear"
 
+[node name="Layer_menu" type="ColorRect" parent="."]
+offset_left = 352.0
+offset_top = 42.0
+offset_right = 1281.0
+offset_bottom = 80.0
+theme = SubResource("Theme_olnhu")
+color = Color(0.203922, 0.262745, 0.368627, 1)
+metadata/_edit_group_ = true
+
+[node name="GridContainer" type="GridContainer" parent="Layer_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="Background" type="Button" parent="Layer_menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+keep_pressed_outside = true
+text = "Background"
+
+[node name="Player Area" type="Button" parent="Layer_menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+keep_pressed_outside = true
+text = "Player Area"
+
+[node name="Foreground" type="Button" parent="Layer_menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+keep_pressed_outside = true
+text = "Foreground"
+
 [node name="Block_menu" type="ColorRect" parent="."]
-offset_left = -1.0
-offset_top = 43.0
-offset_right = 349.0
-offset_bottom = 314.0
-color = Color(0.192157, 0.192157, 0.192157, 1)
+offset_top = 79.0
+offset_right = 352.0
+offset_bottom = 362.0
+theme = SubResource("Theme_wmi0e")
+color = Color(0.203922, 0.262745, 0.368627, 1)
 metadata/_edit_group_ = true
 
 [node name="GridContainer" type="GridContainer" parent="Block_menu"]
 layout_mode = 1
-offset_left = 10.0
+offset_left = 6.0
 offset_top = 24.0
-offset_right = 102.0
+offset_right = 103.0
 offset_bottom = 230.0
 metadata/_edit_group_ = true
 
@@ -381,14 +428,16 @@ offset_left = 1089.0
 offset_top = 2.0
 offset_right = 1127.0
 offset_bottom = 33.0
+theme = SubResource("Theme_3bojt")
 text = "Edit"
 
 [node name="Level_menu" type="ColorRect" parent="."]
-offset_left = 354.0
-offset_top = 587.0
-offset_right = 1269.0
-offset_bottom = 647.0
-color = Color(0.192157, 0.192157, 0.192157, 1)
+offset_left = 351.0
+offset_top = 588.0
+offset_right = 1281.0
+offset_bottom = 649.0
+theme = SubResource("Theme_eog21")
+color = Color(0.145098, 0.192157, 0.278431, 1)
 metadata/_edit_group_ = true
 
 [node name="GridContainer" type="GridContainer" parent="Level_menu"]
@@ -427,7 +476,30 @@ columns = 10
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+keep_pressed_outside = true
 text = "Level 1"
+
+[node name="SearchBar" type="ColorRect" parent="."]
+offset_top = 44.0
+offset_right = 352.0
+offset_bottom = 80.0
+color = Color(0.145098, 0.192157, 0.278431, 1)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SearchBar"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 339.0
+offset_bottom = 23.0
+tooltip_text = "Just A representation for now"
+color = Color(0.917647, 0.901961, 0.898039, 1)
+
+[node name="MiniMap" type="ColorRect" parent="."]
+offset_top = 362.0
+offset_right = 352.0
+offset_bottom = 648.0
+color = Color(0.145098, 0.192157, 0.278431, 1)
 
 [connection signal="mouse_entered" from="Top_menu" to="." method="_on_top_menu_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu" to="." method="_on_top_menu_mouse_exited"]
@@ -438,21 +510,18 @@ text = "Level 1"
 [connection signal="pressed" from="Top_menu/GridContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="close_requested" from="Top_menu/GridContainer/Play/player_select_window" to="." method="_on_player_select_window_close_requested"]
 [connection signal="pressed" from="Top_menu/GridContainer/Play/player_select_window/GridContainer/Dwarf" to="." method="_on_dwarf_pressed"]
-[connection signal="mouse_entered" from="Top_menu/GridContainer/Background" to="." method="_on_background_mouse_entered"]
-[connection signal="mouse_exited" from="Top_menu/GridContainer/Background" to="." method="_on_background_mouse_exited"]
-[connection signal="pressed" from="Top_menu/GridContainer/Background" to="." method="_on_background_pressed"]
-[connection signal="mouse_entered" from="Top_menu/GridContainer/Player Area" to="." method="_on_player_area_mouse_entered"]
-[connection signal="mouse_exited" from="Top_menu/GridContainer/Player Area" to="." method="_on_player_area_mouse_exited"]
-[connection signal="pressed" from="Top_menu/GridContainer/Player Area" to="." method="_on_player_area_pressed"]
-[connection signal="mouse_entered" from="Top_menu/GridContainer/Foreground" to="." method="_on_foreground_mouse_entered"]
-[connection signal="mouse_exited" from="Top_menu/GridContainer/Foreground" to="." method="_on_foreground_mouse_exited"]
-[connection signal="pressed" from="Top_menu/GridContainer/Foreground" to="." method="_on_foreground_pressed"]
-[connection signal="mouse_entered" from="Top_menu/GridContainer/Player Select" to="." method="_on_player_select_mouse_entered"]
-[connection signal="mouse_exited" from="Top_menu/GridContainer/Player Select" to="." method="_on_player_select_mouse_exited"]
-[connection signal="pressed" from="Top_menu/GridContainer/Player Select" to="." method="_on_player_select_pressed"]
 [connection signal="mouse_entered" from="Top_menu/GridContainer/Clear" to="." method="_on_clear_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu/GridContainer/Clear" to="." method="_on_clear_mouse_exited"]
 [connection signal="pressed" from="Top_menu/GridContainer/Clear" to="." method="_on_clear_pressed"]
+[connection signal="mouse_entered" from="Layer_menu/GridContainer/Background" to="." method="_on_background_mouse_entered"]
+[connection signal="mouse_exited" from="Layer_menu/GridContainer/Background" to="." method="_on_background_mouse_exited"]
+[connection signal="pressed" from="Layer_menu/GridContainer/Background" to="." method="_on_background_pressed"]
+[connection signal="mouse_entered" from="Layer_menu/GridContainer/Player Area" to="." method="_on_player_area_mouse_entered"]
+[connection signal="mouse_exited" from="Layer_menu/GridContainer/Player Area" to="." method="_on_player_area_mouse_exited"]
+[connection signal="pressed" from="Layer_menu/GridContainer/Player Area" to="." method="_on_player_area_pressed"]
+[connection signal="mouse_entered" from="Layer_menu/GridContainer/Foreground" to="." method="_on_foreground_mouse_entered"]
+[connection signal="mouse_exited" from="Layer_menu/GridContainer/Foreground" to="." method="_on_foreground_mouse_exited"]
+[connection signal="pressed" from="Layer_menu/GridContainer/Foreground" to="." method="_on_foreground_pressed"]
 [connection signal="mouse_entered" from="Block_menu" to="." method="_on_block_menu_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu" to="." method="_on_block_menu_mouse_exited"]
 [connection signal="mouse_entered" from="Block_menu/GridContainer" to="." method="_on_grid_container_mouse_entered"]
@@ -544,3 +613,7 @@ text = "Level 1"
 [connection signal="mouse_entered" from="Level_menu/GridContainer3/Level1" to="." method="_on_level_1_mouse_entered"]
 [connection signal="mouse_exited" from="Level_menu/GridContainer3/Level1" to="." method="_on_level_1_mouse_exited"]
 [connection signal="pressed" from="Level_menu/GridContainer3/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="mouse_entered" from="SearchBar" to="." method="_on_search_bar_mouse_entered"]
+[connection signal="mouse_exited" from="SearchBar" to="." method="_on_search_bar_mouse_exited"]
+[connection signal="mouse_entered" from="MiniMap" to="." method="_on_mini_map_mouse_entered"]
+[connection signal="mouse_exited" from="MiniMap" to="." method="_on_mini_map_mouse_exited"]

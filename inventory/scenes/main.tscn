@@ -19,6 +19,7 @@ script = ExtResource("1_wpuem")
 [node name="Sprite2D" type="Sprite2D" parent="editor_object"]
 
 [node name="cam_container" type="Node2D" parent="."]
+position = Vector2(216, 155)
 
 [node name="Camera2D" type="Camera2D" parent="cam_container"]
 position = Vector2(359, 169)

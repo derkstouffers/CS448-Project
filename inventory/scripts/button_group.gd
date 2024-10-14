@@ -14,6 +14,10 @@ extends CanvasLayer
 @onready var top_menu = button_group.get_node("Top_menu")
 @onready var block_menu = button_group.get_node("Block_menu")
 @onready var level_menu = button_group.get_node("Level_menu")
+@onready var layer_menu = button_group.get_node("Layer_menu")
+@onready var search_bar = button_group.get_node("SearchBar")
+@onready var mini_map = button_group.get_node("MiniMap")
+
 @onready var edit = button_group.get_node("Edit")
 @onready var ground = button_group.get_node("Block_menu/Ground")
 @onready var walls = button_group.get_node("Block_menu/Walls")
@@ -45,7 +49,10 @@ func _on_play_pressed() -> void:
 	player_select_window.visible = true
 	top_menu.visible = false
 	block_menu.visible = false
+	layer_menu.visible = false
 	level_menu.visible = false
+	search_bar.visible = false
+	mini_map.visible = false
 	edit.visible = true
 	
 	pass # Replace with function body.
@@ -70,8 +77,10 @@ func _on_background_pressed() -> void:
 	Global.playerLayer = false
 	Global.foregroundLayer = false	
 	pass # Replace with function body.
+	
 
 func _on_player_area_pressed() -> void:
+	
 	Global.backgroundLayer = false
 	Global.playerLayer = true
 	Global.foregroundLayer = false
@@ -79,21 +88,10 @@ func _on_player_area_pressed() -> void:
 
 
 func _on_foreground_pressed() -> void:
+	
 	Global.backgroundLayer = false
 	Global.playerLayer = false
 	Global.foregroundLayer = true
-	pass # Replace with function body.
-
-
-func _on_player_select_pressed() -> void:
-	
-	if player_count < 1:
-		var player
-		player = player1.instantiate()
-		player.is_dragging = true
-		#player.global_position = get_global_mouse_position()
-		playerArea.add_child(player)
-		player_count += 1
 	pass # Replace with function body.
 
 ######
@@ -162,7 +160,10 @@ func _on_interactive_pressed() -> void:
 func _on_edit_pressed() -> void:
 	top_menu.visible = true
 	block_menu.visible = true
+	layer_menu.visible = true
 	level_menu.visible = true
+	search_bar.visible = true
+	mini_map.visible = true
 	edit.visible = false
 	Global.playing = false
 	pass # Replace with function body.
@@ -461,17 +462,6 @@ func _on_foreground_mouse_exited() -> void:
 	object_cursor.can_place = true
 	pass # Replace with function body.
 
-
-func _on_player_select_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_player_select_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
 func _on_clear_mouse_entered() -> void:
 	object_cursor.can_place = false
 	pass # Replace with function body.	
@@ -727,5 +717,33 @@ func _on_level_1_mouse_entered() -> void:
 
 
 func _on_level_1_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
+
+
+
+###
+### SEARCHBAR
+###
+func _on_search_bar_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_search_bar_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
+
+
+###
+### MINIMAP
+###
+
+func _on_mini_map_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_mini_map_mouse_exited() -> void:
 	object_cursor.can_place = true
 	pass # Replace with function body.

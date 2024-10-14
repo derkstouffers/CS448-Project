@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b365ptyl2j4um"]
+[gd_scene load_steps=5 format=3 uid="uid://b365ptyl2j4um"]
 
 [ext_resource type="Script" path="res://scripts/load_screen.gd" id="1_h7er3"]
 [ext_resource type="Texture2D" uid="uid://d37cb774sgfu4" path="res://assets/backgrounds/game_background_4.png" id="1_oilvo"]
+[ext_resource type="FontFile" uid="uid://dfnj0s4uiru6a" path="res://assets/ui_ux/Bungee-Regular.ttf" id="3_mrbl0"]
+
+[sub_resource type="Theme" id="Theme_pi1fa"]
+default_font = ExtResource("3_mrbl0")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_h7er3")
@@ -25,6 +29,8 @@ offset_right = 85.5
 offset_bottom = 97.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_pi1fa")
+theme_override_constants/separation = 10
 alignment = 1
 vertical = true
 metadata/_edit_group_ = true

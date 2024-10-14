@@ -304,8 +304,6 @@ use_parent_material = true
 tile_set = SubResource("TileSet_tqpyl")
 
 [node name="Player Area" type="TileMapLayer" parent="."]
-light_mask = 2
-visibility_layer = 2
 tile_set = SubResource("TileSet_jv27s")
 
 [node name="foreground" type="TileMapLayer" parent="."]
