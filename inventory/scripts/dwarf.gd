@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 				sprite.flip_h = true
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		#move_and_collide(velocity * delta)
 		move_and_slide()
 		
 func _input(event: InputEvent) -> void:

@@ -3,7 +3,7 @@ extends Node2D
 var can_place = true
 var is_panning = true
 
-@onready var level = get_node("/root/main/level2")
+@onready var level = get_node("/root/main/level")
 @onready var editor = get_node("/root/main/cam_container")
 @onready var editor_cam = editor.get_node("Camera2D")
 
@@ -12,9 +12,9 @@ var is_panning = true
 
 var current_item
 
-@onready var background : TileMapLayer = level.get_node("/root/main/level2/worldMap/Background")
-@onready var playerArea : TileMapLayer = level.get_node("/root/main/level2/worldMap/Player Area")
-@onready var foreground : TileMapLayer = level.get_node("/root/main/level2/worldMap/foreground")
+@onready var background : TileMapLayer = level.get_node("/root/main/level/Background")
+@onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
+@onready var foreground : TileMapLayer = level.get_node("/root/main/level/foreground")
 
 
 

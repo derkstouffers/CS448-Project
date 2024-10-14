@@ -1,12 +1,12 @@
 extends CanvasLayer
 
 @onready var main = get_node("/root/main")
-@onready var level = get_node("/root/main/level2")
+@onready var level = get_node("/root/main/level")
 
 
-@onready var background : TileMapLayer = level.get_node("/root/main/level2/worldMap/Background")
-@onready var playerArea : TileMapLayer = level.get_node("/root/main/level2/worldMap/Player Area")
-@onready var foreground : TileMapLayer = level.get_node("/root/main/level2/worldMap/foreground")
+@onready var background : TileMapLayer = level.get_node("/root/main/level/Background")
+@onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
+@onready var foreground : TileMapLayer = level.get_node("/root/main/level/foreground")
 
 @onready var object_cursor = get_node("/root/main/editor_object")
 
@@ -675,10 +675,10 @@ func _on_add_level_pressed() -> void:
 	#var dungeon_levels = button_group.get_node("/Level_menu/GridContainer3")
 	#var new_level
 	#new_level = level2.instantiate()
-	
+	#
 	#main.add_child(new_level)
 	#
-	#dungeon_levels.add_child()
+	##dungeon_levels.add_child()
 	#
 	#level.visible = false
 	#new_level.visible = true
@@ -688,4 +688,44 @@ func _on_add_level_pressed() -> void:
 
 func _on_level_1_pressed() -> void:
 	level.visible = true
+	pass # Replace with function body.
+
+
+func _on_level_menu_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_level_menu_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
+
+
+func _on_add_level_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_add_level_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
+
+
+func _on_delete_level_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_delete_level_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
+
+
+func _on_level_1_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_level_1_mouse_exited() -> void:
+	object_cursor.can_place = true
 	pass # Replace with function body.
