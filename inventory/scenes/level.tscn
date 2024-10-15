@@ -91,7 +91,6 @@ texture = ExtResource("12_yuul7")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_tqpyl"]
-physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_sbkib")
 sources/1 = SubResource("TileSetAtlasSource_yu460")
 sources/2 = SubResource("TileSetAtlasSource_6oeiq")
@@ -280,7 +279,6 @@ texture = ExtResource("12_yuul7")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_b7lgr"]
-physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_l3j6h")
 sources/1 = SubResource("TileSetAtlasSource_i1wtf")
 sources/2 = SubResource("TileSetAtlasSource_2r0cw")
@@ -298,6 +296,12 @@ sources/13 = SubResource("TileSetAtlasSource_u7533")
 sources/14 = SubResource("TileSetAtlasSource_fo88p")
 
 [node name="level" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1281.0
+offset_bottom = 650.0
+color = Color(0.109804, 0.145098, 0.211765, 1)
 
 [node name="Background" type="TileMapLayer" parent="."]
 use_parent_material = true

@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var level = get_node("/root/main/level")
 @onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
+@onready var camera = get_node("/root/main/cam_container/Camera2D")
 
 var is_dragging = false
 
@@ -15,16 +16,15 @@ func _physics_process(delta: float) -> void:
 
 	if is_dragging:
 		global_position = get_global_mouse_position()
+	
 			
 	if(Global.playing):
 		
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
-			print(velocity)
 			
-			
-			### reset player set if player reaches fall speed of 1000 or more
+			#### reset player set if player reaches fall speed of 1000 or more
 			if velocity.y >= 1000:
 				level.remove_child(level.get_node("dwarf"))
 				Global.player_count -= 1
@@ -50,11 +50,12 @@ func _physics_process(delta: float) -> void:
 			
 
 			
-		#move_and_collide(velocity * delta)
+		
 		move_and_slide()
 		
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
+	if Global.playing and event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
 		if event.pressed:
 			is_dragging = false
+			camera.enabled = false
 	
