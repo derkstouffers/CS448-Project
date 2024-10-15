@@ -125,7 +125,6 @@ columns = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-toggle_mode = true
 keep_pressed_outside = true
 text = "Background"
 
@@ -133,8 +132,6 @@ text = "Background"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-toggle_mode = true
-button_pressed = true
 keep_pressed_outside = true
 text = "Player Area"
 
@@ -142,7 +139,6 @@ text = "Player Area"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-toggle_mode = true
 keep_pressed_outside = true
 text = "Foreground"
 
@@ -169,8 +165,6 @@ text = "Ground"
 
 [node name="Walls" type="Button" parent="Block_menu/GridContainer"]
 layout_mode = 2
-toggle_mode = true
-button_pressed = true
 text = "Walls"
 
 [node name="Hazards" type="Button" parent="Block_menu/GridContainer"]

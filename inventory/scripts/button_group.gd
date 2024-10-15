@@ -30,7 +30,6 @@ extends CanvasLayer
 const level2 = preload("res://scenes/level.tscn")
 const player1 = preload("res://scenes/dwarf.tscn")
 
-var being_made = false
 
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
@@ -64,7 +63,7 @@ func _on_play_pressed() -> void:
 	## Shift to player camera if player already placed in world
 	if Global.player_count == 1:
 		camera.enabled = false
-		level1.get_node("dwarf").get_child(2).enabled = true
+		Global.playerArea.get_node("dwarf").get_child(2).enabled = true
 	
 	pass # Replace with function body.
 
@@ -76,7 +75,7 @@ func _on_dwarf_pressed() -> void:
 		var player
 		player = player1.instantiate()
 		player.is_dragging = true
-		level1.add_child(player)
+		Global.playerArea.add_child(player)
 		Global.player_count += 1
 	pass # Replace with function body.
 	
@@ -88,6 +87,8 @@ func _on_background_pressed() -> void:
 	Global.backgroundLayer = true
 	Global.playerLayer = false
 	Global.foregroundLayer = false	
+	
+
 	pass # Replace with function body.
 	
 
@@ -96,6 +97,7 @@ func _on_player_area_pressed() -> void:
 	Global.backgroundLayer = false
 	Global.playerLayer = true
 	Global.foregroundLayer = false
+
 	pass # Replace with function body.
 
 
@@ -104,6 +106,7 @@ func _on_foreground_pressed() -> void:
 	Global.backgroundLayer = false
 	Global.playerLayer = false
 	Global.foregroundLayer = true
+
 	pass # Replace with function body.
 
 ######
@@ -116,7 +119,7 @@ func _on_clear_pressed() -> void:
 	
 	
 	if Global.player_count > 0:
-		level1.remove_child(level1.get_node("dwarf"))
+		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 		Global.player_count -= 1
 	pass # Replace with function body.
 
@@ -183,7 +186,7 @@ func _on_edit_pressed() -> void:
 	### change cameras back to editing camera
 	camera.enabled = true
 	if Global.player_count > 0:
-		level1.get_node("dwarf").get_child(2).enabled = false
+		Global.playerArea.get_node("dwarf").get_child(2).enabled = false
 	pass # Replace with function body.
 
 
@@ -681,46 +684,66 @@ func _on_chest_pressed() -> void:
 var button
 var new_level
 func _on_add_level_pressed() -> void:
-	being_made = true
+	
 	var dungeon_levels =  $Level_menu/GridContainer3  #button_group.get_node("/Level_menu/GridContainer3")
 	button = Button.new()
 	
 	new_level = level2.instantiate()
 	
+	
+	### add new level to the main scene
 	level1.add_sibling(new_level, true)
-	print(main.get_children())
+	
+	
+	### add new button for level to the level menu
 	dungeon_levels.add_child(button)
+	
+	### Give functionality to button
 	button.text = new_level.get_name()
-
 	Global.level.visible = false
 	new_level.visible = true
 	button.pressed.connect(_on_level_select.bind(button.text))
+	button.mouse_entered.connect(self._mouse_enter)
+	button.mouse_exited.connect(self._mouse_exit)
 	
 	pass # Replace with function body.
 		
 func _on_level_select(level_name):		
 	var level_select
 	level_select = main.get_node(level_name)
-	#var child_count = $Level_menu/GridContainer3.get_child_count()
-	#for i in range(child_count - 1):
-		#$"..".get_child(i + 1).visible = false
 	
-	level_select.visible = !level_select.visible
+	## make level selected visible and previous level hidden
+	Global.level.visible = false
+	level_select.visible = true
 	
+	
+	### set the level to be drawn in 
 	Global.level =  level_select
 	Global.background = level_select.get_node("Background")
 	Global.playerArea = level_select.get_node("Player Area")
 	Global.foreground = level_select.get_node("foreground")
 	
+	pass
+
+func _mouse_enter():
+	object_cursor.can_place = false
+
+func _mouse_exit():
+	object_cursor.can_place = true	
+	
 
 
 
 func _on_level_1_pressed() -> void:
-	level1.visible = !level1.visible
+	
+	Global.level.visible = false
+	level1.visible = true
+	
 	Global.level =  level1
 	Global.background = get_node("/root/main/level/Background")
 	Global.playerArea = get_node("/root/main/level/Player Area")
 	Global.foreground = get_node("/root/main/level/foreground")
+	
 	pass # Replace with function body.
 
 

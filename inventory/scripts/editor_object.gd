@@ -3,7 +3,7 @@ extends Node2D
 var can_place = true
 var is_panning = true
 
-#@onready var level = get_node("/root/main/level")
+@onready var level = get_node("/root/main/level")
 @onready var editor = get_node("/root/main/cam_container")
 @onready var editor_cam = editor.get_node("Camera2D")
 
@@ -12,15 +12,20 @@ var is_panning = true
 
 var current_item
 
-#@onready var background : TileMapLayer = level.get_node("/root/main/level/Background")
-#@onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
-#@onready var foreground : TileMapLayer = level.get_node("/root/main/level/foreground")
+@onready var background : TileMapLayer = level.get_node("/root/main/level/Background")
+@onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
+@onready var foreground : TileMapLayer = level.get_node("/root/main/level/foreground")
+
 
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.level = level
+	Global.background = background
+	Global.playerArea = playerArea
+	Global.foreground = foreground
 	#editor_cam.make_current()
 	pass # Replace with function body.
 

@@ -145,3 +145,4 @@ animation = &"walk"
 shape = SubResource("CapsuleShape2D_wt5hr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
