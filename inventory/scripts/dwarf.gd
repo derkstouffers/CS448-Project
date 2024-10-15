@@ -1,6 +1,10 @@
 extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 
+
+@onready var level = get_node("/root/main/level")
+@onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
+
 var is_dragging = false
 
 const SPEED = 300.0
@@ -14,9 +18,16 @@ func _physics_process(delta: float) -> void:
 			
 	if(Global.playing):
 		
-	# Add the gravity.
+		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
+			print(velocity)
+			
+			
+			### reset player set if player reaches fall speed of 1000 or more
+			if velocity.y >= 1000:
+				level.remove_child(level.get_node("dwarf"))
+				Global.player_count -= 1
 
 	# Handle jump.
 		if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -36,6 +47,9 @@ func _physics_process(delta: float) -> void:
 				sprite.flip_h = true
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
+			
+
+			
 		#move_and_collide(velocity * delta)
 		move_and_slide()
 		

@@ -3,7 +3,6 @@ extends CanvasLayer
 @onready var main = get_node("/root/main")
 @onready var level = get_node("/root/main/level")
 
-
 @onready var background : TileMapLayer = level.get_node("/root/main/level/Background")
 @onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
 @onready var foreground : TileMapLayer = level.get_node("/root/main/level/foreground")
@@ -29,7 +28,7 @@ extends CanvasLayer
 
 const level2 = preload("res://scenes/level.tscn")
 const player1 = preload("res://scenes/dwarf.tscn")
-var player_count = 0
+
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#pass # Replace with function body.
@@ -46,7 +45,10 @@ var player_count = 0
 
 func _on_play_pressed() -> void:
 	Global.playing = true
-	player_select_window.visible = true
+	
+	if Global.player_count < 1:
+		player_select_window.visible = true
+		
 	top_menu.visible = false
 	block_menu.visible = false
 	layer_menu.visible = false
@@ -59,13 +61,14 @@ func _on_play_pressed() -> void:
 
 func _on_dwarf_pressed() -> void:
 	player_select_window.visible = false
-	if player_count < 1:
+	if Global.player_count < 1:
 		var player
 		player = player1.instantiate()
 		player.is_dragging = true
 		#player.global_position = get_global_mouse_position()
-		playerArea.add_child(player)
-		player_count += 1
+		level.add_child(player)
+		Global.player_count += 1
+
 	pass # Replace with function body.
 	
 func _on_player_select_window_close_requested() -> void:
@@ -103,9 +106,9 @@ func _on_clear_pressed() -> void:
 	foreground.clear()
 	
 	
-	if player_count > 0:
-		playerArea.remove_child(playerArea.get_node("dwarf"))
-		player_count -= 1
+	if Global.player_count > 0:
+		level.remove_child(level.get_node("dwarf"))
+		Global.player_count -= 1
 	pass # Replace with function body.
 
 ###
