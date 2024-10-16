@@ -123,6 +123,7 @@ texture = ExtResource("1_0mro5")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_it7m4"]
 texture = ExtResource("2_lrehj")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1da6v"]
 texture = ExtResource("3_v0v5l")
@@ -154,6 +155,7 @@ texture = ExtResource("5_kdvn3")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0rcs"]
 texture = ExtResource("6_roam7")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jqith"]
 texture = ExtResource("7_vpnal")

@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://bd5ijxhw76jya"]
+
+[ext_resource type="Texture2D" uid="uid://geslslmtgqhb" path="res://Sprites/Green Slime Bounce.png" id="1_mh1kr"]
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_ntykq"]
+
+[sub_resource type="Curve2D" id="Curve2D_ouuu1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 113, -1, 0, 0, 0, 0, 0, -1)
+}
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j01p4"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaccr"]
+atlas = ExtResource("1_mh1kr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhhlj"]
+atlas = ExtResource("1_mh1kr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjf6c"]
+atlas = ExtResource("1_mh1kr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixa3u"]
+atlas = ExtResource("1_mh1kr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aen4v"]
+atlas = ExtResource("1_mh1kr")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkb6i"]
+atlas = ExtResource("1_mh1kr")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m88bf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iaccr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhhlj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjf6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixa3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aen4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkb6i")
+}],
+"loop": true,
+"name": &"bounce",
+"speed": 5.0
+}]
+
+[node name="sprite" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ouuu1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(0, -1)
+rotates = false
+
+[node name="slime" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+position = Vector2(0, 1)
+script = ExtResource("1_ntykq")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/slime"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_j01p4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Path2D/PathFollow2D/slime"]
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_m88bf")
+animation = &"bounce"

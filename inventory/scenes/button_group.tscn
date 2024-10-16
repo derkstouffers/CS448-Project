@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://clrvdmfbg0bne"]
+[gd_scene load_steps=30 format=3 uid="uid://clrvdmfbg0bne"]
 
 [ext_resource type="Script" path="res://scripts/button_group.gd" id="1_jed0n"]
 [ext_resource type="Texture2D" uid="uid://cuiaq8wwhnuil" path="res://characters/dwarf/Dwarf 1.png" id="2_jtfji"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://assets/interactive/Ladder.png" id="16_d6hhi"]
 [ext_resource type="Texture2D" uid="uid://curxra5askb1" path="res://assets/interactive/Treasure Chest_1.png" id="17_mlhbe"]
 [ext_resource type="Texture2D" uid="uid://c26j48mqlyv4p" path="res://assets/Decor/Torch-1.png" id="18_puwac"]
+[ext_resource type="Texture2D" uid="uid://d0wyu6ug0tx0q" path="res://Sprites/green_slime.png" id="23_o1287"]
 
 [sub_resource type="Theme" id="Theme_ha7l0"]
 default_font = ExtResource("2_uuyxx")
@@ -412,11 +413,11 @@ offset_right = 344.0
 offset_bottom = 267.0
 columns = 2
 
-[node name="Stone" type="Button" parent="Block_menu/Sprite"]
+[node name="Slime" type="Button" parent="Block_menu/Sprite"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Stone"
-icon = ExtResource("2_rvp3f")
+text = "Slime"
+icon = ExtResource("23_o1287")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
@@ -542,6 +543,7 @@ color = Color(0.145098, 0.192157, 0.278431, 1)
 [connection signal="pressed" from="Block_menu/GridContainer/Interactive" to="." method="_on_interactive_pressed"]
 [connection signal="mouse_entered" from="Block_menu/GridContainer/Sprite" to="." method="_on_sprite_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/GridContainer/Sprite" to="." method="_on_sprite_mouse_exited"]
+[connection signal="pressed" from="Block_menu/GridContainer/Sprite" to="." method="_on_sprite_pressed"]
 [connection signal="mouse_entered" from="Block_menu/Ground/Stone" to="." method="_on_stone_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/Ground/Stone" to="." method="_on_stone_mouse_exited"]
 [connection signal="pressed" from="Block_menu/Ground/Stone" to="." method="_on_stone_pressed"]
@@ -599,6 +601,9 @@ color = Color(0.145098, 0.192157, 0.278431, 1)
 [connection signal="mouse_entered" from="Block_menu/Interactive/Chest" to="." method="_on_chest_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/Interactive/Chest" to="." method="_on_chest_mouse_exited"]
 [connection signal="pressed" from="Block_menu/Interactive/Chest" to="." method="_on_chest_pressed"]
+[connection signal="mouse_entered" from="Block_menu/Sprite/Slime" to="." method="_on_slime_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/Sprite/Slime" to="." method="_on_slime_mouse_exited"]
+[connection signal="pressed" from="Block_menu/Sprite/Slime" to="." method="_on_slime_pressed"]
 [connection signal="mouse_entered" from="Edit" to="." method="_on_edit_mouse_entered"]
 [connection signal="mouse_exited" from="Edit" to="." method="_on_edit_mouse_exited"]
 [connection signal="pressed" from="Edit" to="." method="_on_edit_pressed"]

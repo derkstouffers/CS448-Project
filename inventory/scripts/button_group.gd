@@ -24,11 +24,14 @@ extends CanvasLayer
 @onready var hazards = button_group.get_node("Block_menu/Hazards")
 @onready var decor = button_group.get_node("Block_menu/Decor")
 @onready var interactive = button_group.get_node("Block_menu/Interactive")
+@onready var sprites = button_group.get_node("Block_menu/Sprite")
+
 
 @onready var player_select_window = button_group.get_node("Top_menu/GridContainer/Play/player_select_window")
 
 const level2 = preload("res://scenes/level.tscn")
 const player1 = preload("res://scenes/dwarf.tscn")
+const slime = preload("res://scenes/slime.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -133,6 +136,7 @@ func _on_ground_pressed() -> void:
 	hazards.visible = false
 	decor.visible = false
 	interactive.visible = false
+	sprites.visible = false
 	pass # Replace with function body.
 
 
@@ -142,6 +146,7 @@ func _on_walls_pressed() -> void:
 	hazards.visible = false
 	decor.visible = false
 	interactive.visible = false
+	sprites.visible = false
 	pass # Replace with function body.
 
 func _on_hazards_pressed() -> void:
@@ -150,6 +155,7 @@ func _on_hazards_pressed() -> void:
 	hazards.visible = true
 	decor.visible = false
 	interactive.visible = false
+	sprites.visible = false
 	pass # Replace with function body.
 
 
@@ -159,6 +165,7 @@ func _on_decor_pressed() -> void:
 	hazards.visible = false
 	decor.visible = true
 	interactive.visible = false
+	sprites.visible = false
 	pass # Replace with function body.
 	
 func _on_interactive_pressed() -> void:
@@ -167,6 +174,16 @@ func _on_interactive_pressed() -> void:
 	hazards.visible = false
 	decor.visible = false
 	interactive.visible = true	
+	sprites.visible = false
+	pass # Replace with function body.
+
+func _on_sprite_pressed() -> void:
+	ground.visible = false
+	walls.visible = false
+	hazards.visible = false
+	decor.visible = false
+	interactive.visible = false
+	sprites.visible = true
 	pass # Replace with function body.
 	
 ###
@@ -675,7 +692,26 @@ func _on_chest_pressed() -> void:
 	pass # Replace with function body.
 
 
+###
+### SPRITES
+###
 
+func _on_slime_pressed() -> void:
+	var slimes
+	slimes = slime.instantiate()
+	slimes.get_node("Path2D/PathFollow2D/slime").is_dragging = true
+	Global.playerArea.add_child(slimes)
+	pass # Replace with function body.
+	
+	
+func _on_slime_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_slime_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
 
 
 
