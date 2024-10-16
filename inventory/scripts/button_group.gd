@@ -60,6 +60,7 @@ func _on_play_pressed() -> void:
 	edit.visible = true
 	
 	
+	#### NEED TO MAKE A WINDOW (PLAYER ALREADY EXISTS IN A LEVEL THEN RETURNS USER TO EDIT MODE)
 	## Shift to player camera if player already placed in world
 	if Global.player_count == 1:
 		camera.enabled = false
@@ -715,6 +716,7 @@ func _on_level_select(level_name):
 	## make level selected visible and previous level hidden
 	Global.level.visible = false
 	level_select.visible = true
+	
 	
 	
 	### set the level to be drawn in 

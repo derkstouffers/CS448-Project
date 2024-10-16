@@ -50,12 +50,20 @@ func _physics_process(delta: float) -> void:
 			
 
 			
-		
+
+		#var collided_tile = 
 		move_and_slide()
+		
+		#if collided_tile != Vector2.ZERO:
+			#var tile_id = get_parent().get_cell_v(collided_tile).get_tile()
+			#if tile_id == 3:
+				#print("COIN HIT")
+			
 		
 func _input(event: InputEvent) -> void:
 	if Global.playing and event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
 		if event.pressed:
 			is_dragging = false
 			camera.enabled = false
+			
 	
