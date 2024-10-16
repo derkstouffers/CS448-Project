@@ -131,7 +131,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wt5hr"]
 radius = 5.0
-height = 16.0
+height = 14.0
 
 [node name="dwarf" type="CharacterBody2D"]
 script = ExtResource("1_xs4ku")
@@ -145,4 +145,4 @@ animation = &"walk"
 shape = SubResource("CapsuleShape2D_wt5hr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(3.5, 3.5)
