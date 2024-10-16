@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 			
 			#### reset player set if player reaches fall speed of 1000 or more
 			if velocity.y >= 1000:
-				level.remove_child(level.get_node("dwarf"))
+				Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 				Global.player_count -= 1
 
 	# Handle jump.

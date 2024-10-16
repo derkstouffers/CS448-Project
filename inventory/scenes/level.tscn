@@ -297,20 +297,12 @@ sources/14 = SubResource("TileSetAtlasSource_fo88p")
 
 [node name="level" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_right = 1281.0
-offset_bottom = 650.0
-color = Color(0.109804, 0.145098, 0.211765, 1)
-
 [node name="Background" type="TileMapLayer" parent="."]
 use_parent_material = true
 tile_set = SubResource("TileSet_tqpyl")
 
 [node name="Player Area" type="TileMapLayer" parent="."]
-visibility_layer = 2
 tile_set = SubResource("TileSet_jv27s")
 
 [node name="foreground" type="TileMapLayer" parent="."]
-visibility_layer = 4
 tile_set = SubResource("TileSet_b7lgr")
