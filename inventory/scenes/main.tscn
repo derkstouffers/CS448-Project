@@ -25,3 +25,5 @@ position = Vector2(216, 155)
 position = Vector2(359, 169)
 
 [node name="button_group" parent="." instance=ExtResource("18_l3ise")]
+
+[node name="levels" type="Node2D" parent="."]

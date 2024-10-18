@@ -18,12 +18,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 			
 		velocity += get_gravity() * delta
-			
-			
+					
 	# Activates the made path for the slimes		
 	path_follow.progress += speed * delta
-	
-	
+
 	$AnimatedSprite2D.play("bounce")
 	
 	## based on this implementation we need this to have the gravity work
@@ -37,4 +35,3 @@ func _input(event: InputEvent) -> void:
 		if event.pressed:
 			is_dragging = false
 			
-		

@@ -742,7 +742,7 @@ func _on_add_level_pressed() -> void:
 	dungeon_levels.add_child(button)
 	
 	### Give functionality to button
-	button.text = new_level.get_name()
+	button.text = new_level.get_name()	
 	Global.level.visible = false
 	new_level.visible = true
 	button.pressed.connect(_on_level_select.bind(button.text))
@@ -858,4 +858,22 @@ func _on_mini_map_mouse_entered() -> void:
 
 func _on_mini_map_mouse_exited() -> void:
 	object_cursor.can_place = true
+	pass # Replace with function body.
+
+
+### Gonna work on this
+func _on_save_pressed() -> void:
+	var scene = PackedScene.new()
+	var scene_node = main.get_node("/root/main/" + Global.level.name)
+	scene.pack(scene_node)
+	ResourceSaver.save(scene, "res://scenes/" + scene_node.name + ".tscn")
+	pass # Replace with function body.
+
+
+func _on_load_pressed() -> void:
+	pass # Replace with function body.
+
+### just a temporary button for changing levels until we have quests/objectives worked in
+func _on_next_level_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/level2.tscn")
 	pass # Replace with function body.
