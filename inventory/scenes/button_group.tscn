@@ -511,6 +511,13 @@ size = Vector2i(465, 100)
 theme = SubResource("Theme_lditu")
 dialog_text = "are you sure you want to clear your progress?"
 
+[node name="next_level" type="Button" parent="."]
+offset_left = 1036.0
+offset_top = 92.0
+offset_right = 1122.0
+offset_bottom = 123.0
+text = "next_level"
+
 [connection signal="mouse_entered" from="Top_menu" to="." method="_on_top_menu_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu" to="." method="_on_top_menu_mouse_exited"]
 [connection signal="mouse_entered" from="Top_menu/GridContainer" to="." method="_on_grid_container_mouse_entered"]
@@ -520,6 +527,7 @@ dialog_text = "are you sure you want to clear your progress?"
 [connection signal="pressed" from="Top_menu/GridContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="close_requested" from="Top_menu/GridContainer/Play/player_select_window" to="." method="_on_player_select_window_close_requested"]
 [connection signal="pressed" from="Top_menu/GridContainer/Play/player_select_window/GridContainer/Dwarf" to="." method="_on_dwarf_pressed"]
+[connection signal="pressed" from="Top_menu/GridContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="mouse_entered" from="Top_menu/GridContainer/Clear" to="." method="_on_clear_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu/GridContainer/Clear" to="." method="_on_clear_mouse_exited"]
 [connection signal="pressed" from="Top_menu/GridContainer/Clear" to="." method="_on_clear_pressed"]
@@ -631,3 +639,4 @@ dialog_text = "are you sure you want to clear your progress?"
 [connection signal="mouse_exited" from="SearchBar" to="." method="_on_search_bar_mouse_exited"]
 [connection signal="mouse_entered" from="MiniMap" to="." method="_on_mini_map_mouse_entered"]
 [connection signal="mouse_exited" from="MiniMap" to="." method="_on_mini_map_mouse_exited"]
+[connection signal="pressed" from="next_level" to="." method="_on_next_level_pressed"]

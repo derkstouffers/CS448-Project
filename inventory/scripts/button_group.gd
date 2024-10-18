@@ -760,7 +760,7 @@ func _on_level_select(level_name):
 	level_select.visible = true
 	
 	# fix block collision issues from one level to the next
-	Global.playerArea.collision_enabled = false
+	Global.playerArea.collision_enabled = !Global.playerArea.collision_enabled
 	
 	
 	### set the level to be drawn in 
@@ -789,7 +789,7 @@ func _on_level_1_pressed() -> void:
 	Global.background = get_node("/root/main/level/Background")
 	Global.playerArea = get_node("/root/main/level/Player Area")
 	Global.foreground = get_node("/root/main/level/foreground")
-	
+	Global.playerArea.collision_enabled = !Global.playerArea.collision_enabled
 	pass # Replace with function body.
 
 
@@ -858,4 +858,26 @@ func _on_mini_map_mouse_entered() -> void:
 
 func _on_mini_map_mouse_exited() -> void:
 	object_cursor.can_place = true
+	pass # Replace with function body.
+	
+	
+###
+### Save button
+### temporary functionality
+
+
+func _on_save_pressed() -> void:
+	var scene = PackedScene.new()
+	var scene_node = main.get_node("/root/main/" + Global.level.name)
+	scene.pack(scene_node)
+	ResourceSaver.save(scene, "res://scenes/" + scene_node.name + ".tscn")
+	pass # Replace with function body.
+
+
+###
+### Changing levels within play, HARDCODED ONLY FOR LEVEL 2 right now
+###
+
+func _on_next_level_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/level2.tscn")
 	pass # Replace with function body.

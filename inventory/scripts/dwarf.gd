@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 var is_dragging = false
 
-const SPEED = 300.0
+const SPEED = 150
 const JUMP_VELOCITY = -400.0
 
 
