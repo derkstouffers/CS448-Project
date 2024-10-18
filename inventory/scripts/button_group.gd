@@ -29,6 +29,8 @@ extends CanvasLayer
 
 @onready var player_select_window = button_group.get_node("Top_menu/GridContainer/Play/player_select_window")
 
+@onready var clear_confirm: ConfirmationDialog = $"clear_confirm"
+
 const level2 = preload("res://scenes/level.tscn")
 const player1 = preload("res://scenes/dwarf.tscn")
 const slime = preload("res://scenes/slime.tscn")
@@ -117,6 +119,11 @@ func _on_foreground_pressed() -> void:
 ###### WANT TO MAKE IT A POPUP TO MAKE SURE WE WANT TO CLEAR 
 ######
 func _on_clear_pressed() -> void:
+	clear_confirm.popup_centered()
+	clear_confirm.connect("confirmed", _on_clear_popup)
+	pass # Replace with function body.
+
+func _on_clear_popup() -> void:
 	Global.background.clear()
 	Global.playerArea.clear()
 	Global.foreground.clear()
@@ -125,7 +132,6 @@ func _on_clear_pressed() -> void:
 	if Global.player_count > 0:
 		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 		Global.player_count -= 1
-	pass # Replace with function body.
 
 ###
 ### BLOCK MENU
@@ -753,6 +759,8 @@ func _on_level_select(level_name):
 	Global.level.visible = false
 	level_select.visible = true
 	
+	# fix block collision issues from one level to the next
+	Global.playerArea.collision_enabled = false
 	
 	
 	### set the level to be drawn in 

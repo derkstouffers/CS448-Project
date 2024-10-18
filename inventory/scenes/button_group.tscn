@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://clrvdmfbg0bne"]
+[gd_scene load_steps=31 format=3 uid="uid://clrvdmfbg0bne"]
 
 [ext_resource type="Script" path="res://scripts/button_group.gd" id="1_jed0n"]
 [ext_resource type="Texture2D" uid="uid://cuiaq8wwhnuil" path="res://characters/dwarf/Dwarf 1.png" id="2_jtfji"]
@@ -41,6 +41,9 @@ default_font_size = 12
 default_font = ExtResource("2_uuyxx")
 
 [sub_resource type="Theme" id="Theme_eog21"]
+default_font = ExtResource("2_uuyxx")
+
+[sub_resource type="Theme" id="Theme_lditu"]
 default_font = ExtResource("2_uuyxx")
 
 [node name="button_group" type="CanvasLayer"]
@@ -500,6 +503,13 @@ offset_top = 362.0
 offset_right = 352.0
 offset_bottom = 648.0
 color = Color(0.145098, 0.192157, 0.278431, 1)
+
+[node name="clear_confirm" type="ConfirmationDialog" parent="."]
+title = "Clear Level"
+position = Vector2i(0, 36)
+size = Vector2i(465, 100)
+theme = SubResource("Theme_lditu")
+dialog_text = "are you sure you want to clear your progress?"
 
 [connection signal="mouse_entered" from="Top_menu" to="." method="_on_top_menu_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu" to="." method="_on_top_menu_mouse_exited"]
