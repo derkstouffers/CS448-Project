@@ -31,6 +31,8 @@ extends CanvasLayer
 
 @onready var clear_confirm: ConfirmationDialog = $"clear_confirm"
 
+@onready var next_level_button = $next_level
+
 const level2 = preload("res://scenes/level.tscn")
 const player1 = preload("res://scenes/dwarf.tscn")
 const slime = preload("res://scenes/slime.tscn")
@@ -63,6 +65,7 @@ func _on_play_pressed() -> void:
 	search_bar.visible = false
 	mini_map.visible = false
 	edit.visible = true
+	next_level_button.visible = true
 	
 	
 	#### NEED TO MAKE A WINDOW (PLAYER ALREADY EXISTS IN A LEVEL THEN RETURNS USER TO EDIT MODE)
@@ -204,6 +207,7 @@ func _on_edit_pressed() -> void:
 	search_bar.visible = true
 	mini_map.visible = true
 	edit.visible = false
+	next_level_button.visible = false
 	Global.playing = false
 	
 	
@@ -743,6 +747,7 @@ func _on_add_level_pressed() -> void:
 	
 	### Give functionality to button
 	button.text = new_level.get_name()
+	Global.level_array.append(button.text)
 	Global.level.visible = false
 	new_level.visible = true
 	button.pressed.connect(_on_level_select.bind(button.text))
@@ -864,6 +869,7 @@ func _on_mini_map_mouse_exited() -> void:
 ###
 ### Save button
 ### temporary functionality
+### will probably change this to save the whole project the user is making rather than individual levels
 
 
 func _on_save_pressed() -> void:
@@ -877,7 +883,50 @@ func _on_save_pressed() -> void:
 ###
 ### Changing levels within play, HARDCODED ONLY FOR LEVEL 2 right now
 ###
-
+var i = 1
 func _on_next_level_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/level2.tscn")
+	#get_tree().change_scene_to_file("res://scenes/level2.tscn")
+	var level_count = Global.level_array.size()
+	var next_level
+	
+	## remove player from previous level
+	Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
+	Global.player_count -= 1
+	## remove collision from previous level
+	Global.playerArea.collision_enabled = false
+	
+	## Turn off previous level visibility
+	Global.level.visible = false
+	
+	## get and set next level
+	next_level = main.get_node(Global.level_array[i])
+	next_level.visible = true
+	Global.level = next_level
+	
+	
+	## add player to new level 
+	var player = player1.instantiate()
+	
+	Global.playerArea = next_level.get_node('Player Area')
+	Global.playerArea.collision_enabled = true
+	
+	next_level.get_node('Player Area').add_child(player)
+	
+	## set position for where player will enter new level
+	## need to probably make it variable for each level that can be placed by user
+	player.set_position(Vector2i(500,500))
+	
+	Global.player_count += 1
+	if Global.player_count == 1:
+		camera.enabled = false
+		next_level.get_node('Player Area/dwarf').get_child(2).enabled = true
+	
+	## if the next level is the size of the level array in global then there are no more levels
+	if level_count != i:
+		## increment i to access the next level in the global array of levels
+		i += 1
+		
+	else:
+		print("GAME OVER")
+	
 	pass # Replace with function body.

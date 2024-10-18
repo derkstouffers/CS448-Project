@@ -8,6 +8,7 @@ var place_tile = false
 var backgroundLayer = false
 var playerLayer = true
 var foregroundLayer = false
+var level_array = ["level"]
 
 @onready var level #= get_node("/root/main/level")
 @onready var background #= get_node("/root/main/level/Background")
