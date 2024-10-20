@@ -38,10 +38,17 @@ func _process(delta: float) -> void:
 		
 		if !Global.place_tile:
 			
+			current_item = Global.current_item
+			var new_item 
 			if(current_item != null and can_place and Input.is_action_just_pressed("mb_left")):
-				var new_item = current_item.instantiate()
-				Global.level.add_child(new_item)
+				new_item = current_item.instantiate()
+				### HARDCODED FOR PLAYER AREA RIGHT NOW SINCE THE NON_TILEMAP TILES ARE ALL INTERACTIVES RIGHT NOW
+				Global.playerArea.add_child(new_item)
 				new_item.global_position = get_global_mouse_position()
+				pass
+			if(current_item != null and can_place and Input.is_action_just_pressed("mb_right")):
+				### THIS SHOULD BE DELETE LOGIC FOR NON_TILEMAP TILE PLACEMENT
+				pass
 				
 		else:
 			if(can_place):

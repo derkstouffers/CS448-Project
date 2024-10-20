@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cxrnp1yhdg8lt"]
+[gd_scene load_steps=23 format=3 uid="uid://cxrnp1yhdg8lt"]
 
 [ext_resource type="Texture2D" uid="uid://c34nwvh8y7hpl" path="res://characters/dwarf/Dwarf 1 Jump.png" id="1_6m0ev"]
 [ext_resource type="Texture2D" uid="uid://bjncv63q15p74" path="res://characters/dwarf/Dwarf 1 Walk.png" id="1_houyg"]
@@ -133,6 +133,10 @@ animations = [{
 radius = 5.0
 height = 14.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xgh1o"]
+radius = 5.0
+height = 14.0
+
 [node name="dwarf" type="CharacterBody2D"]
 script = ExtResource("1_xs4ku")
 metadata/_edit_group_ = true
@@ -142,7 +146,16 @@ sprite_frames = SubResource("SpriteFrames_w2gfx")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_wt5hr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3.5, 3.5)
+
+[node name="Area2D" type="Area2D" parent="." groups=["player"]]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_xgh1o")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

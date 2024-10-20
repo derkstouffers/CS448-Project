@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+@onready var object_cursor = get_node("/root/main/editor_object")
 @onready var path_follow : PathFollow2D = $".."
 @export var speed = 25
 
@@ -33,8 +33,12 @@ func _physics_process(delta: float) -> void:
 
 # Used for placing in world
 func _input(event: InputEvent) -> void:
+	Global.place_tile = true
 	if event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
 		if event.pressed:
 			is_dragging = false
+			Global.place_tile = false
 			
-		
+	
+	
+				

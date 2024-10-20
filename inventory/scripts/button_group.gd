@@ -17,7 +17,7 @@ extends CanvasLayer
 @onready var layer_menu = button_group.get_node("Layer_menu")
 @onready var search_bar = button_group.get_node("SearchBar")
 @onready var mini_map = button_group.get_node("MiniMap")
-
+@onready var quest_tracker = button_group.get_node("Quest_Tracker")
 @onready var edit = button_group.get_node("Edit")
 @onready var ground = button_group.get_node("Block_menu/Ground")
 @onready var walls = button_group.get_node("Block_menu/Walls")
@@ -39,8 +39,9 @@ const slime = preload("res://scenes/slime.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#pass # Replace with function body.
+func _ready() -> void:
+	Global.gained_coins.connect(update_coins_gained)
+	pass # Replace with function body.
 #
 #
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,8 +66,15 @@ func _on_play_pressed() -> void:
 	search_bar.visible = false
 	mini_map.visible = false
 	edit.visible = true
-	next_level_button.visible = true
+	next_level_button.visible = true ## Temporary
+	quest_tracker.visible = true
 	
+	for lev in Global.level_array:
+		if lev == Global.level.name:
+			Global.playerArea.collision_enabled = true
+		else:
+			main.get_node(lev).get_node("Player Area").collision_enabled = false
+			pass
 	
 	#### NEED TO MAKE A WINDOW (PLAYER ALREADY EXISTS IN A LEVEL THEN RETURNS USER TO EDIT MODE)
 	## Shift to player camera if player already placed in world
@@ -208,6 +216,7 @@ func _on_edit_pressed() -> void:
 	mini_map.visible = true
 	edit.visible = false
 	next_level_button.visible = false
+	quest_tracker.visible = false
 	Global.playing = false
 	
 	
@@ -680,12 +689,19 @@ func _on_torch_pressed() -> void:
 ###
 ### INTERACTIVE
 ###	
-
+@onready var coin = preload("res://scenes/coin.tscn")
 func _on_coin_pressed() -> void:
-	Global.place_tile = true
-	Global.TileID = 3
-	Global.current_tile_coords = Vector2i(0,0)
+	#Global.place_tile = true
+	#Global.TileID = 3
+	#Global.current_tile_coords = Vector2i(0,0)
+	Global.place_tile = false
+	Global.current_item = coin
+	
 	pass # Replace with function body.
+	
+func update_coins_gained(gained_coins):
+	$Quest_Tracker/Container/coin_tracker.text = str(Global.coins)
+	pass
 
 
 func _on_ladder_pressed() -> void:
@@ -694,11 +710,13 @@ func _on_ladder_pressed() -> void:
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
 
-
+@onready var chest = preload("res://scenes/chest.tscn")
 func _on_chest_pressed() -> void:	
-	Global.place_tile = true
-	Global.TileID = 5
-	Global.current_tile_coords = Vector2i(0,0)
+	#Global.place_tile = true
+	#Global.TileID = 5
+	#Global.current_tile_coords = Vector2i(0,0)
+	Global.place_tile = false
+	Global.current_item = chest
 	pass # Replace with function body.
 
 
@@ -707,10 +725,12 @@ func _on_chest_pressed() -> void:
 ###
 
 func _on_slime_pressed() -> void:
-	var slimes
-	slimes = slime.instantiate()
-	slimes.get_node("Path2D/PathFollow2D/slime").is_dragging = true
-	Global.playerArea.add_child(slimes)
+	#var slimes
+	#slimes = slime.instantiate()
+	#slimes.get_node("Path2D/PathFollow2D/slime").is_dragging = true
+	#Global.playerArea.add_child(slimes)
+	Global.place_tile = false
+	Global.current_item = slime
 	pass # Replace with function body.
 	
 	
@@ -765,7 +785,7 @@ func _on_level_select(level_name):
 	level_select.visible = true
 	
 	# fix block collision issues from one level to the next
-	Global.playerArea.collision_enabled = !Global.playerArea.collision_enabled
+	Global.playerArea.collision_enabled = false
 	
 	
 	### set the level to be drawn in 
@@ -773,6 +793,7 @@ func _on_level_select(level_name):
 	Global.background = level_select.get_node("Background")
 	Global.playerArea = level_select.get_node("Player Area")
 	Global.foreground = level_select.get_node("foreground")
+	Global.playerArea.collision_enabled = true
 	
 	pass
 
@@ -789,12 +810,13 @@ func _on_level_1_pressed() -> void:
 	
 	Global.level.visible = false
 	level1.visible = true
+	Global.playerArea.collision_enabled = false
 	
 	Global.level =  level1
 	Global.background = get_node("/root/main/level/Background")
 	Global.playerArea = get_node("/root/main/level/Player Area")
 	Global.foreground = get_node("/root/main/level/foreground")
-	Global.playerArea.collision_enabled = !Global.playerArea.collision_enabled
+	Global.playerArea.collision_enabled = true
 	pass # Replace with function body.
 
 
@@ -907,14 +929,16 @@ func _on_next_level_pressed() -> void:
 	## add player to new level 
 	var player = player1.instantiate()
 	
+	## enable collision mesh for new level
 	Global.playerArea = next_level.get_node('Player Area')
 	Global.playerArea.collision_enabled = true
+	
 	
 	next_level.get_node('Player Area').add_child(player)
 	
 	## set position for where player will enter new level
 	## need to probably make it variable for each level that can be placed by user
-	player.set_position(Vector2i(500,500))
+	player.set_position(Vector2i(500, 200))
 	
 	Global.player_count += 1
 	if Global.player_count == 1:

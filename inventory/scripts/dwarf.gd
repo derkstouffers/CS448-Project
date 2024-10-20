@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 			velocity += get_gravity() * delta
 			
 			#### reset player set if player reaches fall speed of 1000 or more
-			if velocity.y >= 1000:
+			if velocity.y >= 5000:
 				Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 				Global.player_count -= 1
 
@@ -48,16 +48,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			
-
-			
-
-		#var collided_tile = 
 		move_and_slide()
 		
-		#if collided_tile != Vector2.ZERO:
-			#var tile_id = get_parent().get_cell_v(collided_tile).get_tile()
-			#if tile_id == 3:
-				#print("COIN HIT")
 			
 		
 func _input(event: InputEvent) -> void:
@@ -67,3 +59,8 @@ func _input(event: InputEvent) -> void:
 			camera.enabled = false
 			
 	
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group('slime'):
+		print("collided")
