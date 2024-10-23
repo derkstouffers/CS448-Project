@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6j7qy5xr2bnc"]
+
+[ext_resource type="Script" path="res://scripts/fire_attack.gd" id="1_mhrkv"]
+[ext_resource type="Texture2D" uid="uid://c1cd14x3gra3n" path="res://attacks/explosion.png" id="1_oaq00"]
+[ext_resource type="Texture2D" uid="uid://b1652547e4wno" path="res://attacks/fireball-1.png.png" id="2_o0ayg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abtmh"]
+atlas = ExtResource("1_oaq00")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axwe0"]
+atlas = ExtResource("1_oaq00")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swmb1"]
+atlas = ExtResource("1_oaq00")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccucd"]
+atlas = ExtResource("1_oaq00")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e13in"]
+atlas = ExtResource("2_o0ayg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qk4aj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abtmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axwe0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swmb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccucd")
+}],
+"loop": true,
+"name": &"explosion",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e13in")
+}],
+"loop": false,
+"name": &"fireball",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_11fy6"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w724d"]
+radius = 2.0
+
+[node name="fireAttack" type="Area2D" groups=["fireball"]]
+script = ExtResource("1_mhrkv")
+metadata/_edit_group_ = true
+
+[node name="fireAttackAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qk4aj")
+animation = &"fireball"
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_11fy6")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_w724d")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

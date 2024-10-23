@@ -522,6 +522,27 @@ offset_right = 352.0
 offset_bottom = 648.0
 color = Color(0.145098, 0.192157, 0.278431, 1)
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MiniMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 19.0
+offset_right = -19.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MiniMap/SubViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+audio_listener_enable_2d = true
+gui_disable_input = true
+size = Vector2i(312, 248)
+render_target_update_mode = 4
+
 [node name="clear_confirm" type="ConfirmationDialog" parent="."]
 title = "Clear Level"
 position = Vector2i(0, 36)

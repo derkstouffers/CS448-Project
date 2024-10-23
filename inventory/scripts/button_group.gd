@@ -903,11 +903,10 @@ func _on_save_pressed() -> void:
 
 
 ###
-### Changing levels within play, HARDCODED ONLY FOR LEVEL 2 right now
+### Changing levels within play. THERE IS A BUG IF YOU GO BACK TO EDIT AFTER REACHING A LATER LEVEL IN PLAY MODE THEN START FROM LEVEL 1 AGAIN AND TRY TO GO TO THE NEXT LEVEL
 ###
 var i = 1
 func _on_next_level_pressed() -> void:
-	#get_tree().change_scene_to_file("res://scenes/level2.tscn")
 	var level_count = Global.level_array.size()
 	var next_level
 	
@@ -949,6 +948,8 @@ func _on_next_level_pressed() -> void:
 	if level_count != i:
 		## increment i to access the next level in the global array of levels
 		i += 1
+	if level_count == i:
+		i = 1
 		
 	else:
 		print("GAME OVER")

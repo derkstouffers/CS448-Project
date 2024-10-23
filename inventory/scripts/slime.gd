@@ -39,6 +39,3 @@ func _input(event: InputEvent) -> void:
 			is_dragging = false
 			Global.place_tile = false
 			
-	
-	
-				

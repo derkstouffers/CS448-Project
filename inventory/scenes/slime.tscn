@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd5ijxhw76jya"]
+[gd_scene load_steps=15 format=3 uid="uid://bd5ijxhw76jya"]
 
 [ext_resource type="Texture2D" uid="uid://geslslmtgqhb" path="res://Sprites/Green Slime Bounce.png" id="1_mh1kr"]
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_ntykq"]
+[ext_resource type="Texture2D" uid="uid://cn5fihcpe56ve" path="res://Sprites/slime_hit-1.png.png" id="3_4cxpi"]
 
 [sub_resource type="Curve2D" id="Curve2D_ouuu1"]
 _data = {
@@ -10,7 +11,7 @@ _data = {
 point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j01p4"]
-radius = 6.0
+radius = 7.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iaccr"]
 atlas = ExtResource("1_mh1kr")
@@ -36,6 +37,10 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("1_mh1kr")
 region = Rect2(160, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdig8"]
+atlas = ExtResource("3_4cxpi")
+region = Rect2(0, 0, 31, 31)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_m88bf"]
 animations = [{
 "frames": [{
@@ -60,7 +65,18 @@ animations = [{
 "loop": true,
 "name": &"bounce",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdig8")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bgx1t"]
+radius = 9.0
 
 [node name="sprite" type="Node2D"]
 
@@ -77,17 +93,18 @@ script = ExtResource("1_ntykq")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/slime"]
-visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_j01p4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Path2D/PathFollow2D/slime"]
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_m88bf")
-animation = &"bounce"
+animation = &"hit"
 
 [node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/slime" groups=["slime"]]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Path2D/PathFollow2D/slime/Area2D"]
 position = Vector2(0, -1)
-shape = SubResource("CircleShape2D_j01p4")
+shape = SubResource("CircleShape2D_bgx1t")
+
+[connection signal="area_entered" from="Path2D/PathFollow2D/slime/Area2D" to="Path2D/PathFollow2D/slime" method="_on_area_2d_area_entered"]

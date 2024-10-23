@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var level = get_node("/root/main/level")
 @onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
 @onready var camera = get_node("/root/main/cam_container/Camera2D")
-
+@onready var fireball = preload("res://scenes/fire_attack.tscn")
 var is_dragging = false
 
 const SPEED = 150
@@ -48,7 +48,19 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			
+			
 		move_and_slide()
+		
+		if Input.is_action_pressed("attack"):
+			var fire_attack = fireball.instantiate()
+			add_child(fire_attack)
+			fire_attack.position.x = 15
+			if direction > 0:
+				fire_attack.direction = direction
+				fire_attack.position.x = 10
+			if direction < 0:
+				fire_attack.direction = direction
+				fire_attack.position.x = -10
 		
 			
 		
@@ -63,4 +75,5 @@ func _input(event: InputEvent) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group('slime'):
+		
 		print("collided")
