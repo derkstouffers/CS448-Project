@@ -20,14 +20,16 @@ func _physics_process(delta: float) -> void:
 			
 	if(Global.playing):
 		
+		camera.enabled = false
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 			
 			#### reset player set if player reaches fall speed of 1000 or more
 			if velocity.y >= 5000:
-				Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
-				Global.player_count -= 1
+				#Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
+				#Global.player_count -= 1
+				Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(15)[0].x, Global.playerArea.get_used_cells_by_id(15)[0].y - 5)))
 
 	# Handle jump.
 		if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -42,27 +44,34 @@ func _physics_process(delta: float) -> void:
 			$AnimatedSprite2D.play("walk")
 			velocity.x = direction * SPEED
 			if direction > 0:
+				Global.attack_direction = 1
 				sprite.flip_h = false
 			elif direction < 0:
+				Global.attack_direction = -1
 				sprite.flip_h = true
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			
 			
-		move_and_slide()
+		
 		
 		if Input.is_action_pressed("attack"):
 			var fire_attack = fireball.instantiate()
-			add_child(fire_attack)
-			fire_attack.position.x = 15
-			if direction > 0:
-				fire_attack.direction = direction
-				fire_attack.position.x = 10
-			if direction < 0:
-				fire_attack.direction = direction
-				fire_attack.position.x = -10
-		
 			
+			
+			if Global.attack_direction == 1:
+				
+				fire_attack.direction = 1
+				Global.playerArea.add_child(fire_attack)
+				fire_attack.position.x = Global.playerArea.get_node("dwarf").position.x  + 15
+				fire_attack.position.y = Global.playerArea.get_node("dwarf").position.y
+			if Global.attack_direction == -1:
+				fire_attack.direction = -1
+				Global.playerArea.add_child(fire_attack)
+				fire_attack.position.x = Global.playerArea.get_node("dwarf").position.x  - 15
+				fire_attack.position.y = Global.playerArea.get_node("dwarf").position.y
+			
+		move_and_slide()	
 		
 func _input(event: InputEvent) -> void:
 	if Global.playing and event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
@@ -75,5 +84,4 @@ func _input(event: InputEvent) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group('slime'):
-		
 		print("collided")

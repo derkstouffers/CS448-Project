@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://c26j48mqlyv4p" path="res://assets/Decor/Torch-1.png" id="18_puwac"]
 [ext_resource type="Texture2D" uid="uid://d0wyu6ug0tx0q" path="res://Sprites/green_slime.png" id="23_o1287"]
 [ext_resource type="Texture2D" uid="uid://cc0lqydqthvva" path="res://assets/ground_walls/Spawnpoint Block.png" id="24_0nn1o"]
-[ext_resource type="Script" path="res://scripts/sub_viewport.gd" id="25_iggcg"]
+[ext_resource type="Script" path="res://scripts/sub_viewport.gd" id="25_bgseq"]
 
 [sub_resource type="Theme" id="Theme_ha7l0"]
 default_font = ExtResource("2_uuyxx")
@@ -502,6 +502,18 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "+"
 
+[node name="PopupMenu" type="PopupMenu" parent="Level_menu/GridContainer/add_level"]
+title = "Level Objectives"
+initial_position = 2
+size = Vector2i(225, 100)
+borderless = false
+item_count = 2
+item_0/text = "Loot Goblin"
+item_0/checkable = 2
+item_1/text = "Murder Hobo"
+item_1/checkable = 2
+item_1/id = 1
+
 [node name="GridContainer2" type="GridContainer" parent="Level_menu"]
 layout_mode = 0
 offset_left = 850.0
@@ -571,15 +583,9 @@ audio_listener_enable_2d = true
 gui_disable_input = true
 size = Vector2i(312, 248)
 render_target_update_mode = 4
-script = ExtResource("25_iggcg")
+script = ExtResource("25_bgseq")
 
 [node name="Camera2D" type="Camera2D" parent="MiniMap/SubViewportContainer/SubViewport"]
-offset = Vector2(330, 170)
-
-[node name="TextureRect" type="TextureRect" parent="MiniMap/SubViewportContainer/SubViewport"]
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
 
 [node name="clear_confirm" type="ConfirmationDialog" parent="."]
 title = "Clear Level"
@@ -630,18 +636,6 @@ texture = ExtResource("23_o1287")
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_sfeuj")
-
-[node name="ObjectiveSelector" type="PopupMenu" parent="."]
-title = "Level Objectives"
-initial_position = 2
-size = Vector2i(225, 100)
-borderless = false
-item_count = 2
-item_0/text = "Loot Goblin"
-item_0/checkable = 2
-item_1/text = "Murder Hobo"
-item_1/checkable = 2
-item_1/id = 1
 
 [connection signal="mouse_entered" from="Top_menu" to="." method="_on_top_menu_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu" to="." method="_on_top_menu_mouse_exited"]
@@ -772,4 +766,3 @@ item_1/id = 1
 [connection signal="mouse_entered" from="MiniMap" to="." method="_on_mini_map_mouse_entered"]
 [connection signal="mouse_exited" from="MiniMap" to="." method="_on_mini_map_mouse_exited"]
 [connection signal="pressed" from="next_level" to="." method="_on_next_level_pressed"]
-[connection signal="id_pressed" from="ObjectiveSelector" to="." method="_on_objective_selector_id_pressed"]

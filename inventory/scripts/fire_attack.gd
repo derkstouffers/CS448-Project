@@ -1,10 +1,15 @@
 extends Area2D
 
-var speed = 100
+var speed = 180
 @export var direction = 1
 	
 func _physics_process(delta: float) -> void:
-		position.x += speed * direction * delta
+
+	if direction > 0:
+		$fireAttackAnimation.flip_h = false
+	if direction < 0:
+		$fireAttackAnimation.flip_h = true
+	position.x += speed * direction * delta
 		
 
 

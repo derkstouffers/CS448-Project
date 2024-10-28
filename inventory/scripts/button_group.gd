@@ -25,13 +25,15 @@ extends CanvasLayer
 @onready var decor = button_group.get_node("Block_menu/Decor")
 @onready var interactive = button_group.get_node("Block_menu/Interactive")
 @onready var sprites = button_group.get_node("Block_menu/Sprite")
-
+@onready var spawn = button_group.get_node("Block_menu/Spawn Point")
 
 @onready var player_select_window = button_group.get_node("Top_menu/GridContainer/Play/player_select_window")
+@onready var error_window = button_group.get_node("Top_menu/GridContainer/Play/Error Window")
 
 @onready var clear_confirm: ConfirmationDialog = $"clear_confirm"
 
 @onready var next_level_button = $next_level
+
 
 const level2 = preload("res://scenes/level.tscn")
 const player1 = preload("res://scenes/dwarf.tscn")
@@ -41,6 +43,7 @@ const slime = preload("res://scenes/slime.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.gained_coins.connect(update_coins_gained)
+	$ObjectiveSelector.popup_centered()
 	pass # Replace with function body.
 #
 #
@@ -54,36 +57,54 @@ func _ready() -> void:
 ###
 
 func _on_play_pressed() -> void:
-	Global.playing = true
-	
-	if Global.player_count < 1:
-		player_select_window.visible = true
+	if Global.playerArea.get_used_cells_by_id(15).size() < 1:
+		error_window.visible = true
 		
-	top_menu.visible = false
-	block_menu.visible = false
-	layer_menu.visible = false
-	level_menu.visible = false
-	search_bar.visible = false
-	mini_map.visible = false
-	edit.visible = true
-	next_level_button.visible = true ## Temporary
-	quest_tracker.visible = true
-	
-	for lev in Global.level_array:
-		if lev == Global.level.name:
-			Global.playerArea.collision_enabled = true
-		else:
-			main.get_node(lev).get_node("Player Area").collision_enabled = false
-			pass
-	
-	#### NEED TO MAKE A WINDOW (PLAYER ALREADY EXISTS IN A LEVEL THEN RETURNS USER TO EDIT MODE)
-	## Shift to player camera if player already placed in world
-	if Global.player_count == 1:
-		camera.enabled = false
-		Global.playerArea.get_node("dwarf").get_child(2).enabled = true
-	
+	else:
+		for level_ in Global.level_dict.keys():
+			for i in main.get_node(level_ + "/Player Area").get_children():
+				if i.name.begins_with("coin"):
+					Global.level_dict[level_]["coins"] += 1
+				if i.name.begins_with("chest"):
+					Global.level_dict[level_]["chests"] += 1
+				if i.name.begins_with("slime"):
+					Global.level_dict[level_]["enemies"] += 1
+		print(Global.level_dict)
+		pass
+		Global.playing = true
+		
+		if Global.player_count < 1:
+			player_select_window.visible = true
+			
+		top_menu.visible = false
+		block_menu.visible = false
+		layer_menu.visible = false
+		level_menu.visible = false
+		search_bar.visible = false
+		mini_map.visible = false
+		edit.visible = true
+		next_level_button.visible = true ## Temporary
+		quest_tracker.visible = true
+		
+		for lev in Global.level_array:
+			if lev == Global.level.name:
+				Global.playerArea.collision_enabled = true
+			else:
+				main.get_node(lev).get_node("Player Area").collision_enabled = false
+				pass
+		
+		#### NEED TO MAKE A WINDOW (PLAYER ALREADY EXISTS IN A LEVEL THEN RETURNS USER TO EDIT MODE)
+		## Shift to player camera if player already placed in world
+		if Global.player_count == 1:
+			camera.enabled = false
+			Global.playerArea.get_node("dwarf").get_child(2).enabled = true
+		
+		pass # Replace with function body.
+func _on_error_window_close_requested() -> void:
+	error_window.hide()
 	pass # Replace with function body.
-
+	
+	
 func _on_dwarf_pressed() -> void:
 	player_select_window.visible = false
 	
@@ -91,8 +112,9 @@ func _on_dwarf_pressed() -> void:
 	if Global.player_count < 1:
 		var player
 		player = player1.instantiate()
-		player.is_dragging = true
+		#player.is_dragging = true
 		Global.playerArea.add_child(player)
+		Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local(Vector2i(Global.playerArea.get_used_cells_by_id(15)[0].x, Global.playerArea.get_used_cells_by_id(15)[0].y - 5))
 		Global.player_count += 1
 	pass # Replace with function body.
 	
@@ -154,6 +176,7 @@ func _on_ground_pressed() -> void:
 	decor.visible = false
 	interactive.visible = false
 	sprites.visible = false
+	spawn.visible = false
 	pass # Replace with function body.
 
 
@@ -164,6 +187,7 @@ func _on_walls_pressed() -> void:
 	decor.visible = false
 	interactive.visible = false
 	sprites.visible = false
+	spawn.visible = false
 	pass # Replace with function body.
 
 func _on_hazards_pressed() -> void:
@@ -173,6 +197,7 @@ func _on_hazards_pressed() -> void:
 	decor.visible = false
 	interactive.visible = false
 	sprites.visible = false
+	spawn.visible = false
 	pass # Replace with function body.
 
 
@@ -183,6 +208,7 @@ func _on_decor_pressed() -> void:
 	decor.visible = true
 	interactive.visible = false
 	sprites.visible = false
+	spawn.visible = false
 	pass # Replace with function body.
 	
 func _on_interactive_pressed() -> void:
@@ -192,6 +218,7 @@ func _on_interactive_pressed() -> void:
 	decor.visible = false
 	interactive.visible = true	
 	sprites.visible = false
+	spawn.visible = false
 	pass # Replace with function body.
 
 func _on_sprite_pressed() -> void:
@@ -201,6 +228,17 @@ func _on_sprite_pressed() -> void:
 	decor.visible = false
 	interactive.visible = false
 	sprites.visible = true
+	spawn.visible = false
+	pass # Replace with function body.
+
+func _on_player_spawn_point_pressed() -> void:
+	ground.visible = false
+	walls.visible = false
+	hazards.visible = false
+	decor.visible = false
+	interactive.visible = false
+	sprites.visible = false
+	spawn.visible = true
 	pass # Replace with function body.
 	
 ###
@@ -557,17 +595,51 @@ func _on_torch_mouse_exited() -> void:
 	pass # Replace with function body.
 	
 ###
+### PLAYER SPAWN BLOCK
+###
+
+func _on_player_spawn_point_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_player_spawn_point_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
+
+
+func _on_spawn_block_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 15
+	Global.current_tile_coords = Vector2i(0,0)		
+	pass # Replace with function body.
+
+
+func _on_spawn_block_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_spawn_block_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
+
+	
+###
 ### GROUND BLOCKS
 ###
 
 func _on_stone_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
 
 func _on_lwr__l_stone_stair_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 12
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
@@ -575,6 +647,7 @@ func _on_lwr__l_stone_stair_pressed() -> void:
 	
 func _on_lwr_r_stone_stair_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 13
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
@@ -588,6 +661,7 @@ func _on_lwr_r_stone_stair_pressed() -> void:
 ###
 func _on_beige_bricks_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(2,0)
 	pass # Replace with function body.
@@ -595,6 +669,7 @@ func _on_beige_bricks_pressed() -> void:
 
 func _on_brown_bricks_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(3,0)
 	pass # Replace with function body.
@@ -602,6 +677,7 @@ func _on_brown_bricks_pressed() -> void:
 
 func _on_dark_gray_bricks_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(4,0)
 	pass # Replace with function body.	
@@ -613,6 +689,7 @@ func _on_dark_gray_bricks_pressed() -> void:
 
 func _on_lava_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(1,0)	
 	pass # Replace with function body.
@@ -620,6 +697,7 @@ func _on_lava_pressed() -> void:
 
 func _on_sm__spike_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 6
 	Global.current_tile_coords = Vector2i(0,0)	
 	pass # Replace with function body.
@@ -627,6 +705,7 @@ func _on_sm__spike_pressed() -> void:
 
 func _on_med_spike_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 2
 	Global.current_tile_coords = Vector2i(0,0)	
 	pass # Replace with function body.
@@ -634,6 +713,7 @@ func _on_med_spike_pressed() -> void:
 
 func _on_lg_spike_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 7
 	Global.current_tile_coords = Vector2i(0,0)	
 	pass # Replace with function body.
@@ -645,6 +725,7 @@ func _on_lg_spike_pressed() -> void:
 	
 func _on_jacko_lantern_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(0,0)	
 	pass # Replace with function body.
@@ -652,6 +733,7 @@ func _on_jacko_lantern_pressed() -> void:
 
 func _on_btm_lft_web_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 8
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
@@ -659,6 +741,7 @@ func _on_btm_lft_web_pressed() -> void:
 
 func _on_btm_rt_web_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 9
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
@@ -666,6 +749,7 @@ func _on_btm_rt_web_pressed() -> void:
 
 func _on_top_l_web_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 10
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
@@ -673,12 +757,14 @@ func _on_top_l_web_pressed() -> void:
 
 func _on_top_r_web_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 11
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.	
 
 func _on_torch_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 14
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
@@ -691,9 +777,6 @@ func _on_torch_pressed() -> void:
 ###	
 @onready var coin = preload("res://scenes/coin.tscn")
 func _on_coin_pressed() -> void:
-	#Global.place_tile = true
-	#Global.TileID = 3
-	#Global.current_tile_coords = Vector2i(0,0)
 	Global.place_tile = false
 	Global.current_item = coin
 	
@@ -706,15 +789,13 @@ func update_coins_gained(gained_coins):
 
 func _on_ladder_pressed() -> void:
 	Global.place_tile = true
+	Global.current_item = null
 	Global.TileID = 4
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
 
 @onready var chest = preload("res://scenes/chest.tscn")
 func _on_chest_pressed() -> void:	
-	#Global.place_tile = true
-	#Global.TileID = 5
-	#Global.current_tile_coords = Vector2i(0,0)
 	Global.place_tile = false
 	Global.current_item = chest
 	pass # Replace with function body.
@@ -725,10 +806,6 @@ func _on_chest_pressed() -> void:
 ###
 
 func _on_slime_pressed() -> void:
-	#var slimes
-	#slimes = slime.instantiate()
-	#slimes.get_node("Path2D/PathFollow2D/slime").is_dragging = true
-	#Global.playerArea.add_child(slimes)
 	Global.place_tile = false
 	Global.current_item = slime
 	pass # Replace with function body.
@@ -768,11 +845,25 @@ func _on_add_level_pressed() -> void:
 	### Give functionality to button
 	button.text = new_level.get_name()
 	Global.level_array.append(button.text)
+	Global.level_dict[button.text] = {"coins" : 0, "chests": 0, "enemies": 0} ## testing a different version with dictionary
+	print(Global.level_dict)
 	Global.level.visible = false
 	new_level.visible = true
+	
+	Global.playerArea.collision_enabled = false
+	
+	Global.level = new_level
+	Global.background = new_level.get_node("Background")
+	Global.playerArea = new_level.get_node("Player Area")
+	Global.foreground = new_level.get_node("foreground")
+	
+	Global.playerArea.collision_enabled = true
+	
 	button.pressed.connect(_on_level_select.bind(button.text))
 	button.mouse_entered.connect(self._mouse_enter)
 	button.mouse_exited.connect(self._mouse_exit)
+	
+	$ObjectiveSelector.popup_centered()
 	
 	pass # Replace with function body.
 		
@@ -893,12 +984,11 @@ func _on_mini_map_mouse_exited() -> void:
 ### temporary functionality
 ### will probably change this to save the whole project the user is making rather than individual levels
 
-
 func _on_save_pressed() -> void:
-	var scene = PackedScene.new()
-	var scene_node = main.get_node("/root/main/" + Global.level.name)
-	scene.pack(scene_node)
-	ResourceSaver.save(scene, "res://scenes/" + scene_node.name + ".tscn")
+	#var scene = PackedScene.new()
+	#var scene_node = main.get_node("/root/main")
+	#scene.pack(scene_node)
+	#ResourceSaver.save(scene, "res://dungeons/" + scene_node.name + ".tscn", 2)	
 	pass # Replace with function body.
 
 
@@ -937,7 +1027,7 @@ func _on_next_level_pressed() -> void:
 	
 	## set position for where player will enter new level
 	## need to probably make it variable for each level that can be placed by user
-	player.set_position(Vector2i(500, 200))
+	Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(15)[0].x, Global.playerArea.get_used_cells_by_id(15)[0].y - 5)))
 	
 	Global.player_count += 1
 	if Global.player_count == 1:
@@ -954,4 +1044,12 @@ func _on_next_level_pressed() -> void:
 	else:
 		print("GAME OVER")
 	
+	pass # Replace with function body.
+
+
+func _on_objective_selector_id_pressed(id: int) -> void:
+	if id == 0:
+		Global.playerArea.objective = 1
+	if id == 1:
+		Global.playerArea.objective = 2
 	pass # Replace with function body.

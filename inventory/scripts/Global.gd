@@ -10,6 +10,11 @@ var backgroundLayer = false
 var playerLayer = true
 var foregroundLayer = false
 var level_array = ["level"]
+var level_dict = {"level" : {"coins" : 0, "chests": 0, "enemies": 0}}
+
+var attack_direction = 1
+
+var i = 1 ## for iterating the levels 
 
 @onready var level #= get_node("/root/main/level")
 @onready var background #= get_node("/root/main/level/Background")

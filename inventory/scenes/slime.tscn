@@ -11,7 +11,7 @@ _data = {
 point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j01p4"]
-radius = 7.0
+radius = 9.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iaccr"]
 atlas = ExtResource("1_mh1kr")
@@ -72,13 +72,13 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bgx1t"]
 radius = 9.0
 
-[node name="sprite" type="Node2D"]
+[node name="slime" type="Node2D"]
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_ouuu1")

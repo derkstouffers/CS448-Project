@@ -32,10 +32,18 @@ func _physics_process(delta: float) -> void:
 
 
 # Used for placing in world
-func _input(event: InputEvent) -> void:
-	Global.place_tile = true
-	if event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
-		if event.pressed:
-			is_dragging = false
-			Global.place_tile = false
+#func _input(event: InputEvent) -> void:
+	#Global.place_tile = true
+	#if event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
+		#if event.pressed:
+			#is_dragging = false
+			#Global.place_tile = false
 			
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	$AnimatedSprite2D.play("hit")
+	Global.level_dict[Global.level.name]["enemies"] -= 1
+	print(Global.level_dict)
+	queue_free()
+	pass # Replace with function body.

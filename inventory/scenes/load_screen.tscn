@@ -48,3 +48,4 @@ layout_mode = 2
 text = "Quit"
 
 [connection signal="pressed" from="TextureRect/BoxContainer/build_btn" to="." method="_on_build_btn_pressed"]
+[connection signal="pressed" from="TextureRect/BoxContainer/load_btn" to="." method="_on_load_btn_pressed"]
