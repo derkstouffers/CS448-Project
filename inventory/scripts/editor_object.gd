@@ -8,7 +8,10 @@ var is_panning = true
 @onready var editor_cam = editor.get_node("Camera2D")
 
 @export var cam_spd = 10
-
+var limit_left = -1500
+var limit_right = 1500
+var limit_top = -1500
+var limit_bottom = 1500
 
 var current_item
 
@@ -116,4 +119,9 @@ func move_editor():
 		editor.global_position.y += cam_spd
 	if Input.is_action_pressed("d"):
 		editor.global_position.x += cam_spd
+	
+	# Clamp the new position within the defined limits
+	global_position.x = clamp(global_position.x, limit_left, limit_right)
+	global_position.y = clamp(global_position.y, limit_top, limit_bottom)
+	
 	pass

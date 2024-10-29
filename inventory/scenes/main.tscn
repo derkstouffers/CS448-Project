@@ -18,14 +18,14 @@ script = ExtResource("1_wpuem")
 
 [node name="Sprite2D" type="Sprite2D" parent="editor_object"]
 
+[node name="button_group" parent="." instance=ExtResource("18_l3ise")]
+
 [node name="cam_container" type="Node2D" parent="."]
-position = Vector2(216, 155)
 
 [node name="Camera2D" type="Camera2D" parent="cam_container"]
-position = Vector2(359, 169)
+position = Vector2(578, 325)
 limit_left = -1000
 limit_top = -1000
-limit_right = 1000
+limit_right = 1500
 limit_bottom = 1000
-
-[node name="button_group" parent="." instance=ExtResource("18_l3ise")]
+limit_smoothed = true
