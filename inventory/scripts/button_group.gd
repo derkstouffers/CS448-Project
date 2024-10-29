@@ -27,6 +27,10 @@ extends CanvasLayer
 @onready var sprites = button_group.get_node("Block_menu/Sprite")
 @onready var spawn = button_group.get_node("Block_menu/Spawn Point")
 
+@onready var mini_map_player_layer = get_node("/root/main/button_group/MiniMap/SubViewportContainer/SubViewport/player_layer")
+@onready var mini_map_background_layer = get_node("/root/main/button_group/MiniMap/SubViewportContainer/SubViewport/background_layer")
+@onready var mini_map_foreground_layer = get_node("/root/main/button_group/MiniMap/SubViewportContainer/SubViewport/foreground_layer")
+
 @onready var player_select_window = button_group.get_node("Top_menu/GridContainer/Play/player_select_window")
 @onready var error_window = button_group.get_node("Top_menu/GridContainer/Play/Error Window")
 
@@ -44,12 +48,31 @@ const slime = preload("res://scenes/slime.tscn")
 func _ready() -> void:
 	Global.gained_coins.connect(update_coins_gained)
 	$ObjectiveSelector.popup_centered()
+	$MiniMap/SubViewportContainer/SubViewport/Camera2D.make_current()
+	var background_layer_tiles = Global.background.get_tile_set()
+	var player_layer_tiles = Global.playerArea.get_tile_set()
+	var foreground_layer_tiles = Global.foreground.get_tile_set()
+	mini_map_player_layer.set_tile_set(player_layer_tiles)
+	mini_map_background_layer.set_tile_set(background_layer_tiles)
+	mini_map_foreground_layer.set_tile_set(foreground_layer_tiles)
 	pass # Replace with function body.
 #
 #
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#pass
+func _process(delta: float) -> void:
+	## Only getting Player Layer map data for now
+	var background_map_data = Global.background.get_tile_map_data_as_array()
+	var player_map_data = Global.playerArea.get_tile_map_data_as_array()
+	var foreground_map_data = Global.foreground.get_tile_map_data_as_array()
+	if player_map_data != null:
+		mini_map_player_layer.set_tile_map_data_from_array(player_map_data)
+	if background_map_data != null:
+		mini_map_background_layer.set_tile_map_data_from_array(background_map_data)
+	if foreground_map_data != null:
+		mini_map_foreground_layer.set_tile_map_data_from_array(foreground_map_data)
+	else:
+		print("MINIMAP Failed")
+	pass
 
 
 ###
@@ -1046,10 +1069,22 @@ func _on_next_level_pressed() -> void:
 	
 	pass # Replace with function body.
 
-
+###
+### Objective/Quest picker for each level
+###
 func _on_objective_selector_id_pressed(id: int) -> void:
 	if id == 0:
 		Global.playerArea.objective = 1
 	if id == 1:
 		Global.playerArea.objective = 2
+	pass # Replace with function body.
+
+
+func _on_objective_selector_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_objective_selector_mouse_exited() -> void:
+	object_cursor.can_place = true
 	pass # Replace with function body.

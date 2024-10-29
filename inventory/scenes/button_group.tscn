@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://clrvdmfbg0bne"]
+[gd_scene load_steps=34 format=3 uid="uid://clrvdmfbg0bne"]
 
 [ext_resource type="Script" path="res://scripts/button_group.gd" id="1_jed0n"]
 [ext_resource type="Texture2D" uid="uid://cuiaq8wwhnuil" path="res://characters/dwarf/Dwarf 1.png" id="2_jtfji"]
@@ -24,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://c26j48mqlyv4p" path="res://assets/Decor/Torch-1.png" id="18_puwac"]
 [ext_resource type="Texture2D" uid="uid://d0wyu6ug0tx0q" path="res://Sprites/green_slime.png" id="23_o1287"]
 [ext_resource type="Texture2D" uid="uid://cc0lqydqthvva" path="res://assets/ground_walls/Spawnpoint Block.png" id="24_0nn1o"]
-[ext_resource type="Script" path="res://scripts/sub_viewport.gd" id="25_iggcg"]
 
 [sub_resource type="Theme" id="Theme_ha7l0"]
 default_font = ExtResource("2_uuyxx")
@@ -571,15 +570,25 @@ audio_listener_enable_2d = true
 gui_disable_input = true
 size = Vector2i(312, 248)
 render_target_update_mode = 4
-script = ExtResource("25_iggcg")
+
+[node name="background_layer" type="TileMapLayer" parent="MiniMap/SubViewportContainer/SubViewport"]
+position = Vector2(0, 362)
+scale = Vector2(0.2, 0.2)
+
+[node name="player_layer" type="TileMapLayer" parent="MiniMap/SubViewportContainer/SubViewport"]
+position = Vector2(0, 362)
+scale = Vector2(0.2, 0.2)
+
+[node name="foreground_layer" type="TileMapLayer" parent="MiniMap/SubViewportContainer/SubViewport"]
+position = Vector2(0, 362)
+scale = Vector2(0.2, 0.2)
 
 [node name="Camera2D" type="Camera2D" parent="MiniMap/SubViewportContainer/SubViewport"]
-offset = Vector2(330, 170)
-
-[node name="TextureRect" type="TextureRect" parent="MiniMap/SubViewportContainer/SubViewport"]
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
+offset = Vector2(110, 425)
+limit_left = -1000
+limit_top = -1000
+limit_right = 1000
+limit_bottom = 1000
 
 [node name="clear_confirm" type="ConfirmationDialog" parent="."]
 title = "Clear Level"
@@ -773,3 +782,5 @@ item_1/id = 1
 [connection signal="mouse_exited" from="MiniMap" to="." method="_on_mini_map_mouse_exited"]
 [connection signal="pressed" from="next_level" to="." method="_on_next_level_pressed"]
 [connection signal="id_pressed" from="ObjectiveSelector" to="." method="_on_objective_selector_id_pressed"]
+[connection signal="mouse_entered" from="ObjectiveSelector" to="." method="_on_objective_selector_mouse_entered"]
+[connection signal="mouse_exited" from="ObjectiveSelector" to="." method="_on_objective_selector_mouse_exited"]
