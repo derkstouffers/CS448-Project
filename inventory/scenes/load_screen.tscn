@@ -11,7 +11,7 @@ default_font = ExtResource("3_mrbl0")
 script = ExtResource("1_h7er3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1153.0
+offset_right = 1250.0
 offset_bottom = 648.0
 texture = ExtResource("1_oilvo")
 expand_mode = 1

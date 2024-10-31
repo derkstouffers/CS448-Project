@@ -4,46 +4,42 @@ extends CharacterBody2D
 @onready var path_follow : PathFollow2D = $".."
 @export var speed = 25
 
-var is_dragging = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	
-	if is_dragging:
-		global_position = get_global_mouse_position()
-	
-	#if Global.playing:
+	if Global.playing: #and _current_level():
 		
-	# gravity
-	if not is_on_floor():
-			
-		velocity += get_gravity() * delta
-			
-			
-	# Activates the made path for the slimes		
-	path_follow.progress += speed * delta
-	
-	
-	$AnimatedSprite2D.play("bounce")
-	
-	## based on this implementation we need this to have the gravity work
-	move_and_slide()
+		# gravity
+		if not is_on_floor():
+				
+			velocity += get_gravity() * delta
+				
+				
+		# Activates the made path for the slimes		
+		path_follow.progress += speed * delta
+		
+		
+		$AnimatedSprite2D.play("bounce")
+		
+		## based on this implementation we need this to have the gravity work
+		move_and_slide()
 
-
-
-# Used for placing in world
-#func _input(event: InputEvent) -> void:
-	#Global.place_tile = true
-	#if event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
-		#if event.pressed:
-			#is_dragging = false
-			#Global.place_tile = false
 			
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	$AnimatedSprite2D.play("hit")
 	Global.level_dict[Global.level.name]["enemies"] -= 1
-	print(Global.level_dict)
+	#print(Global.level_dict)
 	queue_free()
 	pass # Replace with function body.
+
+
+#func _current_level():
+	#var player_present = Global.playerArea.get_node_or_null("dwarf")
+	#print(player_present)
+	#if player_present:
+		#print("IM HERE")
+		#return true	
+	#return false

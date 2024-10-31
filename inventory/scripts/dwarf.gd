@@ -14,10 +14,7 @@ const JUMP_VELOCITY = -400.0
 
 func _physics_process(delta: float) -> void:
 
-	if is_dragging:
-		global_position = get_global_mouse_position()
-	
-			
+				
 	if(Global.playing):
 		
 		camera.enabled = false
@@ -27,8 +24,6 @@ func _physics_process(delta: float) -> void:
 			
 			#### reset player set if player reaches fall speed of 1000 or more
 			if velocity.y >= 5000:
-				#Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
-				#Global.player_count -= 1
 				Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(15)[0].x, Global.playerArea.get_used_cells_by_id(15)[0].y - 5)))
 
 	# Handle jump.
@@ -73,14 +68,8 @@ func _physics_process(delta: float) -> void:
 			
 		move_and_slide()	
 		
-func _input(event: InputEvent) -> void:
-	if Global.playing and event is InputEventMouseButton and Input.is_action_pressed("mb_left"):
-		if event.pressed:
-			is_dragging = false
-			camera.enabled = false
-			
-	
 
+		
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group('slime'):

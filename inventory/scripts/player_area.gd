@@ -16,6 +16,7 @@ extends TileMapLayer
 
 @export var objective = 0
 
+var selected_tile
 const player1 = preload("res://scenes/dwarf.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,25 +25,27 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var tile = local_to_map(get_global_mouse_position())
+	selected_tile = map_to_local(tile)
 	if Global.playing and Global.playerArea.get_node_or_null("dwarf"):
 		
-		if objectives(Global.level.name, objective):
-			print("IM HERE")
+		if objectives(objective):
+			#print("IM HERE")
 			#await get_tree().create_timer(2.0).timeout
 			go_to_next_level()
 	pass
 
 
 
-func objectives(level_name: String, quest : int):
-	print(Global.level.name + "objective: " + str(Global.playerArea.objective) + "\n")
+func objectives(quest : int):
+	#print(Global.level.name + "objective: " + str(Global.playerArea.objective) + "\n")
 	if quest == 1:
-		print(Global.level.name + " objective get coins: " + str(objective))
+		#print(Global.level.name + " objective get coins: " + str(objective))
 		if Global.level_dict[Global.level.name]["coins"] == 0 and Global.level_dict[Global.level.name]["chests"] == 0:
 			return true
 		return false
 	elif quest == 2:
-		print(Global.level.name + " objective kill slime: " + str(objective))
+		#print(Global.level.name + " objective kill slime: " + str(objective))
 		if Global.level_dict[Global.level.name]["enemies"] == 0:
 			return true
 		return false
@@ -110,7 +113,7 @@ func go_to_next_level() -> void:
 		## get and set next level
 
 
-		print(Global.i)
+		
 		next_level = main.get_node(Global.level_array[Global.i])
 		next_level.visible = true
 		Global.level = next_level

@@ -92,7 +92,7 @@ func _on_play_pressed() -> void:
 					Global.level_dict[level_]["chests"] += 1
 				if i.name.begins_with("slime"):
 					Global.level_dict[level_]["enemies"] += 1
-		print(Global.level_dict)
+		#print(Global.level_dict)
 		pass
 		Global.playing = true
 		
@@ -135,7 +135,6 @@ func _on_dwarf_pressed() -> void:
 	if Global.player_count < 1:
 		var player
 		player = player1.instantiate()
-		#player.is_dragging = true
 		Global.playerArea.add_child(player)
 		Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local(Vector2i(Global.playerArea.get_used_cells_by_id(15)[0].x, Global.playerArea.get_used_cells_by_id(15)[0].y - 5))
 		Global.player_count += 1
@@ -869,7 +868,7 @@ func _on_add_level_pressed() -> void:
 	button.text = new_level.get_name()
 	Global.level_array.append(button.text)
 	Global.level_dict[button.text] = {"coins" : 0, "chests": 0, "enemies": 0} ## testing a different version with dictionary
-	print(Global.level_dict)
+	#print(Global.level_dict)
 	Global.level.visible = false
 	new_level.visible = true
 	
@@ -1006,14 +1005,75 @@ func _on_mini_map_mouse_exited() -> void:
 ### Save button
 ### temporary functionality
 ### will probably change this to save the whole project the user is making rather than individual levels
-
-func _on_save_pressed() -> void:
-	#var scene = PackedScene.new()
-	#var scene_node = main.get_node("/root/main")
-	#scene.pack(scene_node)
-	#ResourceSaver.save(scene, "res://dungeons/" + scene_node.name + ".tscn", 2)	
+func _on_save_mouse_entered() -> void:
+	Global.place_tile = true
+	object_cursor.can_place = false
 	pass # Replace with function body.
 
+
+func _on_save_mouse_exited() -> void:
+	Global.place_tile = false
+	object_cursor.can_place = false
+	pass # Replace with function body.
+	
+func _on_save_pressed() -> void:
+	for lev in Global.level_array:
+		Global.level_data[lev] = {
+			"background": main.get_node(lev + "/Background").get_tile_map_data_as_array(), 
+			"playerArea" : main.get_node(lev + "/Player Area").get_tile_map_data_as_array(),
+			"foreground": main.get_node(lev + "/foreground").get_tile_map_data_as_array(),
+			"objects": get_object_data(main.get_node(lev + "/Player Area"))
+			}
+	pass # Replace with function body.
+
+### loads all levels with prior save data	
+func _on_load_pressed() -> void:
+	for lev in Global.level_data:
+		main.get_node(lev + "/Background").set_tile_map_data_from_array(Global.level_data[lev]['background'])
+		main.get_node(lev + "/Player Area").set_tile_map_data_from_array(Global.level_data[lev]['playerArea'])
+		main.get_node(lev + "/foreground").set_tile_map_data_from_array(Global.level_data[lev]['foreground'])
+	load_object_data()
+	pass # Replace with function body.
+
+### Gets data for objects that are not tileset tiles specific to the Player Area for each level
+# objects : {"object_name" : {"position": Vector2i()}} 
+#
+#
+func get_object_data(tilemaplayer: TileMapLayer)->Dictionary:
+	
+	var object_data = {}
+	
+	for child in tilemaplayer.get_children():
+		if child.has_method("get_position"):
+			var object_name = child.get_name()
+			object_data[object_name] = {"position" : child.get_position()}
+	return object_data
+
+### loads the object_data into their respective levels and Player Areas
+# objects will need added to this as we add them into the system
+func load_object_data():
+	for lev in Global.level_data.keys():
+		for object in Global.level_data.get(lev).get("objects").keys():
+			if object.begins_with("coin"):
+				var instance = coin.instantiate()
+				main.get_node(lev + '/Player Area').add_child(instance, true)
+				instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
+			elif object.begins_with("chest"):
+				var instance = chest.instantiate()
+				main.get_node(lev + '/Player Area').add_child(instance, true)
+				instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
+			elif object.begins_with("slime"):
+				var instance = slime.instantiate()
+				main.get_node(lev + '/Player Area').add_child(instance, true)
+				instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
+			elif object.begins_with("ladder"):
+				#var instance = ladder.instantiate()
+				#main.get_node(lev + '/Player Area').add_child(instance, true)
+				##print(Global.level_data.get(lev).get("objects").get(object)["position"])
+				#instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
+				pass
+			pass
+	pass
 
 ###
 ### Changing levels within play. THERE IS A BUG IF YOU GO BACK TO EDIT AFTER REACHING A LATER LEVEL IN PLAY MODE THEN START FROM LEVEL 1 AGAIN AND TRY TO GO TO THE NEXT LEVEL
