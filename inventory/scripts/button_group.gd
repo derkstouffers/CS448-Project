@@ -95,6 +95,7 @@ func _on_play_pressed() -> void:
 					Global.level_dict[level_]["enemies"] += 1
 		#print(Global.level_dict)
 		pass
+		#Global.playing = true
 		Global.playing = true
 		
 		if Global.player_count < 1:
@@ -134,6 +135,7 @@ func _on_dwarf_pressed() -> void:
 	
 	## place player in world if no other player exists in world
 	if Global.player_count < 1:
+		print("PLAYER BEING ADDED")
 		var player
 		player = player1.instantiate()
 		Global.playerArea.add_child(player)
@@ -143,6 +145,12 @@ func _on_dwarf_pressed() -> void:
 	
 func _on_player_select_window_close_requested() -> void:
 	player_select_window.hide()
+	pass # Replace with function body.
+
+
+func _on_player_select_window_mouse_entered() -> void:
+	object_cursor.can_place = false
+	Global.place_tile = true
 	pass # Replace with function body.
 	
 func _on_background_pressed() -> void:
@@ -1032,7 +1040,7 @@ func _on_load_pressed() -> void:
 		main.get_node(lev + "/Background").set_tile_map_data_from_array(Global.level_data[lev]['background'])
 		main.get_node(lev + "/Player Area").set_tile_map_data_from_array(Global.level_data[lev]['playerArea'])
 		main.get_node(lev + "/foreground").set_tile_map_data_from_array(Global.level_data[lev]['foreground'])
-	load_object_data()
+		load_object_data(lev)
 	pass # Replace with function body.
 
 ### Gets data for objects that are not tileset tiles specific to the Player Area for each level
@@ -1051,8 +1059,8 @@ func get_object_data(tilemaplayer: TileMapLayer)->Dictionary:
 
 ### loads the object_data into their respective levels and Player Areas
 # objects will need added to this as we add them into the system
-func load_object_data():
-	for lev in Global.level_data.keys():
+func load_object_data(lev):
+	#for lev in Global.level_data.keys():
 		for object in Global.level_data.get(lev).get("objects").keys():
 			if object.begins_with("coin"):
 				var instance = coin.instantiate()
@@ -1072,7 +1080,26 @@ func load_object_data():
 				##print(Global.level_data.get(lev).get("objects").get(object)["position"])
 				#instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
 				pass
-			pass
+			#pass
+	#pass
+
+### WORKING ON INDIVIDUAL SAVE AND LOAD
+func _on_save_level_pressed():
+	
+	Global.level_data[Global.level.name] = {
+		"background": main.get_node(Global.level.name + "/Background").get_tile_map_data_as_array(), 
+		"playerArea" : main.get_node(Global.level.name + "/Player Area").get_tile_map_data_as_array(),
+		"foreground": main.get_node(Global.level.name + "/foreground").get_tile_map_data_as_array(),
+		"objects": get_object_data(main.get_node(Global.level.name + "/Player Area"))
+		}
+	pass
+	
+func _on_load_level_pressed():
+	
+	main.get_node(Global.level.name + "/Background").set_tile_map_data_from_array(Global.level_data[Global.level.name]['background'])
+	main.get_node(Global.level.name + "/Player Area").set_tile_map_data_from_array(Global.level_data[Global.level.name]['playerArea'])
+	main.get_node(Global.level.name + "/foreground").set_tile_map_data_from_array(Global.level_data[Global.level.name]['foreground'])
+	load_object_data(Global.level.name)
 	pass
 
 ###
@@ -1086,6 +1113,7 @@ func _on_next_level_pressed() -> void:
 	## remove player from previous level
 	Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 	Global.player_count -= 1
+	
 	## remove collision from previous level
 	Global.playerArea.collision_enabled = false
 	

@@ -4,26 +4,30 @@ extends CharacterBody2D
 @onready var path_follow : PathFollow2D = $".."
 @export var speed = 25
 
+var level
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	
-	if Global.playing: #and _current_level():
+	if Global.playing:
+		_current_level()
 		
-		# gravity
-		if not is_on_floor():
-				
-			velocity += get_gravity() * delta
-				
-				
-		# Activates the made path for the slimes		
-		path_follow.progress += speed * delta
-		
-		
-		$AnimatedSprite2D.play("bounce")
-		
-		## based on this implementation we need this to have the gravity work
-		move_and_slide()
+		if level == get_parent().get_parent().get_parent().get_parent().get_parent().name:
+			
+			# gravity
+			if not is_on_floor():
+					
+				velocity += get_gravity() * delta
+					
+					
+			# Activates the made path for the slimes		
+			path_follow.progress += speed * delta
+			
+			
+			$AnimatedSprite2D.play("bounce")
+			
+			## based on this implementation we need this to have the gravity work
+			move_and_slide()
 
 			
 
@@ -36,10 +40,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
 
 
-#func _current_level():
-	#var player_present = Global.playerArea.get_node_or_null("dwarf")
-	#print(player_present)
-	#if player_present:
-		#print("IM HERE")
-		#return true	
-	#return false
+func _current_level():
+	
+	for lev in Global.level_array:
+		if get_node("/root/main/" + lev + "/Player Area").has_node("dwarf"):
+			level = lev
+			#print(level)
