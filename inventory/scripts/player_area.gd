@@ -8,7 +8,6 @@ extends TileMapLayer
 @onready var block_menu = button_group.get_node("Block_menu")
 @onready var level_menu = button_group.get_node("Level_menu")
 @onready var layer_menu = button_group.get_node("Layer_menu")
-@onready var search_bar = button_group.get_node("SearchBar")
 @onready var mini_map = button_group.get_node("MiniMap")
 @onready var quest_tracker = button_group.get_node("Quest_Tracker")
 @onready var edit = button_group.get_node("Edit")
@@ -66,7 +65,6 @@ func go_to_next_level() -> void:
 		level_menu.visible = true
 		layer_menu.visible = true
 		block_menu.visible = true
-		search_bar.visible = true
 		mini_map.visible = true
 		edit.visible = false
 		next_level_button.visible = false

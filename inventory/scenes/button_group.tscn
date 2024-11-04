@@ -38,13 +38,13 @@ default_font = ExtResource("2_uuyxx")
 default_font = ExtResource("2_uuyxx")
 default_font_size = 12
 
+[sub_resource type="Theme" id="Theme_1a14d"]
+default_font = ExtResource("2_uuyxx")
+
 [sub_resource type="Theme" id="Theme_3bojt"]
 default_font = ExtResource("2_uuyxx")
 
 [sub_resource type="Theme" id="Theme_eog21"]
-default_font = ExtResource("2_uuyxx")
-
-[sub_resource type="Theme" id="Theme_1a14d"]
 default_font = ExtResource("2_uuyxx")
 
 [sub_resource type="Theme" id="Theme_lditu"]
@@ -174,7 +174,7 @@ keep_pressed_outside = true
 text = "Foreground"
 
 [node name="Block_menu" type="ColorRect" parent="."]
-offset_top = 79.0
+offset_top = 47.0
 offset_right = 352.0
 offset_bottom = 362.0
 theme = SubResource("Theme_wmi0e")
@@ -184,9 +184,9 @@ metadata/_edit_group_ = true
 [node name="GridContainer" type="GridContainer" parent="Block_menu"]
 layout_mode = 1
 offset_left = 6.0
-offset_top = 24.0
+offset_top = 4.0
 offset_right = 103.0
-offset_bottom = 230.0
+offset_bottom = 302.0
 metadata/_edit_group_ = true
 
 [node name="Ground" type="Button" parent="Block_menu/GridContainer"]
@@ -217,6 +217,11 @@ text = "Sprite"
 [node name="Player Spawn Point" type="Button" parent="Block_menu/GridContainer"]
 layout_mode = 2
 text = "Spawn Point"
+
+[node name="All Items" type="Button" parent="Block_menu/GridContainer"]
+layout_mode = 2
+text = "all items
+"
 
 [node name="Ground" type="GridContainer" parent="Block_menu"]
 visible = false
@@ -474,6 +479,230 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
+[node name="All_Blocks" type="ColorRect" parent="."]
+visible = false
+offset_left = -2.0
+offset_top = 48.0
+offset_right = 350.0
+offset_bottom = 364.0
+color = Color(0.203922, 0.262745, 0.368627, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="All_Blocks"]
+offset_left = 12.0
+offset_top = 48.0
+offset_right = 343.0
+offset_bottom = 307.0
+
+[node name="GridContainer" type="GridContainer" parent="All_Blocks/ScrollContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Stone" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stone"
+icon = ExtResource("2_rvp3f")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lwr_ L Stone Stair" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left Stair"
+icon = ExtResource("4_tliso")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lwr_R_Stone Stair" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right Stair"
+icon = ExtResource("5_jle0s")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Beige Bricks" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Beige Bricks"
+icon = ExtResource("3_fn584")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Brown Bricks" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Brown Bricks"
+icon = ExtResource("4_nk11e")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Dark Gray Bricks" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Drk Gray Bricks"
+icon = ExtResource("5_cjwlv")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lava" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lava"
+icon = ExtResource("6_is2u5")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Sm_ Spike" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sm. Spike"
+icon = ExtResource("7_xu64y")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Med_Spike" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Med. Spike"
+icon = ExtResource("8_kcqcc")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lg_Spike" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lrg. Spike"
+icon = ExtResource("9_x0s3u")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="JackoLantern" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Jack o Lantern"
+icon = ExtResource("10_2p2ti")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Btm_Lft_Web" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Btm. L Web"
+icon = ExtResource("11_1vj5j")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Btm_Rt_Web" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Btm. R Web"
+icon = ExtResource("12_cvs18")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Top_L_Web" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Top L Web"
+icon = ExtResource("13_5mh7i")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Top_R_Web" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Top R Web"
+icon = ExtResource("14_ms5nt")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Torch" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Torch"
+icon = ExtResource("18_puwac")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Coin" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Coin"
+icon = ExtResource("15_lguei")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Ladder" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ladder"
+icon = ExtResource("16_d6hhi")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Chest" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Chest"
+icon = ExtResource("17_mlhbe")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Slime" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Slime"
+icon = ExtResource("23_o1287")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Spawn Block" type="Button" parent="All_Blocks/ScrollContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Spawn Point"
+icon = ExtResource("24_0nn1o")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="SearchBar" type="LineEdit" parent="All_Blocks"]
+offset_left = 14.0
+offset_top = 7.0
+offset_right = 254.0
+offset_bottom = 43.0
+theme = SubResource("Theme_1a14d")
+placeholder_text = "search"
+
+[node name="non search menu" type="Button" parent="All_Blocks"]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 8.0
+offset_right = 317.0
+offset_bottom = 39.0
+text = "Back
+"
+
 [node name="Edit" type="Button" parent="."]
 visible = false
 offset_left = 1089.0
@@ -530,24 +759,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 keep_pressed_outside = true
 text = "Level 1"
-
-[node name="SearchBar" type="LineEdit" parent="."]
-offset_top = 44.0
-offset_right = 352.0
-offset_bottom = 80.0
-theme = SubResource("Theme_1a14d")
-placeholder_text = "search"
-metadata/_edit_group_ = true
-
-[node name="ColorRect" type="ColorRect" parent="SearchBar"]
-visible = false
-layout_mode = 0
-offset_left = 12.0
-offset_top = 4.0
-offset_right = 339.0
-offset_bottom = 23.0
-tooltip_text = "Just A representation for now"
-color = Color(0.917647, 0.901961, 0.898039, 1)
 
 [node name="MiniMap" type="ColorRect" parent="."]
 offset_top = 362.0
@@ -708,6 +919,7 @@ item_1/id = 1
 [connection signal="mouse_entered" from="Block_menu/GridContainer/Player Spawn Point" to="." method="_on_player_spawn_point_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/GridContainer/Player Spawn Point" to="." method="_on_player_spawn_point_mouse_exited"]
 [connection signal="pressed" from="Block_menu/GridContainer/Player Spawn Point" to="." method="_on_player_spawn_point_pressed"]
+[connection signal="pressed" from="Block_menu/GridContainer/All Items" to="." method="_on_all_items_pressed"]
 [connection signal="mouse_entered" from="Block_menu/Ground/Stone" to="." method="_on_stone_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/Ground/Stone" to="." method="_on_stone_mouse_exited"]
 [connection signal="pressed" from="Block_menu/Ground/Stone" to="." method="_on_stone_pressed"]
@@ -771,6 +983,73 @@ item_1/id = 1
 [connection signal="mouse_entered" from="Block_menu/Spawn Point/Spawn Block" to="." method="_on_spawn_block_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/Spawn Point/Spawn Block" to="." method="_on_spawn_block_mouse_exited"]
 [connection signal="pressed" from="Block_menu/Spawn Point/Spawn Block" to="." method="_on_spawn_block_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Stone" to="." method="_on_stone_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Stone" to="." method="_on_stone_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Stone" to="." method="_on_stone_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Beige Bricks" to="." method="_on_beige_bricks_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Beige Bricks" to="." method="_on_beige_bricks_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Beige Bricks" to="." method="_on_beige_bricks_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Brown Bricks" to="." method="_on_brown_bricks_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Brown Bricks" to="." method="_on_brown_bricks_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Brown Bricks" to="." method="_on_brown_bricks_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Lava" to="." method="_on_lava_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Lava" to="." method="_on_lava_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Lava" to="." method="_on_lava_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Sm_ Spike" to="." method="_on_sm__spike_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Sm_ Spike" to="." method="_on_sm__spike_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Sm_ Spike" to="." method="_on_sm__spike_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Med_Spike" to="." method="_on_med_spike_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Med_Spike" to="." method="_on_med_spike_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Med_Spike" to="." method="_on_med_spike_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Lg_Spike" to="." method="_on_lg_spike_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Lg_Spike" to="." method="_on_lg_spike_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Lg_Spike" to="." method="_on_lg_spike_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/JackoLantern" to="." method="_on_jacko_lantern_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/JackoLantern" to="." method="_on_jacko_lantern_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/JackoLantern" to="." method="_on_jacko_lantern_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Btm_Lft_Web" to="." method="_on_btm_lft_web_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Btm_Lft_Web" to="." method="_on_btm_lft_web_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Btm_Lft_Web" to="." method="_on_btm_lft_web_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Btm_Rt_Web" to="." method="_on_btm_rt_web_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Btm_Rt_Web" to="." method="_on_btm_rt_web_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Btm_Rt_Web" to="." method="_on_btm_rt_web_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Top_L_Web" to="." method="_on_top_l_web_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Top_L_Web" to="." method="_on_top_l_web_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Top_L_Web" to="." method="_on_top_l_web_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Top_R_Web" to="." method="_on_top_r_web_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Top_R_Web" to="." method="_on_top_r_web_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Top_R_Web" to="." method="_on_top_r_web_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Torch" to="." method="_on_torch_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Torch" to="." method="_on_torch_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Torch" to="." method="_on_torch_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Coin" to="." method="_on_coin_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Coin" to="." method="_on_coin_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Coin" to="." method="_on_coin_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Ladder" to="." method="_on_ladder_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Ladder" to="." method="_on_ladder_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Ladder" to="." method="_on_ladder_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Chest" to="." method="_on_chest_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Chest" to="." method="_on_chest_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Chest" to="." method="_on_chest_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Slime" to="." method="_on_slime_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Slime" to="." method="_on_slime_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Slime" to="." method="_on_slime_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Spawn Block" to="." method="_on_spawn_block_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Spawn Block" to="." method="_on_spawn_block_mouse_exited"]
+[connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Spawn Block" to="." method="_on_spawn_block_pressed"]
+[connection signal="mouse_entered" from="All_Blocks/SearchBar" to="." method="_on_search_bar_mouse_entered"]
+[connection signal="mouse_exited" from="All_Blocks/SearchBar" to="." method="_on_search_bar_mouse_exited"]
+[connection signal="text_changed" from="All_Blocks/SearchBar" to="." method="_on_search_bar_text_changed"]
+[connection signal="pressed" from="All_Blocks/non search menu" to="." method="_on_non_search_menu_pressed"]
 [connection signal="mouse_entered" from="Edit" to="." method="_on_edit_mouse_entered"]
 [connection signal="mouse_exited" from="Edit" to="." method="_on_edit_mouse_exited"]
 [connection signal="pressed" from="Edit" to="." method="_on_edit_pressed"]
@@ -784,8 +1063,6 @@ item_1/id = 1
 [connection signal="mouse_entered" from="Level_menu/GridContainer3/Level1" to="." method="_on_level_1_mouse_entered"]
 [connection signal="mouse_exited" from="Level_menu/GridContainer3/Level1" to="." method="_on_level_1_mouse_exited"]
 [connection signal="pressed" from="Level_menu/GridContainer3/Level1" to="." method="_on_level_1_pressed"]
-[connection signal="mouse_entered" from="SearchBar" to="." method="_on_search_bar_mouse_entered"]
-[connection signal="mouse_exited" from="SearchBar" to="." method="_on_search_bar_mouse_exited"]
 [connection signal="mouse_entered" from="MiniMap" to="." method="_on_mini_map_mouse_entered"]
 [connection signal="mouse_exited" from="MiniMap" to="." method="_on_mini_map_mouse_exited"]
 [connection signal="pressed" from="next_level" to="." method="_on_next_level_pressed"]

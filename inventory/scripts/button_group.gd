@@ -13,9 +13,10 @@ extends CanvasLayer
 @onready var button_group = get_node("/root/main/button_group")
 @onready var top_menu = button_group.get_node("Top_menu")
 @onready var block_menu = button_group.get_node("Block_menu")
+@onready var all_blocks = button_group.get_node("All_Blocks")
 @onready var level_menu = button_group.get_node("Level_menu")
 @onready var layer_menu = button_group.get_node("Layer_menu")
-@onready var search_bar = button_group.get_node("SearchBar")
+@onready var search_bar = button_group.get_node("All_Blocks/SearchBar")
 @onready var mini_map = button_group.get_node("MiniMap")
 @onready var quest_tracker = button_group.get_node("Quest_Tracker")
 @onready var edit = button_group.get_node("Edit")
@@ -170,12 +171,11 @@ func _on_foreground_pressed() -> void:
 
 	pass # Replace with function body.
 
-######
-###### WANT TO MAKE IT A POPUP TO MAKE SURE WE WANT TO CLEAR 
-######
+
 func _on_clear_pressed() -> void:
 	clear_confirm.popup_centered()
-	clear_confirm.connect("confirmed", _on_clear_popup)
+	if not clear_confirm.is_connected("confirmed", _on_clear_popup):
+		clear_confirm.connect("confirmed", _on_clear_popup)
 	pass # Replace with function body.
 
 func _on_clear_popup() -> void:
@@ -1148,3 +1148,25 @@ func _on_objective_selector_mouse_entered() -> void:
 func _on_objective_selector_mouse_exited() -> void:
 	object_cursor.can_place = true
 	pass # Replace with function body.
+
+func _on_all_items_pressed() -> void:
+	block_menu.visible = false
+	all_blocks.visible = true
+	
+func _on_non_search_menu_pressed() -> void:
+	block_menu.visible = true
+	all_blocks.visible = false
+	
+func _on_search_bar_text_changed(new_text: String) -> void:
+	var buttons = get_node("All_Blocks/ScrollContainer/GridContainer")
+	
+	if new_text == "":
+		for child in buttons.get_children():
+			child.visible = true
+		
+	if new_text != "":
+		for child in buttons.get_children():
+			if child.name.contains(new_text):
+				child.visible = true
+			else:
+				child.visible = false
