@@ -37,8 +37,7 @@ var attack_direction = 1
 
 signal gained_coins(int)
 var coins = 0
-
-
+	
 func gain_coins(coins_gained):
 	coins += coins_gained
 	emit_signal("gained_coins", coins_gained)

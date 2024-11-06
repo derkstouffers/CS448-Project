@@ -1166,7 +1166,7 @@ func _on_search_bar_text_changed(new_text: String) -> void:
 		
 	if new_text != "":
 		for child in buttons.get_children():
-			if child.name.contains(new_text):
+			if child.name.to_lower().contains(new_text):
 				child.visible = true
 			else:
 				child.visible = false
