@@ -1,6 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://bd5ijxhw76jya"]
 
 [ext_resource type="Texture2D" uid="uid://geslslmtgqhb" path="res://Sprites/Green Slime Bounce.png" id="1_mh1kr"]
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_nerap"]
 [ext_resource type="Texture2D" uid="uid://cn5fihcpe56ve" path="res://Sprites/slime_hit-1.png.png" id="3_4cxpi"]
 
 [sub_resource type="Curve2D" id="Curve2D_ouuu1"]
@@ -8,54 +9,6 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 113, -1, 0, 0, 0, 0, 0, -1)
 }
 point_count = 3
-
-[sub_resource type="GDScript" id="GDScript_dq21s"]
-script/source = "extends CharacterBody2D
-
-@onready var object_cursor = get_node(\"/root/main/editor_object\")
-@onready var path_follow : PathFollow2D = $\"..\"
-@export var speed = 25
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
-	
-	if Global.playing and _current_level():
-		
-		# gravity
-		if not is_on_floor():
-				
-			velocity += get_gravity() * delta
-				
-				
-		# Activates the made path for the slimes		
-		path_follow.progress += speed * delta
-		
-		
-		$AnimatedSprite2D.play(\"bounce\")
-		
-		## based on this implementation we need this to have the gravity work
-		move_and_slide()
-
-			
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	$AnimatedSprite2D.play(\"hit\")
-	Global.level_dict[Global.level.name][\"enemies\"] -= 1
-	#print(Global.level_dict)
-	queue_free()
-	pass # Replace with function body.
-
-
-func _current_level():
-	var player_present = Global.playerArea.get_node_or_null(\"dwarf\")
-	print(player_present)
-	if player_present:
-		print(\"IM HERE\")
-		return true	
-	return false
-"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j01p4"]
 radius = 9.0
@@ -136,7 +89,7 @@ rotates = false
 
 [node name="slime" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
 position = Vector2(0, 1)
-script = SubResource("GDScript_dq21s")
+script = ExtResource("1_nerap")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/slime"]

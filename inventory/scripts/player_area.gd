@@ -26,10 +26,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var tile = local_to_map(get_global_mouse_position())
 	selected_tile = map_to_local(tile)
-	if Global.playing and Global.playerArea.get_node_or_null("dwarf"):
+	
+	if Global.playing and has_node("dwarf"):
 		
 		if objectives(objective):
-			#print("IM HERE")
 			#await get_tree().create_timer(2.0).timeout
 			go_to_next_level()
 	pass
@@ -37,14 +37,13 @@ func _process(delta: float) -> void:
 
 
 func objectives(quest : int):
-	#print(Global.level.name + "objective: " + str(Global.playerArea.objective) + "\n")
+	
 	if quest == 1:
-		#print(Global.level.name + " objective get coins: " + str(objective))
+		
 		if Global.level_dict[Global.level.name]["coins"] == 0 and Global.level_dict[Global.level.name]["chests"] == 0:
 			return true
 		return false
 	elif quest == 2:
-		#print(Global.level.name + " objective kill slime: " + str(objective))
 		if Global.level_dict[Global.level.name]["enemies"] == 0:
 			return true
 		return false
@@ -57,7 +56,7 @@ func go_to_next_level() -> void:
 	var next_level
 	
 	if level_count == Global.i:
-		print("GAME OVER")
+		## GAME OVER REACHED END OF LAST LEVEL MADE RETURN TO EDIT MODE
 		
 		## RETURN TO EDIT MODE AT LEVEL 1
 		Global.playing = false
@@ -102,6 +101,7 @@ func go_to_next_level() -> void:
 		## remove player from previous level
 		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 		Global.player_count -= 1
+		
 		## remove collision from previous level
 		Global.playerArea.collision_enabled = false
 		
@@ -109,14 +109,11 @@ func go_to_next_level() -> void:
 		Global.level.visible = false
 		
 		## get and set next level
-
-
 		
 		next_level = main.get_node(Global.level_array[Global.i])
 		next_level.visible = true
 		Global.level = next_level
 		
-	
 	
 		## add player to new level 
 		var player = player1.instantiate()
@@ -125,8 +122,7 @@ func go_to_next_level() -> void:
 		Global.playerArea = next_level.get_node('Player Area')
 		Global.playerArea.collision_enabled = true
 		objective = Global.playerArea.objective
-		
-		
+
 		Global.playerArea.add_child(player)
 		
 		## set position for where player will enter new level
@@ -142,3 +138,4 @@ func go_to_next_level() -> void:
 		Global.i += 1
 			
 	pass # Replace with function body.
+	
