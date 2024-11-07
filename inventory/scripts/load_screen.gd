@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var transition = $SceneTransitionRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,7 +13,8 @@ func _process(delta: float) -> void:
 
 
 func _on_build_btn_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	transition.transition_to("res://scenes/main.tscn")
+	#get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 func _on_load_btn_pressed() -> void:	

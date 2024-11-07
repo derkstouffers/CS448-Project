@@ -3,6 +3,7 @@ extends TileMapLayer
 @onready var main = get_node("/root/main")
 @onready var camera = get_node("/root/main/cam_container/Camera2D")
 
+
 @onready var button_group = get_node("/root/main/button_group")
 @onready var top_menu = button_group.get_node("Top_menu")
 @onready var block_menu = button_group.get_node("Block_menu")
@@ -11,7 +12,6 @@ extends TileMapLayer
 @onready var mini_map = button_group.get_node("MiniMap")
 @onready var quest_tracker = button_group.get_node("Quest_Tracker")
 @onready var edit = button_group.get_node("Edit")
-@onready var next_level_button = button_group.get_node("next_level")
 
 @export var objective = 0
 
@@ -32,6 +32,10 @@ func _process(delta: float) -> void:
 		if objectives(objective):
 			#await get_tree().create_timer(2.0).timeout
 			go_to_next_level()
+	elif Global.playing == false:
+		for lev in Global.level_dict:
+			Global.level_dict[lev] = {"coins" : 0, "chests": 0, "enemies": 0}
+		Global.coins = 0
 	pass
 
 
@@ -66,7 +70,6 @@ func go_to_next_level() -> void:
 		block_menu.visible = true
 		mini_map.visible = true
 		edit.visible = false
-		next_level_button.visible = false
 		quest_tracker.visible = false
 		
 		Global.level.visible = false
@@ -80,6 +83,7 @@ func go_to_next_level() -> void:
 			Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 			Global.player_count -= 1
 		Global.i = 1
+		
 	
 		# fix block collision issues from one level to the next
 		Global.playerArea.collision_enabled = false
@@ -107,6 +111,7 @@ func go_to_next_level() -> void:
 		
 		## Turn off previous level visibility
 		Global.level.visible = false
+		
 		
 		## get and set next level
 		

@@ -3,9 +3,6 @@ extends CanvasLayer
 @onready var main = get_node("/root/main")
 @onready var level1 = get_node("/root/main/level")
 
-#@onready var background : TileMapLayer = level.get_node("/root/main/level/Background")
-#@onready var playerArea : TileMapLayer = level.get_node("/root/main/level/Player Area")
-#@onready var foreground : TileMapLayer = level.get_node("/root/main/level/foreground")
 
 @onready var object_cursor = get_node("/root/main/editor_object")
 @onready var camera = $"../cam_container/Camera2D"
@@ -37,7 +34,6 @@ extends CanvasLayer
 
 @onready var clear_confirm: ConfirmationDialog = $"clear_confirm"
 
-@onready var next_level_button = $next_level
 
 
 const level2 = preload("res://scenes/level.tscn")
@@ -61,6 +57,8 @@ func _ready() -> void:
 #
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Global.playing == false:
+		update_coins_gained(0)
 	## Only getting Player Layer map data for now
 	var background_map_data = Global.background.get_tile_map_data_as_array()
 	var player_map_data = Global.playerArea.get_tile_map_data_as_array()
@@ -93,9 +91,9 @@ func _on_play_pressed() -> void:
 					Global.level_dict[level_]["chests"] += 1
 				if i.name.begins_with("slime"):
 					Global.level_dict[level_]["enemies"] += 1
-		#print(Global.level_dict)
+	
 		pass
-		#Global.playing = true
+		
 		Global.playing = true
 		
 		if Global.player_count < 1:
@@ -108,7 +106,7 @@ func _on_play_pressed() -> void:
 		search_bar.visible = false
 		mini_map.visible = false
 		edit.visible = true
-		next_level_button.visible = true ## Temporary
+		
 		quest_tracker.visible = true
 		
 		for lev in Global.level_array:
@@ -118,7 +116,7 @@ func _on_play_pressed() -> void:
 				main.get_node(lev).get_node("Player Area").collision_enabled = false
 				pass
 		
-		#### NEED TO MAKE A WINDOW (PLAYER ALREADY EXISTS IN A LEVEL THEN RETURNS USER TO EDIT MODE)
+		
 		## Shift to player camera if player already placed in world
 		if Global.player_count == 1:
 			camera.enabled = false
@@ -135,7 +133,7 @@ func _on_dwarf_pressed() -> void:
 	
 	## place player in world if no other player exists in world
 	if Global.player_count < 1:
-		print("PLAYER BEING ADDED")
+		
 		var player
 		player = player1.instantiate()
 		Global.playerArea.add_child(player)
@@ -283,7 +281,6 @@ func _on_edit_pressed() -> void:
 	search_bar.visible = true
 	mini_map.visible = true
 	edit.visible = false
-	next_level_button.visible = false
 	quest_tracker.visible = false
 	Global.playing = false
 	
@@ -1102,60 +1099,7 @@ func _on_load_level_pressed():
 	load_object_data(Global.level.name)
 	pass
 
-###
-### Changing levels within play. THERE IS A BUG IF YOU GO BACK TO EDIT AFTER REACHING A LATER LEVEL IN PLAY MODE THEN START FROM LEVEL 1 AGAIN AND TRY TO GO TO THE NEXT LEVEL
-###
-var i = 1
-func _on_next_level_pressed() -> void:
-	var level_count = Global.level_array.size()
-	var next_level
-	
-	## remove player from previous level
-	Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
-	Global.player_count -= 1
-	
-	## remove collision from previous level
-	Global.playerArea.collision_enabled = false
-	
-	## Turn off previous level visibility
-	Global.level.visible = false
-	
-	## get and set next level
-	next_level = main.get_node(Global.level_array[i])
-	next_level.visible = true
-	Global.level = next_level
-	
-	
-	## add player to new level 
-	var player = player1.instantiate()
-	
-	## enable collision mesh for new level
-	Global.playerArea = next_level.get_node('Player Area')
-	Global.playerArea.collision_enabled = true
-	
-	
-	next_level.get_node('Player Area').add_child(player)
-	
-	## set position for where player will enter new level
-	## need to probably make it variable for each level that can be placed by user
-	Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(15)[0].x, Global.playerArea.get_used_cells_by_id(15)[0].y - 5)))
-	
-	Global.player_count += 1
-	if Global.player_count == 1:
-		camera.enabled = false
-		next_level.get_node('Player Area/dwarf').get_child(2).enabled = true
-	
-	## if the next level is the size of the level array in global then there are no more levels
-	if level_count != i:
-		## increment i to access the next level in the global array of levels
-		i += 1
-	if level_count == i:
-		i = 1
-		
-	else:
-		print("GAME OVER")
-	
-	pass # Replace with function body.
+
 
 ###
 ### Objective/Quest picker for each level

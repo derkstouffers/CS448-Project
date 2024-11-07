@@ -29,7 +29,6 @@ func _ready() -> void:
 	Global.background = background
 	Global.playerArea = playerArea
 	Global.foreground = foreground
-	#editor_cam.make_current()
 	pass # Replace with function body.
 
 
@@ -45,20 +44,7 @@ func _process(delta: float) -> void:
 			var new_item 
 			if(current_item != null and can_place and Input.is_action_just_pressed("mb_left")):
 				new_item = current_item.instantiate()
-				#if new_item.name == "coin" and Global.playerArea.get_node_or_null("coin"):
-					###Global.playerArea.get_node("coin").add_sibling(new_item, true)
-					#
-				#if new_item.name == "chest" and Global.playerArea.has_node("chest"):
-					#Global.playerArea.get_node("chest").add_sibling(new_item, true)
-					#
-				#elif new_item.name == "slime" and Global.playerArea.get_node_or_null("slime"):
-					#Global.playerArea.get_node("slime").add_sibling(new_item, true)
-					#
-				#elif new_item.name == "chest" and !Global.playerArea.has_node("chest"):
-					#Global.playerArea.add_child(new_item)	
-				#### HARDCODED FOR PLAYER AREA RIGHT NOW SINCE THE NON_TILEMAP TILES ARE ALL INTERACTIVES RIGHT NOW
-				#else:
-					##pass
+
 				Global.playerArea.add_child(new_item, true)
 				
 				new_item.global_position = Global.playerArea.selected_tile ## grid snap for object that isn't from tileset
@@ -69,7 +55,7 @@ func _process(delta: float) -> void:
 				for child in Global.playerArea.get_children():
 					if child.has_method("get_position") and child.get_position() == Global.playerArea.selected_tile:
 						child.queue_free()
-				pass
+				
 				
 		else:
 			if(can_place):
@@ -77,7 +63,7 @@ func _process(delta: float) -> void:
 				if Input.is_action_pressed("mb_left"):
 					if Global.playerArea.get_used_cells_by_id(15).size() < 1:
 						place_tile()
-						#print(Global.playerArea.get_used_cells_by_id(15))
+						
 					elif Global.playerArea.get_used_cells_by_id(15).size() == 1 and !Global.TileID == 15:
 						place_tile()
 						
