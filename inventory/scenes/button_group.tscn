@@ -1,29 +1,75 @@
-[gd_scene load_steps=35 format=3 uid="uid://clrvdmfbg0bne"]
+[gd_scene load_steps=86 format=3 uid="uid://clrvdmfbg0bne"]
 
 [ext_resource type="Script" path="res://scripts/button_group.gd" id="1_jed0n"]
 [ext_resource type="Texture2D" uid="uid://cuiaq8wwhnuil" path="res://characters/dwarf/Dwarf 1.png" id="2_jtfji"]
 [ext_resource type="Texture2D" uid="uid://bv7jgajhhau2r" path="res://assets/ground_walls/Stone.png" id="2_rvp3f"]
 [ext_resource type="FontFile" uid="uid://dfnj0s4uiru6a" path="res://assets/ui_ux/Bungee-Regular.ttf" id="2_uuyxx"]
 [ext_resource type="Texture2D" uid="uid://kq152i03ag18" path="res://assets/ground_walls/Bricks-3.png.png" id="3_fn584"]
+[ext_resource type="Texture2D" uid="uid://cmkj70yovviwt" path="res://characters/wizard/Blue Wizard Idle.png" id="4_fdrac"]
 [ext_resource type="Texture2D" uid="uid://efdftgp8ywix" path="res://assets/ground_walls/Beige Bricks.png" id="4_nk11e"]
 [ext_resource type="Texture2D" uid="uid://n1xolcpjkixx" path="res://assets/ground_walls/Lower Left Stone Stair.png" id="4_tliso"]
+[ext_resource type="Texture2D" uid="uid://3q4abpt04w0g" path="res://characters/witch/Lavender Witch-1.png" id="5_7edlc"]
 [ext_resource type="Texture2D" uid="uid://ce0yneey4cfdc" path="res://assets/ground_walls/Dark Gray Bricks.png" id="5_cjwlv"]
 [ext_resource type="Texture2D" uid="uid://cpd15dlr0mp4n" path="res://assets/ground_walls/Lower Right Stone Stair.png" id="5_jle0s"]
 [ext_resource type="Texture2D" uid="uid://eyn4a35obc3e" path="res://assets/hazards/Lava.png" id="6_is2u5"]
+[ext_resource type="Texture2D" uid="uid://bq8mx3nypwnf6" path="res://assets/ground_walls/Dark Wood Log Top.png" id="7_ij6d2"]
 [ext_resource type="Texture2D" uid="uid://cparvpn3jpvka" path="res://assets/hazards/Small Spikes.png" id="7_xu64y"]
+[ext_resource type="Texture2D" uid="uid://d20we5loim1r3" path="res://assets/ground_walls/Dark Wood Log.png" id="8_0tafr"]
 [ext_resource type="Texture2D" uid="uid://c5vjke2hstjr3" path="res://assets/hazards/Medium Spikes.png" id="8_kcqcc"]
+[ext_resource type="Texture2D" uid="uid://bl7w74ke0dh1f" path="res://assets/ground_walls/Dark Wood Planks.png" id="9_my54d"]
 [ext_resource type="Texture2D" uid="uid://6ep81gwfwa0j" path="res://assets/hazards/Big Spike.png" id="9_x0s3u"]
 [ext_resource type="Texture2D" uid="uid://b5m05i75vitx5" path="res://assets/Decor/Jack o Lantern.png" id="10_2p2ti"]
+[ext_resource type="Texture2D" uid="uid://bow3mlkqjfy4w" path="res://assets/ground_walls/Gold Block.png" id="10_s4cu0"]
 [ext_resource type="Texture2D" uid="uid://batxptd4pen1m" path="res://assets/Decor/Bottom Left Spider Web.png" id="11_1vj5j"]
+[ext_resource type="Texture2D" uid="uid://cgx56dixl0my7" path="res://assets/ground_walls/Left Classic Bricks Slabs.png" id="11_r0jei"]
 [ext_resource type="Texture2D" uid="uid://dp5c6e8452lo4" path="res://assets/Decor/Bottom Right Spider Web.png" id="12_cvs18"]
+[ext_resource type="Texture2D" uid="uid://1y5aa35f865c" path="res://assets/ground_walls/Lower Classic Bricks Slabs.png" id="12_xmtf4"]
 [ext_resource type="Texture2D" uid="uid://iiln0nowibo2" path="res://assets/Decor/Top Left Spider Web.png" id="13_5mh7i"]
+[ext_resource type="Texture2D" uid="uid://chrgmyp3pq1du" path="res://assets/ground_walls/Lower Dark Wood Slab.png" id="13_yx8cf"]
 [ext_resource type="Texture2D" uid="uid://sn38dwnnki6h" path="res://assets/Decor/Top Right Spider Web.png" id="14_ms5nt"]
+[ext_resource type="Texture2D" uid="uid://dldwmgt46lp6o" path="res://assets/ground_walls/Lower Left Classic Bricks Stairs.png" id="14_ujuvk"]
+[ext_resource type="Texture2D" uid="uid://dxh4f3jfuwv5j" path="res://assets/ground_walls/Lower Left Dark Wood Stairs.png" id="15_kw77w"]
 [ext_resource type="Texture2D" uid="uid://bc8lf1h2su71w" path="res://assets/interactive/Coin.png" id="15_lguei"]
 [ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://assets/interactive/Ladder.png" id="16_d6hhi"]
+[ext_resource type="Texture2D" uid="uid://co6gq5e2ld8rd" path="res://assets/ground_walls/Lower Right Classic Bricks Stairs.png" id="16_pl0hs"]
 [ext_resource type="Texture2D" uid="uid://curxra5askb1" path="res://assets/interactive/Treasure Chest_1.png" id="17_mlhbe"]
+[ext_resource type="Texture2D" uid="uid://dktfuy7y816ht" path="res://assets/ground_walls/Lower Right Dark Wood Stairs.png" id="17_r1a4j"]
+[ext_resource type="Texture2D" uid="uid://d4hmwvonk0uyr" path="res://assets/ground_walls/Right Classic Bricks Slabs.png" id="18_7oqwm"]
 [ext_resource type="Texture2D" uid="uid://c26j48mqlyv4p" path="res://assets/Decor/Torch-1.png" id="18_puwac"]
+[ext_resource type="Texture2D" uid="uid://birnfha8ea88l" path="res://assets/ground_walls/Sideways Dark Wood Log.png" id="19_eh7xh"]
+[ext_resource type="Texture2D" uid="uid://b5o5s0fm1ihov" path="res://assets/ground_walls/Upper Classic Bricks Slabs.png" id="20_c34ee"]
+[ext_resource type="Texture2D" uid="uid://cdir0hp8t1k12" path="res://assets/ground_walls/Upper Dark Wood Slab.png" id="21_8eg1q"]
+[ext_resource type="Texture2D" uid="uid://xhf606fr3jqa" path="res://assets/ground_walls/Upper Left Classic Bricks Stairs-3.png" id="22_ql17j"]
+[ext_resource type="Texture2D" uid="uid://co08casvrt5wg" path="res://assets/ground_walls/Upper Left Dark Wood Stairs.png" id="23_4lr5d"]
 [ext_resource type="Texture2D" uid="uid://d0wyu6ug0tx0q" path="res://Sprites/green_slime.png" id="23_o1287"]
 [ext_resource type="Texture2D" uid="uid://cc0lqydqthvva" path="res://assets/ground_walls/Spawnpoint Block.png" id="24_0nn1o"]
+[ext_resource type="Texture2D" uid="uid://bojt2jkvds4ky" path="res://assets/ground_walls/Upper Right Classic Bricks Stairs.png" id="24_njmln"]
+[ext_resource type="Texture2D" uid="uid://c67lishygry1r" path="res://assets/ground_walls/Upper Right Dark Wood Stairs.png" id="25_n6f3x"]
+[ext_resource type="Texture2D" uid="uid://coax0w2i4g1rp" path="res://assets/ground_walls/Upper Stone Slab.png" id="26_yg5y1"]
+[ext_resource type="Texture2D" uid="uid://chpa8x34v23mc" path="res://assets/ground_walls/Lower Stone Slab.png" id="27_6dyfw"]
+[ext_resource type="Texture2D" uid="uid://4tftma0w5n3t" path="res://assets/ground_walls/Ice Block.png" id="35_jr1e8"]
+[ext_resource type="Texture2D" uid="uid://bsfmq3mfmpnwl" path="res://assets/hazards/Water.png" id="36_1lduf"]
+[ext_resource type="Texture2D" uid="uid://bsv34vdgc6wvi" path="res://assets/Decor/Basic Window Day.png" id="43_b7q4l"]
+[ext_resource type="Texture2D" uid="uid://cvhkw8jfp4d21" path="res://assets/Decor/Basic Window Night.png" id="44_pkcah"]
+[ext_resource type="Texture2D" uid="uid://dv17v5iyo0lkx" path="res://assets/Decor/Black Chandelier.png" id="45_i7xy6"]
+[ext_resource type="Texture2D" uid="uid://bojustfphupyh" path="res://assets/Decor/Purple Chandelier.png" id="46_4p1uk"]
+[ext_resource type="Texture2D" uid="uid://d0731t5pxkle0" path="res://assets/Decor/Brown Chandelier.png" id="47_okxmi"]
+[ext_resource type="Texture2D" uid="uid://xswgwmw0xffq" path="res://assets/Decor/Black Lantern.png" id="48_vfcin"]
+[ext_resource type="Texture2D" uid="uid://duesy40pyyt51" path="res://assets/Decor/Brown Lantern.png" id="49_mdvry"]
+[ext_resource type="Texture2D" uid="uid://ijoemubtdso7" path="res://assets/Decor/Gray Lantern.png" id="50_iu4qf"]
+[ext_resource type="Texture2D" uid="uid://csfb15u5l0jtq" path="res://assets/Decor/Purple Lantern.png" id="51_buxpu"]
+[ext_resource type="Texture2D" uid="uid://2k36kk7qnxni" path="res://assets/Decor/Cattail.png" id="52_ab4hq"]
+[ext_resource type="Texture2D" uid="uid://c5q1rnjxwsu0v" path="res://assets/Decor/Crate.png" id="53_0b322"]
+[ext_resource type="Texture2D" uid="uid://bcklesp7d4mhm" path="res://assets/Decor/Daisy.png" id="54_wud2t"]
+[ext_resource type="Texture2D" uid="uid://v00d03r28rdc" path="res://assets/Decor/Dark Wood Fence.png" id="55_k0vmo"]
+[ext_resource type="Texture2D" uid="uid://b05ywkx3rxyux" path="res://assets/Decor/Down Arrow Sign.png" id="56_pxcx4"]
+[ext_resource type="Texture2D" uid="uid://euwutkksgef2" path="res://assets/Decor/Hanging Brown Lantern.png" id="57_5uuau"]
+[ext_resource type="Texture2D" uid="uid://crfvopui1pc7v" path="res://assets/Decor/Hanging Gray Lantern.png" id="58_hcr53"]
+[ext_resource type="Texture2D" uid="uid://co1kqrdlfdgiw" path="res://assets/Decor/Hanging Lantern Black.png" id="59_mos6u"]
+[ext_resource type="Texture2D" uid="uid://t8qgqlsus12j" path="res://assets/Decor/Hanging Purple Lantern.png" id="60_8w3mg"]
+[ext_resource type="Texture2D" uid="uid://dmji5bpkoxuvk" path="res://assets/Decor/Left Arrow Sign.png" id="61_cmpx2"]
+[ext_resource type="Texture2D" uid="uid://g7y11niaoykp" path="res://assets/Decor/Right Arrow Sign.png" id="62_veenw"]
+[ext_resource type="Texture2D" uid="uid://jfoxy882fe36" path="res://assets/Decor/Up Arrow Sign.png" id="63_dx0oq"]
 
 [sub_resource type="Theme" id="Theme_ha7l0"]
 default_font = ExtResource("2_uuyxx")
@@ -31,12 +77,28 @@ default_font = ExtResource("2_uuyxx")
 [sub_resource type="Theme" id="Theme_fkkqm"]
 default_font = ExtResource("2_uuyxx")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks5x6"]
+atlas = ExtResource("4_fdrac")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="Theme" id="Theme_olnhu"]
 default_font = ExtResource("2_uuyxx")
 
 [sub_resource type="Theme" id="Theme_wmi0e"]
 default_font = ExtResource("2_uuyxx")
 default_font_size = 12
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp3qn"]
+atlas = ExtResource("7_ij6d2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pgjb"]
+atlas = ExtResource("8_0tafr")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boalb"]
+atlas = ExtResource("9_my54d")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc4oh"]
+atlas = ExtResource("10_s4cu0")
 
 [sub_resource type="Theme" id="Theme_1a14d"]
 default_font = ExtResource("2_uuyxx")
@@ -101,6 +163,22 @@ columns = 4
 layout_mode = 2
 text = "Dwarf"
 icon = ExtResource("2_jtfji")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="wizard" type="Button" parent="Top_menu/GridContainer/Play/player_select_window/GridContainer"]
+layout_mode = 2
+text = "wizard"
+icon = SubResource("AtlasTexture_ks5x6")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="witch" type="Button" parent="Top_menu/GridContainer/Play/player_select_window/GridContainer"]
+layout_mode = 2
+text = "witch"
+icon = ExtResource("5_7edlc")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
@@ -187,7 +265,6 @@ offset_right = 352.0
 offset_bottom = 362.0
 theme = SubResource("Theme_wmi0e")
 color = Color(0.203922, 0.262745, 0.368627, 1)
-metadata/_edit_group_ = true
 
 [node name="GridContainer" type="GridContainer" parent="Block_menu"]
 layout_mode = 1
@@ -231,16 +308,19 @@ layout_mode = 2
 text = "all items
 "
 
-[node name="Ground" type="GridContainer" parent="Block_menu"]
-visible = false
+[node name="ScrollContainer" type="ScrollContainer" parent="Block_menu"]
 layout_mode = 0
-offset_left = 114.0
-offset_top = 7.0
-offset_right = 346.0
-offset_bottom = 267.0
+offset_left = 111.0
+offset_top = 3.0
+offset_right = 344.0
+offset_bottom = 310.0
+
+[node name="Ground" type="GridContainer" parent="Block_menu/ScrollContainer"]
+visible = false
+layout_mode = 2
 columns = 2
 
-[node name="Stone" type="Button" parent="Block_menu/Ground"]
+[node name="Stone" type="Button" parent="Block_menu/ScrollContainer/Ground"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Stone"
@@ -249,7 +329,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Lwr_ L Stone Stair" type="Button" parent="Block_menu/Ground"]
+[node name="Lwr_ L Stone Stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Left Stair"
@@ -258,7 +338,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Lwr_R_Stone Stair" type="Button" parent="Block_menu/Ground"]
+[node name="Lwr_R_Stone Stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Right Stair"
@@ -267,15 +347,200 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Walls" type="GridContainer" parent="Block_menu"]
-layout_mode = 0
-offset_left = 105.0
-offset_top = 3.0
-offset_right = 347.0
-offset_bottom = 269.0
+[node name="wood_log_top" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Wood Log Top"
+icon = SubResource("AtlasTexture_pp3qn")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="wood_log" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wood log"
+icon = SubResource("AtlasTexture_4pgjb")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="wood_planks" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wood planks"
+icon = SubResource("AtlasTexture_boalb")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="gold_block" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gold Block"
+icon = SubResource("AtlasTexture_wc4oh")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="brick_slab_L" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Brick Slab L"
+icon = ExtResource("11_r0jei")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="brick_slab" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "brick slab"
+icon = ExtResource("12_xmtf4")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="wood_slab" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wood slab"
+icon = ExtResource("13_yx8cf")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lwr_L_brick_stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "L Brick Stairs"
+icon = ExtResource("14_ujuvk")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lwr_L_wood_stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "L Wood Stairs"
+icon = ExtResource("15_kw77w")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lwr_R_brick_stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R Brick Stairs"
+icon = ExtResource("16_pl0hs")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Lwr_R_wood_stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R Wood Stairs"
+icon = ExtResource("17_r1a4j")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="brick_slab_R" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R Brick Slab"
+icon = ExtResource("18_7oqwm")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="wood_log_side" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wood log side"
+icon = ExtResource("19_eh7xh")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="brick_slab_top" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Brick Slab Top"
+icon = ExtResource("20_c34ee")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="wood_slab_top" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wood slab top"
+icon = ExtResource("21_8eg1q")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Upr_L_brick_stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upr L Brick Stair"
+icon = ExtResource("22_ql17j")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Upr_Lwood_stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upr L Wood Stairs"
+icon = ExtResource("23_4lr5d")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Upr_R_brick_stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upr R Brick Stairs"
+icon = ExtResource("24_njmln")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Upr_R_wood_stair" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upr R Wood Stairs"
+icon = ExtResource("25_n6f3x")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="stone_slab_top" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "stone slab top"
+icon = ExtResource("26_yg5y1")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="stone_slab" type="Button" parent="Block_menu/ScrollContainer/Ground"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "stone slab"
+icon = ExtResource("27_6dyfw")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Walls" type="GridContainer" parent="Block_menu/ScrollContainer"]
+layout_mode = 2
 columns = 2
 
-[node name="Beige Bricks" type="Button" parent="Block_menu/Walls"]
+[node name="Beige Bricks" type="Button" parent="Block_menu/ScrollContainer/Walls"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Beige Bricks"
@@ -284,7 +549,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Brown Bricks" type="Button" parent="Block_menu/Walls"]
+[node name="Brown Bricks" type="Button" parent="Block_menu/ScrollContainer/Walls"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Brown Bricks"
@@ -293,7 +558,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Dark Gray Bricks" type="Button" parent="Block_menu/Walls"]
+[node name="Dark Gray Bricks" type="Button" parent="Block_menu/ScrollContainer/Walls"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Drk Gray Bricks"
@@ -302,21 +567,12 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Hazards" type="GridContainer" parent="Block_menu"]
+[node name="Hazards" type="GridContainer" parent="Block_menu/ScrollContainer"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 113.0
-offset_top = 4.0
-offset_right = -3.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 columns = 2
 
-[node name="Lava" type="Button" parent="Block_menu/Hazards"]
+[node name="Lava" type="Button" parent="Block_menu/ScrollContainer/Hazards"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Lava"
@@ -325,7 +581,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Sm_ Spike" type="Button" parent="Block_menu/Hazards"]
+[node name="Sm_ Spike" type="Button" parent="Block_menu/ScrollContainer/Hazards"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Sm. Spike"
@@ -334,7 +590,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Med_Spike" type="Button" parent="Block_menu/Hazards"]
+[node name="Med_Spike" type="Button" parent="Block_menu/ScrollContainer/Hazards"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Med. Spike"
@@ -343,7 +599,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Lg_Spike" type="Button" parent="Block_menu/Hazards"]
+[node name="Lg_Spike" type="Button" parent="Block_menu/ScrollContainer/Hazards"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Lrg. Spike"
@@ -352,16 +608,30 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Decor" type="GridContainer" parent="Block_menu"]
+[node name="ice_block" type="Button" parent="Block_menu/ScrollContainer/Hazards"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ice block"
+icon = ExtResource("35_jr1e8")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="water_block" type="Button" parent="Block_menu/ScrollContainer/Hazards"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "water block"
+icon = ExtResource("36_1lduf")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Decor" type="GridContainer" parent="Block_menu/ScrollContainer"]
 visible = false
-layout_mode = 0
-offset_left = 109.0
-offset_top = 5.0
-offset_right = 345.0
-offset_bottom = 265.0
+layout_mode = 2
 columns = 2
 
-[node name="JackoLantern" type="Button" parent="Block_menu/Decor"]
+[node name="JackoLantern" type="Button" parent="Block_menu/ScrollContainer/Decor"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Jack o Lantern"
@@ -370,7 +640,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Btm_Lft_Web" type="Button" parent="Block_menu/Decor"]
+[node name="Btm_Lft_Web" type="Button" parent="Block_menu/ScrollContainer/Decor"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Btm. L Web"
@@ -379,7 +649,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Btm_Rt_Web" type="Button" parent="Block_menu/Decor"]
+[node name="Btm_Rt_Web" type="Button" parent="Block_menu/ScrollContainer/Decor"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Btm. R Web"
@@ -388,7 +658,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Top_L_Web" type="Button" parent="Block_menu/Decor"]
+[node name="Top_L_Web" type="Button" parent="Block_menu/ScrollContainer/Decor"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Top L Web"
@@ -397,7 +667,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Top_R_Web" type="Button" parent="Block_menu/Decor"]
+[node name="Top_R_Web" type="Button" parent="Block_menu/ScrollContainer/Decor"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Top R Web"
@@ -406,7 +676,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Torch" type="Button" parent="Block_menu/Decor"]
+[node name="Torch" type="Button" parent="Block_menu/ScrollContainer/Decor"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Torch"
@@ -415,16 +685,211 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Interactive" type="GridContainer" parent="Block_menu"]
+[node name="window_day" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Window Day"
+icon = ExtResource("43_b7q4l")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="window_night" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Window night"
+icon = ExtResource("44_pkcah")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="chandelier_black" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Chandelier black"
+icon = ExtResource("45_i7xy6")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="chandelier_purple" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Chandelier purple"
+icon = ExtResource("46_4p1uk")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="chandelier_brown" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Chandelier brown"
+icon = ExtResource("47_okxmi")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="chandelier_gray" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Chandelier black"
+icon = ExtResource("45_i7xy6")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="lantern_black" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "lantern black"
+icon = ExtResource("48_vfcin")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="lantern_brown" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "lantern brown"
+icon = ExtResource("49_mdvry")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="lantern_gray" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "lantern gray"
+icon = ExtResource("50_iu4qf")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="lantern_purple" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "lantern purple"
+icon = ExtResource("51_buxpu")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="cattail" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "cattail"
+icon = ExtResource("52_ab4hq")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="crate" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "crate"
+icon = ExtResource("53_0b322")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="daisy" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "daisy"
+icon = ExtResource("54_wud2t")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="wood_fence" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wood fence"
+icon = ExtResource("55_k0vmo")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="sign_down" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "down arrow sign"
+icon = ExtResource("56_pxcx4")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="hanging_lantern_brown" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hanging lantern brown"
+icon = ExtResource("57_5uuau")
+autowrap_mode = 2
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="hanging_lantern_gray" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hanging lantern gray"
+icon = ExtResource("58_hcr53")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="hanging_lantern_black" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hanging lantern black"
+icon = ExtResource("59_mos6u")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="hanging_lantern_purple" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hanging lantern purple"
+icon = ExtResource("60_8w3mg")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="sign_left" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "sign left"
+icon = ExtResource("61_cmpx2")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="sign_right" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "sign right"
+icon = ExtResource("62_veenw")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="sign_up" type="Button" parent="Block_menu/ScrollContainer/Decor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "sign up"
+icon = ExtResource("63_dx0oq")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Interactive" type="GridContainer" parent="Block_menu/ScrollContainer"]
 visible = false
-layout_mode = 0
-offset_left = 113.0
-offset_top = 6.0
-offset_right = 345.0
-offset_bottom = 265.0
+layout_mode = 2
 columns = 2
 
-[node name="Coin" type="Button" parent="Block_menu/Interactive"]
+[node name="Coin" type="Button" parent="Block_menu/ScrollContainer/Interactive"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Coin"
@@ -433,7 +898,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Ladder" type="Button" parent="Block_menu/Interactive"]
+[node name="Ladder" type="Button" parent="Block_menu/ScrollContainer/Interactive"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ladder"
@@ -442,7 +907,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Chest" type="Button" parent="Block_menu/Interactive"]
+[node name="Chest" type="Button" parent="Block_menu/ScrollContainer/Interactive"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Chest"
@@ -451,16 +916,12 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Sprite" type="GridContainer" parent="Block_menu"]
+[node name="Sprite" type="GridContainer" parent="Block_menu/ScrollContainer"]
 visible = false
-layout_mode = 0
-offset_left = 112.0
-offset_top = 8.0
-offset_right = 344.0
-offset_bottom = 267.0
+layout_mode = 2
 columns = 2
 
-[node name="Slime" type="Button" parent="Block_menu/Sprite"]
+[node name="Slime" type="Button" parent="Block_menu/ScrollContainer/Sprite"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Slime"
@@ -469,16 +930,12 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Spawn Point" type="GridContainer" parent="Block_menu"]
+[node name="Spawn Point" type="GridContainer" parent="Block_menu/ScrollContainer"]
 visible = false
-layout_mode = 0
-offset_left = 112.0
-offset_top = 8.0
-offset_right = 344.0
-offset_bottom = 267.0
+layout_mode = 2
 columns = 2
 
-[node name="Spawn Block" type="Button" parent="Block_menu/Spawn Point"]
+[node name="Spawn Block" type="Button" parent="Block_menu/ScrollContainer/Spawn Point"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Spawn Point"
@@ -880,6 +1337,8 @@ item_1/id = 1
 [connection signal="close_requested" from="Top_menu/GridContainer/Play/player_select_window" to="." method="_on_player_select_window_close_requested"]
 [connection signal="mouse_entered" from="Top_menu/GridContainer/Play/player_select_window" to="." method="_on_player_select_window_mouse_entered"]
 [connection signal="pressed" from="Top_menu/GridContainer/Play/player_select_window/GridContainer/Dwarf" to="." method="_on_dwarf_pressed"]
+[connection signal="pressed" from="Top_menu/GridContainer/Play/player_select_window/GridContainer/wizard" to="." method="_on_wizard_pressed"]
+[connection signal="pressed" from="Top_menu/GridContainer/Play/player_select_window/GridContainer/witch" to="." method="_on_witch_pressed"]
 [connection signal="close_requested" from="Top_menu/GridContainer/Play/Error Window" to="." method="_on_error_window_close_requested"]
 [connection signal="mouse_entered" from="Top_menu/GridContainer/Save" to="." method="_on_save_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu/GridContainer/Save" to="." method="_on_save_mouse_exited"]
@@ -925,69 +1384,114 @@ item_1/id = 1
 [connection signal="mouse_exited" from="Block_menu/GridContainer/Player Spawn Point" to="." method="_on_player_spawn_point_mouse_exited"]
 [connection signal="pressed" from="Block_menu/GridContainer/Player Spawn Point" to="." method="_on_player_spawn_point_pressed"]
 [connection signal="pressed" from="Block_menu/GridContainer/All Items" to="." method="_on_all_items_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Ground/Stone" to="." method="_on_stone_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Ground/Stone" to="." method="_on_stone_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Ground/Stone" to="." method="_on_stone_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Walls/Beige Bricks" to="." method="_on_beige_bricks_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Walls/Beige Bricks" to="." method="_on_beige_bricks_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Walls/Beige Bricks" to="." method="_on_beige_bricks_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Walls/Brown Bricks" to="." method="_on_brown_bricks_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Walls/Brown Bricks" to="." method="_on_brown_bricks_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Walls/Brown Bricks" to="." method="_on_brown_bricks_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Walls/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Walls/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Walls/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Hazards/Lava" to="." method="_on_lava_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Hazards/Lava" to="." method="_on_lava_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Hazards/Lava" to="." method="_on_lava_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Hazards/Sm_ Spike" to="." method="_on_sm__spike_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Hazards/Sm_ Spike" to="." method="_on_sm__spike_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Hazards/Sm_ Spike" to="." method="_on_sm__spike_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Hazards/Med_Spike" to="." method="_on_med_spike_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Hazards/Med_Spike" to="." method="_on_med_spike_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Hazards/Med_Spike" to="." method="_on_med_spike_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Hazards/Lg_Spike" to="." method="_on_lg_spike_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Hazards/Lg_Spike" to="." method="_on_lg_spike_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Hazards/Lg_Spike" to="." method="_on_lg_spike_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Decor/JackoLantern" to="." method="_on_jacko_lantern_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Decor/JackoLantern" to="." method="_on_jacko_lantern_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Decor/JackoLantern" to="." method="_on_jacko_lantern_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Decor/Btm_Lft_Web" to="." method="_on_btm_lft_web_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Decor/Btm_Lft_Web" to="." method="_on_btm_lft_web_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Decor/Btm_Lft_Web" to="." method="_on_btm_lft_web_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Decor/Btm_Rt_Web" to="." method="_on_btm_rt_web_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Decor/Btm_Rt_Web" to="." method="_on_btm_rt_web_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Decor/Btm_Rt_Web" to="." method="_on_btm_rt_web_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Decor/Top_L_Web" to="." method="_on_top_l_web_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Decor/Top_L_Web" to="." method="_on_top_l_web_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Decor/Top_L_Web" to="." method="_on_top_l_web_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Decor/Top_R_Web" to="." method="_on_top_r_web_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Decor/Top_R_Web" to="." method="_on_top_r_web_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Decor/Top_R_Web" to="." method="_on_top_r_web_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Decor/Torch" to="." method="_on_torch_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Decor/Torch" to="." method="_on_torch_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Decor/Torch" to="." method="_on_torch_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Interactive/Coin" to="." method="_on_coin_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Interactive/Coin" to="." method="_on_coin_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Interactive/Coin" to="." method="_on_coin_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Interactive/Ladder" to="." method="_on_ladder_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Interactive/Ladder" to="." method="_on_ladder_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Interactive/Ladder" to="." method="_on_ladder_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Interactive/Chest" to="." method="_on_chest_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Interactive/Chest" to="." method="_on_chest_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Interactive/Chest" to="." method="_on_chest_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Sprite/Slime" to="." method="_on_slime_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Sprite/Slime" to="." method="_on_slime_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Sprite/Slime" to="." method="_on_slime_pressed"]
-[connection signal="mouse_entered" from="Block_menu/Spawn Point/Spawn Block" to="." method="_on_spawn_block_mouse_entered"]
-[connection signal="mouse_exited" from="Block_menu/Spawn Point/Spawn Block" to="." method="_on_spawn_block_mouse_exited"]
-[connection signal="pressed" from="Block_menu/Spawn Point/Spawn Block" to="." method="_on_spawn_block_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Ground/Stone" to="." method="_on_stone_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Ground/Stone" to="." method="_on_stone_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Stone" to="." method="_on_stone_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Lwr_ L Stone Stair" to="." method="_on_lwr__l_stone_stair_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Lwr_R_Stone Stair" to="." method="_on_lwr_r_stone_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/wood_log_top" to="." method="_on_wood_log_top_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/wood_log" to="." method="_on_wood_log_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/wood_planks" to="." method="_on_wood_planks_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/gold_block" to="." method="_on_gold_block_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/brick_slab_L" to="." method="_on_brick_slab_l_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/brick_slab" to="." method="_on_brick_slab_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/wood_slab" to="." method="_on_wood_slab_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Lwr_L_brick_stair" to="." method="_on_lwr_l_brick_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Lwr_L_wood_stair" to="." method="_on_lwr_l_wood_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Lwr_R_brick_stair" to="." method="_on_lwr_r_brick_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Lwr_R_wood_stair" to="." method="_on_lwr_r_wood_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/brick_slab_R" to="." method="_on_brick_slab_r_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/wood_log_side" to="." method="_on_wood_log_side_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/brick_slab_top" to="." method="_on_brick_slab_top_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/wood_slab_top" to="." method="_on_wood_slab_top_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Upr_L_brick_stair" to="." method="_on_upr_l_brick_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Upr_Lwood_stair" to="." method="_on_upr_lwood_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Upr_R_brick_stair" to="." method="_on_upr_r_brick_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/Upr_R_wood_stair" to="." method="_on_upr_r_wood_stair_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/stone_slab_top" to="." method="_on_stone_slab_top_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Ground/stone_slab" to="." method="_on_stone_slab_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Walls/Beige Bricks" to="." method="_on_beige_bricks_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Walls/Beige Bricks" to="." method="_on_beige_bricks_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Walls/Beige Bricks" to="." method="_on_beige_bricks_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Walls/Brown Bricks" to="." method="_on_brown_bricks_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Walls/Brown Bricks" to="." method="_on_brown_bricks_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Walls/Brown Bricks" to="." method="_on_brown_bricks_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Walls/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Walls/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Walls/Dark Gray Bricks" to="." method="_on_dark_gray_bricks_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Hazards/Lava" to="." method="_on_lava_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Hazards/Lava" to="." method="_on_lava_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Hazards/Lava" to="." method="_on_lava_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Hazards/Sm_ Spike" to="." method="_on_sm__spike_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Hazards/Sm_ Spike" to="." method="_on_sm__spike_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Hazards/Sm_ Spike" to="." method="_on_sm__spike_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Hazards/Med_Spike" to="." method="_on_med_spike_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Hazards/Med_Spike" to="." method="_on_med_spike_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Hazards/Med_Spike" to="." method="_on_med_spike_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Hazards/Lg_Spike" to="." method="_on_lg_spike_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Hazards/Lg_Spike" to="." method="_on_lg_spike_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Hazards/Lg_Spike" to="." method="_on_lg_spike_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Hazards/ice_block" to="." method="_on_ice_block_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Hazards/water_block" to="." method="_on_water_block_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Decor/JackoLantern" to="." method="_on_jacko_lantern_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Decor/JackoLantern" to="." method="_on_jacko_lantern_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/JackoLantern" to="." method="_on_jacko_lantern_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Decor/Btm_Lft_Web" to="." method="_on_btm_lft_web_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Decor/Btm_Lft_Web" to="." method="_on_btm_lft_web_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/Btm_Lft_Web" to="." method="_on_btm_lft_web_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Decor/Btm_Rt_Web" to="." method="_on_btm_rt_web_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Decor/Btm_Rt_Web" to="." method="_on_btm_rt_web_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/Btm_Rt_Web" to="." method="_on_btm_rt_web_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Decor/Top_L_Web" to="." method="_on_top_l_web_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Decor/Top_L_Web" to="." method="_on_top_l_web_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/Top_L_Web" to="." method="_on_top_l_web_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Decor/Top_R_Web" to="." method="_on_top_r_web_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Decor/Top_R_Web" to="." method="_on_top_r_web_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/Top_R_Web" to="." method="_on_top_r_web_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Decor/Torch" to="." method="_on_torch_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Decor/Torch" to="." method="_on_torch_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/Torch" to="." method="_on_torch_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/window_day" to="." method="_on_window_day_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/window_night" to="." method="_on_window_night_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/chandelier_black" to="." method="_on_chandelier_black_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/chandelier_purple" to="." method="_on_chandelier_purple_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/chandelier_brown" to="." method="_on_chandelier_brown_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/chandelier_gray" to="." method="_on_chandelier_gray_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/lantern_black" to="." method="_on_lantern_black_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/lantern_brown" to="." method="_on_lantern_brown_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/lantern_gray" to="." method="_on_lantern_gray_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/lantern_purple" to="." method="_on_lantern_purple_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/cattail" to="." method="_on_cattail_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/crate" to="." method="_on_crate_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/daisy" to="." method="_on_daisy_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/wood_fence" to="." method="_on_wood_fence_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/sign_down" to="." method="_on_sign_down_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/hanging_lantern_brown" to="." method="_on_hanging_lantern_brown_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/hanging_lantern_gray" to="." method="_on_hanging_lantern_gray_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/hanging_lantern_black" to="." method="_on_hanging_lantern_black_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/hanging_lantern_purple" to="." method="_on_hanging_lantern_purple_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/sign_left" to="." method="_on_sign_left_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/sign_right" to="." method="_on_sign_right_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Decor/sign_up" to="." method="_on_sign_up_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Interactive/Coin" to="." method="_on_coin_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Interactive/Coin" to="." method="_on_coin_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Interactive/Coin" to="." method="_on_coin_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Interactive/Ladder" to="." method="_on_ladder_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Interactive/Ladder" to="." method="_on_ladder_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Interactive/Ladder" to="." method="_on_ladder_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Interactive/Chest" to="." method="_on_chest_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Interactive/Chest" to="." method="_on_chest_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Interactive/Chest" to="." method="_on_chest_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Sprite/Slime" to="." method="_on_slime_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Sprite/Slime" to="." method="_on_slime_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Sprite/Slime" to="." method="_on_slime_pressed"]
+[connection signal="mouse_entered" from="Block_menu/ScrollContainer/Spawn Point/Spawn Block" to="." method="_on_spawn_block_mouse_entered"]
+[connection signal="mouse_exited" from="Block_menu/ScrollContainer/Spawn Point/Spawn Block" to="." method="_on_spawn_block_mouse_exited"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Spawn Point/Spawn Block" to="." method="_on_spawn_block_pressed"]
 [connection signal="mouse_entered" from="All_Blocks/ScrollContainer/GridContainer/Stone" to="." method="_on_stone_mouse_entered"]
 [connection signal="mouse_exited" from="All_Blocks/ScrollContainer/GridContainer/Stone" to="." method="_on_stone_mouse_exited"]
 [connection signal="pressed" from="All_Blocks/ScrollContainer/GridContainer/Stone" to="." method="_on_stone_pressed"]

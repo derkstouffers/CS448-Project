@@ -132,7 +132,7 @@ func go_to_next_level() -> void:
 		
 		## set position for where player will enter new level
 		## need to probably make it variable for each level that can be placed by user
-		Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(15)[0].x, Global.playerArea.get_used_cells_by_id(15)[0].y - 5)))
+		Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5)))
 		
 		Global.player_count += 1
 		if Global.player_count == 1:

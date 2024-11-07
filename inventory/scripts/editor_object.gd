@@ -61,10 +61,10 @@ func _process(delta: float) -> void:
 			if(can_place):
 				
 				if Input.is_action_pressed("mb_left"):
-					if Global.playerArea.get_used_cells_by_id(15).size() < 1:
+					if Global.playerArea.get_used_cells_by_id(4).size() < 1:
 						place_tile()
 						
-					elif Global.playerArea.get_used_cells_by_id(15).size() == 1 and !Global.TileID == 15:
+					elif Global.playerArea.get_used_cells_by_id(4).size() == 1 and !Global.TileID == 4:
 						place_tile()
 						
 					

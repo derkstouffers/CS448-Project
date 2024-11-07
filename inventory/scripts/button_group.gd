@@ -17,13 +17,13 @@ extends CanvasLayer
 @onready var mini_map = button_group.get_node("MiniMap")
 @onready var quest_tracker = button_group.get_node("Quest_Tracker")
 @onready var edit = button_group.get_node("Edit")
-@onready var ground = button_group.get_node("Block_menu/Ground")
-@onready var walls = button_group.get_node("Block_menu/Walls")
-@onready var hazards = button_group.get_node("Block_menu/Hazards")
-@onready var decor = button_group.get_node("Block_menu/Decor")
-@onready var interactive = button_group.get_node("Block_menu/Interactive")
-@onready var sprites = button_group.get_node("Block_menu/Sprite")
-@onready var spawn = button_group.get_node("Block_menu/Spawn Point")
+@onready var ground = button_group.get_node("Block_menu/ScrollContainer/Ground")
+@onready var walls = button_group.get_node("Block_menu/ScrollContainer/Walls")
+@onready var hazards = button_group.get_node("Block_menu/ScrollContainer/Hazards")
+@onready var decor = button_group.get_node("Block_menu/ScrollContainer/Decor")
+@onready var interactive = button_group.get_node("Block_menu/ScrollContainer/Interactive")
+@onready var sprites = button_group.get_node("Block_menu/ScrollContainer/Sprite")
+@onready var spawn = button_group.get_node("Block_menu/ScrollContainer/Spawn Point")
 
 @onready var mini_map_player_layer = get_node("/root/main/button_group/MiniMap/SubViewportContainer/SubViewport/player_layer")
 @onready var mini_map_background_layer = get_node("/root/main/button_group/MiniMap/SubViewportContainer/SubViewport/background_layer")
@@ -37,8 +37,10 @@ extends CanvasLayer
 
 
 const level2 = preload("res://scenes/level.tscn")
-const player1 = preload("res://scenes/dwarf.tscn")
+const dwarf = preload("res://scenes/dwarf.tscn")
 const slime = preload("res://scenes/slime.tscn")
+const wizard = preload("res://scenes/wizard.tscn")
+const witch = preload("res://scenes/witch.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -79,7 +81,7 @@ func _process(delta: float) -> void:
 ###
 
 func _on_play_pressed() -> void:
-	if Global.playerArea.get_used_cells_by_id(15).size() < 1:
+	if Global.playerArea.get_used_cells_by_id(4).size() < 1:
 		error_window.visible = true
 		
 	else:
@@ -135,11 +137,35 @@ func _on_dwarf_pressed() -> void:
 	if Global.player_count < 1:
 		
 		var player
-		player = player1.instantiate()
+		player = dwarf.instantiate()
 		Global.playerArea.add_child(player)
-		Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local(Vector2i(Global.playerArea.get_used_cells_by_id(15)[0].x, Global.playerArea.get_used_cells_by_id(15)[0].y - 5))
+		Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local(Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5))
 		Global.player_count += 1
-	pass # Replace with function body.
+	
+	
+func _on_wizard_pressed() -> void:
+	player_select_window.visible = false
+	
+	## place player in world if no other player exists in world
+	if Global.player_count < 1:
+		
+		var player
+		player = wizard.instantiate()
+		Global.playerArea.add_child(player)
+		Global.playerArea.get_node("wizard").position = Global.playerArea.map_to_local(Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5))
+		Global.player_count += 1
+
+func _on_witch_pressed() -> void:
+	player_select_window.visible = false
+	
+	## place player in world if no other player exists in world
+	if Global.player_count < 1:
+		
+		var player
+		player = witch.instantiate()
+		Global.playerArea.add_child(player)
+		Global.playerArea.get_node("witch").position = Global.playerArea.map_to_local(Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5))
+		Global.player_count += 1
 	
 func _on_player_select_window_close_requested() -> void:
 	player_select_window.hide()
@@ -638,7 +664,7 @@ func _on_player_spawn_point_mouse_exited() -> void:
 func _on_spawn_block_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 15
+	Global.TileID = 4
 	Global.current_tile_coords = Vector2i(0,0)		
 	pass # Replace with function body.
 
@@ -667,16 +693,197 @@ func _on_stone_pressed() -> void:
 func _on_lwr__l_stone_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 12
-	Global.current_tile_coords = Vector2i(0,0)
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(5,0)
 	pass # Replace with function body.
 
 	
 func _on_lwr_r_stone_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 13
-	Global.current_tile_coords = Vector2i(0,0)
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(6,0)
+	pass # Replace with function body.
+
+func _on_wood_log_top_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(7,0)
+	pass # Replace with function body.
+
+
+func _on_wood_log_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(8,0)
+	pass # Replace with function body.
+
+
+
+
+func _on_wood_planks_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(9,0)
+	pass # Replace with function body.
+	
+
+
+
+func _on_gold_block_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(10,0)
+	pass # Replace with function body.
+
+
+func _on_brick_slab_l_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(11,0)
+	pass # Replace with function body.
+	
+
+
+
+func _on_brick_slab_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(12,0)
+	pass # Replace with function body.
+
+
+func _on_wood_slab_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(13,0)
+	pass # Replace with function body.
+
+
+
+
+func _on_lwr_l_brick_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(14,0)
+	pass # Replace with function body.
+
+
+
+func _on_lwr_l_wood_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(15,0)
+	pass # Replace with function body.
+
+
+
+func _on_lwr_r_brick_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(16,0)
+	pass # Replace with function body.
+
+
+func _on_lwr_r_wood_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(17,0)
+	pass # Replace with function body.
+
+
+
+
+func _on_brick_slab_r_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(18,0)
+	pass # Replace with function body.
+
+
+func _on_wood_log_side_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(19,0)
+	pass # Replace with function body.
+
+
+func _on_brick_slab_top_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(20,0)
+	pass # Replace with function body.
+
+
+func _on_wood_slab_top_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(21,0)
+	pass # Replace with function body.
+	
+
+
+func _on_upr_l_brick_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(22,0)
+	pass # Replace with function body.
+
+
+func _on_upr_lwood_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(23,0)
+	pass # Replace with function body.
+
+
+
+func _on_upr_r_brick_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(24,0)
+	pass # Replace with function body.
+
+
+func _on_upr_r_wood_stair_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(25,0)
+	pass # Replace with function body.
+
+
+func _on_stone_slab_top_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(26,0)
+	pass # Replace with function body.
+
+
+func _on_stone_slab_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 0
+	Global.current_tile_coords = Vector2i(27,0)
 	pass # Replace with function body.
 
 
@@ -717,16 +924,16 @@ func _on_dark_gray_bricks_pressed() -> void:
 func _on_lava_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 0
-	Global.current_tile_coords = Vector2i(1,0)	
+	Global.TileID = 2
+	Global.current_tile_coords = Vector2i(5,0)	
 	pass # Replace with function body.
 
 
 func _on_sm__spike_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 6
-	Global.current_tile_coords = Vector2i(0,0)	
+	Global.TileID = 2
+	Global.current_tile_coords = Vector2i(1,0)	
 	pass # Replace with function body.
 
 
@@ -741,9 +948,25 @@ func _on_med_spike_pressed() -> void:
 func _on_lg_spike_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 7
-	Global.current_tile_coords = Vector2i(0,0)	
+	Global.TileID = 2
+	Global.current_tile_coords = Vector2i(2,0)	
 	pass # Replace with function body.
+	
+func _on_ice_block_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 2
+	Global.current_tile_coords = Vector2i(3, 0)
+	pass # Replace with function body.
+
+
+func _on_water_block_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 2
+	Global.current_tile_coords = Vector2i(4, 0)
+	pass # Replace with function body.
+
 
 	
 ###
@@ -755,46 +978,198 @@ func _on_jacko_lantern_pressed() -> void:
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(0,0)	
-	pass # Replace with function body.
+	
 
 
 func _on_btm_lft_web_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 8
-	Global.current_tile_coords = Vector2i(0,0)
-	pass # Replace with function body.
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(1,0)
+	
 
 
 func _on_btm_rt_web_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 9
-	Global.current_tile_coords = Vector2i(0,0)
-	pass # Replace with function body.
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(2,0)
+	
 
 
 func _on_top_l_web_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 10
-	Global.current_tile_coords = Vector2i(0,0)
-	pass # Replace with function body.
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(3,0)
+	
 
 
 func _on_top_r_web_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 11
-	Global.current_tile_coords = Vector2i(0,0)
-	pass # Replace with function body.	
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(4,0)
+	
 
 func _on_torch_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 14
-	Global.current_tile_coords = Vector2i(0,0)
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(5,0)
+	
+
+func _on_window_day_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(8,0)
+	
+	
+func _on_window_night_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(9,0)
+	
+
+
+func _on_chandelier_black_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(10,0)
+	
+
+func _on_lantern_black_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(11,0)
+	
+
+func _on_chandelier_brown_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(12,0)
+	
+
+func _on_lantern_brown_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(13,0)
+
+
+func _on_cattail_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(14,0)
+
+
+func _on_crate_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(15,0)
+	
+
+func _on_daisy_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(16,0)
+
+
+func _on_wood_fence_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(17,0)
+
+
+func _on_sign_down_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(18,0)
+
+func _on_chandelier_gray_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(19,0)
 	pass # Replace with function body.
+
+func _on_lantern_gray_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(20,0)
+
+func _on_hanging_lantern_brown_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(21,0)
+
+
+func _on_hanging_lantern_gray_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(22,0)
+
+
+func _on_hanging_lantern_black_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(23,0)
+
+
+func _on_hanging_lantern_purple_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(24,0)
+
+
+func _on_sign_left_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(25,0)
+
+
+func _on_chandelier_purple_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(26,0)
+	
+	
+func _on_lantern_purple_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(27,0)
+	
+	
+func _on_sign_right_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(28,0)
+
+
+func _on_sign_up_pressed() -> void:
+	Global.place_tile = true
+	Global.current_item = null
+	Global.TileID = 1
+	Global.current_tile_coords = Vector2i(29,0)
 
 
 
@@ -817,7 +1192,7 @@ func update_coins_gained(gained_coins):
 func _on_ladder_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
-	Global.TileID = 4
+	Global.TileID = 5
 	Global.current_tile_coords = Vector2i(0,0)
 	pass # Replace with function body.
 

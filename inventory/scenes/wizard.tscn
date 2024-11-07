@@ -1,0 +1,169 @@
+[gd_scene load_steps=25 format=3 uid="uid://7631ocbef8m3"]
+
+[ext_resource type="Texture2D" uid="uid://cmkj70yovviwt" path="res://characters/wizard/Blue Wizard Idle.png" id="1_0te4g"]
+[ext_resource type="Script" path="res://scripts/wizard.gd" id="1_rebhm"]
+[ext_resource type="Texture2D" uid="uid://4h5ttp5ideur" path="res://characters/wizard/Blue Wizard Jump.png" id="2_dp7ff"]
+[ext_resource type="Texture2D" uid="uid://iriyrpowvwok" path="res://characters/wizard/Blue Wizard Walk.png" id="3_iae71"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sdju"]
+atlas = ExtResource("1_0te4g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib1j2"]
+atlas = ExtResource("1_0te4g")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y88wc"]
+atlas = ExtResource("2_dp7ff")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsshr"]
+atlas = ExtResource("2_dp7ff")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q52u6"]
+atlas = ExtResource("2_dp7ff")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bta8d"]
+atlas = ExtResource("2_dp7ff")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpe3n"]
+atlas = ExtResource("2_dp7ff")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gq7jj"]
+atlas = ExtResource("2_dp7ff")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gywya"]
+atlas = ExtResource("3_iae71")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_881ia"]
+atlas = ExtResource("3_iae71")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmk67"]
+atlas = ExtResource("3_iae71")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vkhd"]
+atlas = ExtResource("3_iae71")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edphv"]
+atlas = ExtResource("3_iae71")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4ect"]
+atlas = ExtResource("3_iae71")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5croi"]
+atlas = ExtResource("3_iae71")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inmt2"]
+atlas = ExtResource("3_iae71")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26fii"]
+atlas = ExtResource("3_iae71")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6thqg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sdju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib1j2")
+}],
+"loop": true,
+"name": &"wizard_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y88wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsshr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q52u6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bta8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpe3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gq7jj")
+}],
+"loop": true,
+"name": &"wizard_jump",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gywya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_881ia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmk67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vkhd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edphv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4ect")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5croi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inmt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26fii")
+}],
+"loop": true,
+"name": &"wizard_walk",
+"speed": 9.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rtec4"]
+radius = 8.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3k4xo"]
+height = 32.0
+
+[node name="wizard" type="CharacterBody2D"]
+script = ExtResource("1_rebhm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6thqg")
+animation = &"wizard_idle"
+frame_progress = 0.606764
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_rtec4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_3k4xo")
