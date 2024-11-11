@@ -17,6 +17,7 @@ var level_array = ["level"]
 var level_dict = {"level" : {"coins" : 0, "chests": 0, "enemies": 0}}
 var level_data = {
 	"level" : {
+		"objective" : 0,
 		"background" : [], 
 		"playerArea" : [], 
 		"foreground": [], 

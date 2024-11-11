@@ -1268,6 +1268,8 @@ func _on_add_level_pressed() -> void:
 	$ObjectiveSelector.popup_centered()
 	
 	pass # Replace with function body.
+
+	
 		
 func _on_level_select(level_name):		
 	var level_select
@@ -1397,24 +1399,118 @@ func _on_save_mouse_exited() -> void:
 	pass # Replace with function body.
 	
 func _on_save_pressed() -> void:
-	for lev in Global.level_array:
-		Global.level_data[lev] = {
-			"background": main.get_node(lev + "/Background").get_tile_map_data_as_array(), 
-			"playerArea" : main.get_node(lev + "/Player Area").get_tile_map_data_as_array(),
-			"foreground": main.get_node(lev + "/foreground").get_tile_map_data_as_array(),
-			"objects": get_object_data(main.get_node(lev + "/Player Area"))
+	#for lev in Global.level_array:
+		#Global.level_data[lev] = {
+			#"objective": main.get_node(lev + "/Player Area").objective,
+			#"background": main.get_node(lev + "/Background").get_tile_map_data_as_array(), 
+			#"playerArea" : main.get_node(lev + "/Player Area").get_tile_map_data_as_array(),
+			#"foreground": main.get_node(lev + "/foreground").get_tile_map_data_as_array(),
+			#"objects": get_object_data(main.get_node(lev + "/Player Area"))
+			#}
+			
+	var custom_data = CustomData.new()
+	custom_data.level_data = {}
+	
+	for levl in get_tree().get_root().get_child(1).get_children():
+		#print(get_tree().get_root().get_child(1).get_children())
+		if levl.name.begins_with("level"):
+			custom_data.level_data[levl.name] = {
+				"objective": levl.get_node("Player Area").objective,
+				"background": levl.get_node("Background").get_tile_map_data_as_array(),
+				"playerArea": levl.get_node("Player Area").get_tile_map_data_as_array(),
+				"foreground": levl.get_node("foreground").get_tile_map_data_as_array(),
+				"objects": get_object_data(levl.get_node("Player Area"))
 			}
+		
+	var save_path = "user://save_data.tres"
+	var error = ResourceSaver.save(custom_data, save_path)
+	
+	if error == OK:
+		print("save successful")
+	else:
+		print("save failed")
 	pass # Replace with function body.
 
 ### loads all levels with prior save data	
 func _on_load_pressed() -> void:
-	for lev in Global.level_data:
-		main.get_node(lev + "/Background").set_tile_map_data_from_array(Global.level_data[lev]['background'])
-		main.get_node(lev + "/Player Area").set_tile_map_data_from_array(Global.level_data[lev]['playerArea'])
-		main.get_node(lev + "/foreground").set_tile_map_data_from_array(Global.level_data[lev]['foreground'])
-		load_object_data(lev)
+	#for lev in Global.level_data:
+		#main.get_node(lev + "/Player Area").objective = Global.level_data[lev]['objective']
+		#main.get_node(lev + "/Background").set_tile_map_data_from_array(Global.level_data[lev]['background'])
+		#main.get_node(lev + "/Player Area").set_tile_map_data_from_array(Global.level_data[lev]['playerArea'])
+		#main.get_node(lev + "/foreground").set_tile_map_data_from_array(Global.level_data[lev]['foreground'])
+		#load_object_data(lev)
+	
+	var load_path = "user://save_data.tres"
+	
+	if ResourceLoader.exists(load_path):
+		var loaded_data = ResourceLoader.load(load_path)
+		
+		if loaded_data is CustomData:
+			
+			for level_name in loaded_data.level_data.keys():
+				Global.level_dict[level_name] = {"coins": 0, "chests": 0, "enemies": 0}
+				Global.level_data = loaded_data.level_data
+				
+				var level_data = loaded_data.level_data[level_name]
+				
+				var level = main.get_node_or_null(level_name)
+				if level == null:
+					
+					level = level2.instantiate()
+					level.name = level_name
+					main.add_child(level)
+					add_level_button(level)
+					
+					
+				level.get_node("Player Area").objective = level_data["objective"]
+				level.get_node("Background").set_tile_map_data_from_array(level_data["background"])
+				level.get_node("Player Area").set_tile_map_data_from_array(level_data["playerArea"])
+				level.get_node("foreground").set_tile_map_data_from_array(level_data["foreground"])	
+				
+				
+				### adding all the interactive objects back into tilemaplayer
+				for object in level_data["objects"].keys():
+					if object.begins_with("coin"):
+						Global.level_dict[level_name]["coins"] += 1
+						var instance  = coin.instantiate()
+						main.get_node(level_name + '/Player Area').add_child(instance, true)
+						instance.position = level_data["objects"][object]["position"]
+					elif object.begins_with("chest"):
+						Global.level_dict[level_name]["chests"] += 1
+						var instance  = chest.instantiate()
+						main.get_node(level_name + '/Player Area').add_child(instance, true)
+						instance.position = level_data["objects"][object]["position"]
+					elif object.begins_with("slime"):
+						Global.level_dict[level_name]["enemies"] += 1
+						var instance  = slime.instantiate()
+						main.get_node(level_name + '/Player Area').add_child(instance, true)
+						instance.position = level_data["objects"][object]["position"]
+						
+						
+				print("load successful")
+		else:
+			print("Data is not expected type")
+			
+	else:
+		print("No data file found")
+		
+		
+		
 	pass # Replace with function body.
-
+	
+func add_level_button(new_level):
+	var dungeon_levels =  $Level_menu/GridContainer3  #button_group.get_node("/Level_menu/GridContainer3")
+	button = Button.new()
+	
+	dungeon_levels.add_child(button)
+	button.text = new_level.name
+	new_level.visible = false
+	Global.level_array.append(button.text)
+	new_level.get_node("Player Area").collision_enabled = false
+	button.pressed.connect(_on_level_select.bind(button.text))
+	button.mouse_entered.connect(self._mouse_enter)
+	button.mouse_exited.connect(self._mouse_exit)
+	
 ### Gets data for objects that are not tileset tiles specific to the Player Area for each level
 # objects : {"object_name" : {"position": Vector2i()}} 
 #
@@ -1456,24 +1552,67 @@ func load_object_data(lev):
 	#pass
 
 ### WORKING ON INDIVIDUAL SAVE AND LOAD
+
 func _on_save_level_pressed():
 	
 	Global.level_data[Global.level.name] = {
+		"objective": main.get_node(Global.level.name + "/Player Area").objective,
 		"background": main.get_node(Global.level.name + "/Background").get_tile_map_data_as_array(), 
 		"playerArea" : main.get_node(Global.level.name + "/Player Area").get_tile_map_data_as_array(),
 		"foreground": main.get_node(Global.level.name + "/foreground").get_tile_map_data_as_array(),
 		"objects": get_object_data(main.get_node(Global.level.name + "/Player Area"))
 		}
+	#var custom_data = CustomData.new()
+	#
+	#custom_data.level_data = Global.level_data
+	#var save_path = "user://custom_data.tres"
+	#print(custom_data)
+	#if custom_data is Resource:
+		#var error = ResourceSaver.save(save_path, custom_data)
+		#
+		#if error == OK:
+			#print("Save successful")
+		#
+		#else:
+			#print("Save failed")
+	#else:
+		#print("custom_data is not recognized as a Resource")
+
 	pass
 	
-func _on_load_level_pressed():
+func _on_save_level_mouse_entered() -> void:
+	object_cursor.can_place = false
+	Global.place_tile = true
+	pass # Replace with function body.
+
+
+func _on_save_level_mouse_exited() -> void:
+	object_cursor.can_place = true
+	Global.place_tile = false
+	pass # Replace with function body.
 	
+func _on_load_level_pressed():
+	main.get_node(Global.level.name + "/Player Area").objective = Global.level_data[Global.level.name]['objective']
 	main.get_node(Global.level.name + "/Background").set_tile_map_data_from_array(Global.level_data[Global.level.name]['background'])
 	main.get_node(Global.level.name + "/Player Area").set_tile_map_data_from_array(Global.level_data[Global.level.name]['playerArea'])
 	main.get_node(Global.level.name + "/foreground").set_tile_map_data_from_array(Global.level_data[Global.level.name]['foreground'])
 	load_object_data(Global.level.name)
+	
+	
+	
+	
 	pass
+	
+func _on_load_mouse_entered() -> void:
+	object_cursor.can_place = false
+	Global.place_tile = true
+	pass # Replace with function body.
 
+
+func _on_load_mouse_exited() -> void:
+	object_cursor.can_place = true
+	Global.place_tile = false
+	pass # Replace with function body.
 
 
 ###
@@ -1517,3 +1656,13 @@ func _on_search_bar_text_changed(new_text: String) -> void:
 				child.visible = true
 			else:
 				child.visible = false
+
+
+func _on_scroll_container_mouse_entered() -> void:
+	object_cursor.can_place = false
+	pass # Replace with function body.
+
+
+func _on_scroll_container_mouse_exited() -> void:
+	object_cursor.can_place = true
+	pass # Replace with function body.
