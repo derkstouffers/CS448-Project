@@ -1857,9 +1857,9 @@ initial_position = 2
 size = Vector2i(225, 100)
 borderless = false
 item_count = 2
-item_0/text = "Loot Goblin"
+item_0/text = "Loot the Room"
 item_0/checkable = 2
-item_1/text = "Murder Hobo"
+item_1/text = "Defeat Your Way Through"
 item_1/checkable = 2
 item_1/id = 1
 

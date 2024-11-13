@@ -3,7 +3,6 @@ extends CanvasLayer
 @onready var main = get_node("/root/main")
 @onready var level1 = get_node("/root/main/level")
 
-
 @onready var object_cursor = get_node("/root/main/editor_object")
 @onready var camera = $"../cam_container/Camera2D"
 
@@ -34,8 +33,6 @@ extends CanvasLayer
 
 @onready var clear_confirm: ConfirmationDialog = $"clear_confirm"
 
-
-
 const level2 = preload("res://scenes/level.tscn")
 const dwarf = preload("res://scenes/dwarf.tscn")
 const slime = preload("res://scenes/slime.tscn")
@@ -54,9 +51,9 @@ func _ready() -> void:
 	mini_map_player_layer.set_tile_set(player_layer_tiles)
 	mini_map_background_layer.set_tile_set(background_layer_tiles)
 	mini_map_foreground_layer.set_tile_set(foreground_layer_tiles)
-	pass # Replace with function body.
-#
-#
+	
+	grand_children(self)
+
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Global.playing == false:
@@ -73,8 +70,15 @@ func _process(delta: float) -> void:
 		mini_map_foreground_layer.set_tile_map_data_from_array(foreground_map_data)
 	else:
 		print("MINIMAP Failed")
-	pass
 
+
+func grand_children(node: Node) -> void:
+	for child in node.get_children():
+		child.connect("mouse_entered", _mouse_enter)
+		child.connect("mouse_exited", _mouse_exit)
+		
+		if child.get_child_count() > 0:
+			grand_children(child)
 
 ###
 ### TOP MENU
@@ -93,8 +97,6 @@ func _on_play_pressed() -> void:
 					Global.level_dict[level_]["chests"] += 1
 				if i.name.begins_with("slime"):
 					Global.level_dict[level_]["enemies"] += 1
-	
-		pass
 		
 		Global.playing = true
 		
@@ -105,7 +107,7 @@ func _on_play_pressed() -> void:
 		block_menu.visible = false
 		layer_menu.visible = false
 		level_menu.visible = false
-		search_bar.visible = false
+		all_blocks.visible = false
 		mini_map.visible = false
 		edit.visible = true
 		
@@ -116,18 +118,15 @@ func _on_play_pressed() -> void:
 				Global.playerArea.collision_enabled = true
 			else:
 				main.get_node(lev).get_node("Player Area").collision_enabled = false
-				pass
 		
 		
 		## Shift to player camera if player already placed in world
 		if Global.player_count == 1:
 			camera.enabled = false
 			Global.playerArea.get_node("dwarf").get_child(2).enabled = true
-		
-		pass # Replace with function body.
+
 func _on_error_window_close_requested() -> void:
 	error_window.hide()
-	pass # Replace with function body.
 	
 	
 func _on_dwarf_pressed() -> void:
@@ -169,52 +168,36 @@ func _on_witch_pressed() -> void:
 	
 func _on_player_select_window_close_requested() -> void:
 	player_select_window.hide()
-	pass # Replace with function body.
 
 
 func _on_player_select_window_mouse_entered() -> void:
 	object_cursor.can_place = false
 	Global.place_tile = true
-	pass # Replace with function body.
-	
+
 func _on_background_pressed() -> void:
 	Global.backgroundLayer = true
 	Global.playerLayer = false
-	Global.foregroundLayer = false	
-	
-
-	pass # Replace with function body.
-	
+	Global.foregroundLayer = false
 
 func _on_player_area_pressed() -> void:
-	
 	Global.backgroundLayer = false
 	Global.playerLayer = true
 	Global.foregroundLayer = false
 
-	pass # Replace with function body.
-
-
 func _on_foreground_pressed() -> void:
-	
 	Global.backgroundLayer = false
 	Global.playerLayer = false
 	Global.foregroundLayer = true
-
-	pass # Replace with function body.
-
 
 func _on_clear_pressed() -> void:
 	clear_confirm.popup_centered()
 	if not clear_confirm.is_connected("confirmed", _on_clear_popup):
 		clear_confirm.connect("confirmed", _on_clear_popup)
-	pass # Replace with function body.
 
 func _on_clear_popup() -> void:
 	Global.background.clear()
 	Global.playerArea.clear()
 	Global.foreground.clear()
-	
 	
 	if Global.player_count > 0:
 		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
@@ -231,8 +214,6 @@ func _on_ground_pressed() -> void:
 	interactive.visible = false
 	sprites.visible = false
 	spawn.visible = false
-	pass # Replace with function body.
-
 
 func _on_walls_pressed() -> void:
 	ground.visible = false
@@ -242,7 +223,6 @@ func _on_walls_pressed() -> void:
 	interactive.visible = false
 	sprites.visible = false
 	spawn.visible = false
-	pass # Replace with function body.
 
 func _on_hazards_pressed() -> void:
 	ground.visible = false
@@ -252,8 +232,6 @@ func _on_hazards_pressed() -> void:
 	interactive.visible = false
 	sprites.visible = false
 	spawn.visible = false
-	pass # Replace with function body.
-
 
 func _on_decor_pressed() -> void:
 	ground.visible = false
@@ -263,17 +241,15 @@ func _on_decor_pressed() -> void:
 	interactive.visible = false
 	sprites.visible = false
 	spawn.visible = false
-	pass # Replace with function body.
-	
+
 func _on_interactive_pressed() -> void:
 	ground.visible = false
 	walls.visible = false
 	hazards.visible = false
 	decor.visible = false
-	interactive.visible = true	
+	interactive.visible = true
 	sprites.visible = false
 	spawn.visible = false
-	pass # Replace with function body.
 
 func _on_sprite_pressed() -> void:
 	ground.visible = false
@@ -283,7 +259,6 @@ func _on_sprite_pressed() -> void:
 	interactive.visible = false
 	sprites.visible = true
 	spawn.visible = false
-	pass # Replace with function body.
 
 func _on_player_spawn_point_pressed() -> void:
 	ground.visible = false
@@ -293,8 +268,7 @@ func _on_player_spawn_point_pressed() -> void:
 	interactive.visible = false
 	sprites.visible = false
 	spawn.visible = true
-	pass # Replace with function body.
-	
+
 ###
 ### EDIT TOGGLE
 ###
@@ -315,370 +289,17 @@ func _on_edit_pressed() -> void:
 	camera.enabled = true
 	if Global.player_count > 0:
 		Global.playerArea.get_node("dwarf").get_child(2).enabled = false
-	pass # Replace with function body.
 
-
-func _on_top_menu_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_top_menu_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_block_menu_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_block_menu_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-func _on_grid_container_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_grid_container_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-func _on_ground_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_ground_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-func _on_walls_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_walls_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-	
-	
-func _on_hazards_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_hazards_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-	
-func _on_decor_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_decor_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_interactive_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_interactive_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_sprite_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_sprite_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-	
-func _on_stone_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_stone_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_beige_bricks_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_beige_bricks_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_brown_bricks_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_brown_bricks_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_dark_gray_bricks_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_dark_gray_bricks_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_lava_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_lava_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_sm__spike_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_sm__spike_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_med_spike_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_med_spike_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_lg_spike_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_lg_spike_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_jacko_lantern_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_jacko_lantern_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_btm_lft_web_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_btm_lft_web_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_btm_rt_web_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_btm_rt_web_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_top_l_web_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_top_l_web_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_top_r_web_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_top_r_web_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_coin_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_coin_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_ladder_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_ladder_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_chest_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_chest_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_edit_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_edit_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-	
-func _on_play_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_play_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_background_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_background_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_player_area_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_player_area_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_foreground_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_foreground_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-func _on_clear_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.	
-
-func _on_clear_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.	
-
-func _on_lwr__l_stone_stair_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_lwr__l_stone_stair_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.	
-	
-
-func _on_lwr_r_stone_stair_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_lwr_r_stone_stair_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.	
-	
-func _on_torch_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_torch_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-	
 ###
 ### PLAYER SPAWN BLOCK
 ###
-
-func _on_player_spawn_point_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_player_spawn_point_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
 
 func _on_spawn_block_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 4
-	Global.current_tile_coords = Vector2i(0,0)		
-	pass # Replace with function body.
+	Global.current_tile_coords = Vector2i(0,0)
 
-
-func _on_spawn_block_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_spawn_block_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-	
 ###
 ### GROUND BLOCKS
 ###
@@ -688,129 +309,90 @@ func _on_stone_pressed() -> void:
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(0,0)
-	pass # Replace with function body.
 
 func _on_lwr__l_stone_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(5,0)
-	pass # Replace with function body.
 
-	
 func _on_lwr_r_stone_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(6,0)
-	pass # Replace with function body.
 
 func _on_wood_log_top_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(7,0)
-	pass # Replace with function body.
-
 
 func _on_wood_log_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(8,0)
-	pass # Replace with function body.
-
-
-
 
 func _on_wood_planks_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(9,0)
-	pass # Replace with function body.
-	
-
-
 
 func _on_gold_block_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(10,0)
-	pass # Replace with function body.
-
 
 func _on_brick_slab_l_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(11,0)
-	pass # Replace with function body.
-	
-
-
 
 func _on_brick_slab_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(12,0)
-	pass # Replace with function body.
-
 
 func _on_wood_slab_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(13,0)
-	pass # Replace with function body.
-
-
-
 
 func _on_lwr_l_brick_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(14,0)
-	pass # Replace with function body.
-
-
 
 func _on_lwr_l_wood_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(15,0)
-	pass # Replace with function body.
-
-
 
 func _on_lwr_r_brick_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(16,0)
-	pass # Replace with function body.
-
 
 func _on_lwr_r_wood_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(17,0)
-	pass # Replace with function body.
-
-
-
 
 func _on_brick_slab_r_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(18,0)
-	pass # Replace with function body.
 
 
 func _on_wood_log_side_pressed() -> void:
@@ -818,146 +400,110 @@ func _on_wood_log_side_pressed() -> void:
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(19,0)
-	pass # Replace with function body.
-
 
 func _on_brick_slab_top_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(20,0)
-	pass # Replace with function body.
-
 
 func _on_wood_slab_top_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(21,0)
-	pass # Replace with function body.
-	
-
 
 func _on_upr_l_brick_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(22,0)
-	pass # Replace with function body.
-
 
 func _on_upr_lwood_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(23,0)
-	pass # Replace with function body.
-
-
 
 func _on_upr_r_brick_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(24,0)
-	pass # Replace with function body.
-
 
 func _on_upr_r_wood_stair_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(25,0)
-	pass # Replace with function body.
-
 
 func _on_stone_slab_top_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(26,0)
-	pass # Replace with function body.
-
 
 func _on_stone_slab_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(27,0)
-	pass # Replace with function body.
-
-
-
-
 
 ###
 ### WALLS
 ###
+
 func _on_beige_bricks_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(2,0)
-	pass # Replace with function body.
-
 
 func _on_brown_bricks_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(3,0)
-	pass # Replace with function body.
-
 
 func _on_dark_gray_bricks_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(4,0)
-	pass # Replace with function body.	
-	
-	
+
 ###
 ### HAZARDS
-###	
+###
 
 func _on_lava_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 2
 	Global.current_tile_coords = Vector2i(5,0)	
-	pass # Replace with function body.
-
 
 func _on_sm__spike_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 2
 	Global.current_tile_coords = Vector2i(1,0)	
-	pass # Replace with function body.
-
 
 func _on_med_spike_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 2
-	Global.current_tile_coords = Vector2i(0,0)	
-	pass # Replace with function body.
-
+	Global.current_tile_coords = Vector2i(0,0)
 
 func _on_lg_spike_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 2
-	Global.current_tile_coords = Vector2i(2,0)	
-	pass # Replace with function body.
-	
+	Global.current_tile_coords = Vector2i(2,0)
+
 func _on_ice_block_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 2
 	Global.current_tile_coords = Vector2i(3, 0)
-	pass # Replace with function body.
 
 
 func _on_water_block_pressed() -> void:
@@ -965,95 +511,76 @@ func _on_water_block_pressed() -> void:
 	Global.current_item = null
 	Global.TileID = 2
 	Global.current_tile_coords = Vector2i(4, 0)
-	pass # Replace with function body.
 
-
-	
 ###
 ### DECOR
-###		
-	
+###
+
 func _on_jacko_lantern_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
-	Global.current_tile_coords = Vector2i(0,0)	
-	
-
+	Global.current_tile_coords = Vector2i(0,0)
 
 func _on_btm_lft_web_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(1,0)
-	
-
 
 func _on_btm_rt_web_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(2,0)
-	
-
 
 func _on_top_l_web_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(3,0)
-	
-
 
 func _on_top_r_web_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(4,0)
-	
 
 func _on_torch_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(5,0)
-	
 
 func _on_window_day_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(8,0)
-	
-	
+
 func _on_window_night_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(9,0)
-	
-
 
 func _on_chandelier_black_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(10,0)
-	
 
 func _on_lantern_black_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(11,0)
-	
 
 func _on_chandelier_brown_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(12,0)
-	
 
 func _on_lantern_brown_pressed() -> void:
 	Global.place_tile = true
@@ -1061,20 +588,17 @@ func _on_lantern_brown_pressed() -> void:
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(13,0)
 
-
 func _on_cattail_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(14,0)
 
-
 func _on_crate_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(15,0)
-	
 
 func _on_daisy_pressed() -> void:
 	Global.place_tile = true
@@ -1082,13 +606,11 @@ func _on_daisy_pressed() -> void:
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(16,0)
 
-
 func _on_wood_fence_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(17,0)
-
 
 func _on_sign_down_pressed() -> void:
 	Global.place_tile = true
@@ -1101,7 +623,6 @@ func _on_chandelier_gray_pressed() -> void:
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(19,0)
-	pass # Replace with function body.
 
 func _on_lantern_gray_pressed() -> void:
 	Global.place_tile = true
@@ -1115,13 +636,11 @@ func _on_hanging_lantern_brown_pressed() -> void:
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(21,0)
 
-
 func _on_hanging_lantern_gray_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(22,0)
-
 
 func _on_hanging_lantern_black_pressed() -> void:
 	Global.place_tile = true
@@ -1129,13 +648,11 @@ func _on_hanging_lantern_black_pressed() -> void:
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(23,0)
 
-
 func _on_hanging_lantern_purple_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(24,0)
-
 
 func _on_sign_left_pressed() -> void:
 	Global.place_tile = true
@@ -1143,27 +660,23 @@ func _on_sign_left_pressed() -> void:
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(25,0)
 
-
 func _on_chandelier_purple_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(26,0)
-	
-	
+
 func _on_lantern_purple_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(27,0)
-	
-	
+
 func _on_sign_right_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(28,0)
-
 
 func _on_sign_up_pressed() -> void:
 	Global.place_tile = true
@@ -1171,37 +684,28 @@ func _on_sign_up_pressed() -> void:
 	Global.TileID = 1
 	Global.current_tile_coords = Vector2i(29,0)
 
-
-
-	
 ###
 ### INTERACTIVE
-###	
+###
+
 @onready var coin = preload("res://scenes/coin.tscn")
 func _on_coin_pressed() -> void:
 	Global.place_tile = false
 	Global.current_item = coin
-	
-	pass # Replace with function body.
-	
+
 func update_coins_gained(gained_coins):
 	$Quest_Tracker/Container/coin_tracker.text = str(Global.coins)
-	pass
-
 
 func _on_ladder_pressed() -> void:
 	Global.place_tile = true
 	Global.current_item = null
 	Global.TileID = 5
 	Global.current_tile_coords = Vector2i(0,0)
-	pass # Replace with function body.
 
 @onready var chest = preload("res://scenes/chest.tscn")
 func _on_chest_pressed() -> void:	
 	Global.place_tile = false
 	Global.current_item = chest
-	pass # Replace with function body.
-
 
 ###
 ### SPRITES
@@ -1210,27 +714,15 @@ func _on_chest_pressed() -> void:
 func _on_slime_pressed() -> void:
 	Global.place_tile = false
 	Global.current_item = slime
-	pass # Replace with function body.
-	
-	
-func _on_slime_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_slime_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
 
 ###
 ### LEVEL MENU
 ###
+
 var button
 var new_level
+
 func _on_add_level_pressed() -> void:
-	
 	var dungeon_levels =  $Level_menu/GridContainer3  #button_group.get_node("/Level_menu/GridContainer3")
 	button = Button.new()
 	
@@ -1266,11 +758,7 @@ func _on_add_level_pressed() -> void:
 	button.mouse_exited.connect(self._mouse_exit)
 	
 	$ObjectiveSelector.popup_centered()
-	
-	pass # Replace with function body.
 
-	
-		
 func _on_level_select(level_name):		
 	var level_select
 	level_select = main.get_node(level_name)
@@ -1289,20 +777,14 @@ func _on_level_select(level_name):
 	Global.playerArea = level_select.get_node("Player Area")
 	Global.foreground = level_select.get_node("foreground")
 	Global.playerArea.collision_enabled = true
-	
-	pass
 
 func _mouse_enter():
 	object_cursor.can_place = false
 
 func _mouse_exit():
 	object_cursor.can_place = true	
-	
-
-
 
 func _on_level_1_pressed() -> void:
-	
 	Global.level.visible = false
 	level1.visible = true
 	Global.playerArea.collision_enabled = false
@@ -1312,76 +794,6 @@ func _on_level_1_pressed() -> void:
 	Global.playerArea = get_node("/root/main/level/Player Area")
 	Global.foreground = get_node("/root/main/level/foreground")
 	Global.playerArea.collision_enabled = true
-	pass # Replace with function body.
-
-
-func _on_level_menu_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_level_menu_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_add_level_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_add_level_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_delete_level_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_delete_level_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-func _on_level_1_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_level_1_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-
-###
-### SEARCHBAR
-###
-func _on_search_bar_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_search_bar_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-
-
-###
-### MINIMAP
-###
-
-func _on_mini_map_mouse_entered() -> void:
-	object_cursor.can_place = false
-	pass # Replace with function body.
-
-
-func _on_mini_map_mouse_exited() -> void:
-	object_cursor.can_place = true
-	pass # Replace with function body.
-	
 	
 ###
 ### Save button
@@ -1390,14 +802,12 @@ func _on_mini_map_mouse_exited() -> void:
 func _on_save_mouse_entered() -> void:
 	Global.place_tile = true
 	object_cursor.can_place = false
-	pass # Replace with function body.
 
 
 func _on_save_mouse_exited() -> void:
 	Global.place_tile = false
 	object_cursor.can_place = false
-	pass # Replace with function body.
-	
+
 func _on_save_pressed() -> void:
 	#for lev in Global.level_array:
 		#Global.level_data[lev] = {
@@ -1429,7 +839,6 @@ func _on_save_pressed() -> void:
 		print("save successful")
 	else:
 		print("save failed")
-	pass # Replace with function body.
 
 ### loads all levels with prior save data	
 func _on_load_pressed() -> void:
@@ -1493,11 +902,7 @@ func _on_load_pressed() -> void:
 			
 	else:
 		print("No data file found")
-		
-		
-		
-	pass # Replace with function body.
-	
+
 func add_level_button(new_level):
 	var dungeon_levels =  $Level_menu/GridContainer3  #button_group.get_node("/Level_menu/GridContainer3")
 	button = Button.new()
@@ -1510,13 +915,11 @@ func add_level_button(new_level):
 	button.pressed.connect(_on_level_select.bind(button.text))
 	button.mouse_entered.connect(self._mouse_enter)
 	button.mouse_exited.connect(self._mouse_exit)
-	
+
 ### Gets data for objects that are not tileset tiles specific to the Player Area for each level
 # objects : {"object_name" : {"position": Vector2i()}} 
-#
-#
+
 func get_object_data(tilemaplayer: TileMapLayer)->Dictionary:
-	
 	var object_data = {}
 	
 	for child in tilemaplayer.get_children():
@@ -1548,13 +951,10 @@ func load_object_data(lev):
 				##print(Global.level_data.get(lev).get("objects").get(object)["position"])
 				#instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
 				pass
-			#pass
-	#pass
 
 ### WORKING ON INDIVIDUAL SAVE AND LOAD
 
 func _on_save_level_pressed():
-	
 	Global.level_data[Global.level.name] = {
 		"objective": main.get_node(Global.level.name + "/Player Area").objective,
 		"background": main.get_node(Global.level.name + "/Background").get_tile_map_data_as_array(), 
@@ -1579,61 +979,31 @@ func _on_save_level_pressed():
 		#print("custom_data is not recognized as a Resource")
 
 	pass
-	
-func _on_save_level_mouse_entered() -> void:
-	object_cursor.can_place = false
-	Global.place_tile = true
-	pass # Replace with function body.
 
-
-func _on_save_level_mouse_exited() -> void:
-	object_cursor.can_place = true
-	Global.place_tile = false
-	pass # Replace with function body.
-	
 func _on_load_level_pressed():
 	main.get_node(Global.level.name + "/Player Area").objective = Global.level_data[Global.level.name]['objective']
 	main.get_node(Global.level.name + "/Background").set_tile_map_data_from_array(Global.level_data[Global.level.name]['background'])
 	main.get_node(Global.level.name + "/Player Area").set_tile_map_data_from_array(Global.level_data[Global.level.name]['playerArea'])
 	main.get_node(Global.level.name + "/foreground").set_tile_map_data_from_array(Global.level_data[Global.level.name]['foreground'])
 	load_object_data(Global.level.name)
-	
-	
-	
-	
-	pass
-	
-func _on_load_mouse_entered() -> void:
-	object_cursor.can_place = false
-	Global.place_tile = true
-	pass # Replace with function body.
-
-
-func _on_load_mouse_exited() -> void:
-	object_cursor.can_place = true
-	Global.place_tile = false
-	pass # Replace with function body.
-
 
 ###
 ### Objective/Quest picker for each level
 ###
+
 func _on_objective_selector_id_pressed(id: int) -> void:
 	if id == 0:
 		Global.playerArea.objective = 1
 	if id == 1:
 		Global.playerArea.objective = 2
-	pass # Replace with function body.
 
 
 func _on_objective_selector_mouse_entered() -> void:
 	object_cursor.can_place = false
-	pass # Replace with function body.
 
 
 func _on_objective_selector_mouse_exited() -> void:
 	object_cursor.can_place = true
-	pass # Replace with function body.
 
 func _on_all_items_pressed() -> void:
 	block_menu.visible = false
@@ -1657,12 +1027,9 @@ func _on_search_bar_text_changed(new_text: String) -> void:
 			else:
 				child.visible = false
 
-
 func _on_scroll_container_mouse_entered() -> void:
 	object_cursor.can_place = false
-	pass # Replace with function body.
 
 
 func _on_scroll_container_mouse_exited() -> void:
 	object_cursor.can_place = true
-	pass # Replace with function body.
