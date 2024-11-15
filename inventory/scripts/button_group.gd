@@ -38,12 +38,27 @@ const dwarf = preload("res://scenes/dwarf.tscn")
 const slime = preload("res://scenes/slime.tscn")
 const wizard = preload("res://scenes/wizard.tscn")
 const witch = preload("res://scenes/witch.tscn")
+const empty_dungeon = preload("res://scenes/main.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
+	
 	Global.gained_coins.connect(update_coins_gained)
-	$ObjectiveSelector.popup_centered()
+	if !Global.dungeon_loaded:
+		$ObjectiveSelector.popup_centered()
+	elif Global.dungeon_loaded:
+		
+		var load_path = Global.load_path
+	
+		if ResourceLoader.exists(load_path):
+			var loaded_data = ResourceLoader.load(load_path)
+			
+			if loaded_data is CustomData:
+				Global.level_data = loaded_data.level_data
+				call_deferred("_load_dungeon")
+		
 	$MiniMap/SubViewportContainer/SubViewport/Camera2D.make_current()
 	var background_layer_tiles = Global.background.get_tile_set()
 	var player_layer_tiles = Global.playerArea.get_tile_set()
@@ -74,8 +89,9 @@ func _process(delta: float) -> void:
 
 func grand_children(node: Node) -> void:
 	for child in node.get_children():
-		child.connect("mouse_entered", _mouse_enter)
-		child.connect("mouse_exited", _mouse_exit)
+		if child.has_signal("mouse_entered"):
+			child.connect("mouse_entered", _mouse_enter)
+			child.connect("mouse_exited", _mouse_exit)
 		
 		if child.get_child_count() > 0:
 			grand_children(child)
@@ -195,10 +211,16 @@ func _on_clear_pressed() -> void:
 		clear_confirm.connect("confirmed", _on_clear_popup)
 
 func _on_clear_popup() -> void:
+	# clear tilemaps
 	Global.background.clear()
 	Global.playerArea.clear()
 	Global.foreground.clear()
 	
+	# remove interactive objects
+	for object in Global.level_data.get(Global.level.name).get("objects").keys():
+		Global.playerArea.remove_child(Global.playerArea.get_node(object))
+	
+	# remove player	
 	if Global.player_count > 0:
 		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 		Global.player_count -= 1
@@ -723,7 +745,7 @@ var button
 var new_level
 
 func _on_add_level_pressed() -> void:
-	var dungeon_levels =  $Level_menu/GridContainer3  #button_group.get_node("/Level_menu/GridContainer3")
+	var dungeon_levels =  $Level_menu/GridContainer3 
 	button = Button.new()
 	
 	new_level = level2.instantiate()
@@ -740,7 +762,6 @@ func _on_add_level_pressed() -> void:
 	button.text = new_level.get_name()
 	Global.level_array.append(button.text)
 	Global.level_dict[button.text] = {"coins" : 0, "chests": 0, "enemies": 0} ## testing a different version with dictionary
-	#print(Global.level_dict)
 	Global.level.visible = false
 	new_level.visible = true
 	
@@ -760,6 +781,7 @@ func _on_add_level_pressed() -> void:
 	$ObjectiveSelector.popup_centered()
 
 func _on_level_select(level_name):		
+	
 	var level_select
 	level_select = main.get_node(level_name)
 	
@@ -797,8 +819,7 @@ func _on_level_1_pressed() -> void:
 	
 ###
 ### Save button
-### temporary functionality
-### will probably change this to save the whole project the user is making rather than individual levels
+### 
 func _on_save_mouse_entered() -> void:
 	Global.place_tile = true
 	object_cursor.can_place = false
@@ -809,15 +830,27 @@ func _on_save_mouse_exited() -> void:
 	object_cursor.can_place = false
 
 func _on_save_pressed() -> void:
-	#for lev in Global.level_array:
-		#Global.level_data[lev] = {
-			#"objective": main.get_node(lev + "/Player Area").objective,
-			#"background": main.get_node(lev + "/Background").get_tile_map_data_as_array(), 
-			#"playerArea" : main.get_node(lev + "/Player Area").get_tile_map_data_as_array(),
-			#"foreground": main.get_node(lev + "/foreground").get_tile_map_data_as_array(),
-			#"objects": get_object_data(main.get_node(lev + "/Player Area"))
-			#}
-			
+	$saveFileDialog.mode = FileDialog.FILE_MODE_SAVE_FILE
+	$saveFileDialog.popup_centered()
+
+func _on_save_file_dialog_file_selected(path: String) -> void:
+	
+	# Save Scene
+	var new_dungeon = PackedScene.new()
+	new_dungeon.pack(self.get_parent())		
+	
+	var save_scene = path
+	if !save_scene.contains(".tscn"):
+		save_scene = save_scene + ".tscn"
+
+	var scene_error = ResourceSaver.save(new_dungeon, save_scene)
+	if scene_error == OK:
+		print("save scene successful")
+	else:
+		print("save scene failed")
+	
+	
+	# Save levels data
 	var custom_data = CustomData.new()
 	custom_data.level_data = {}
 	
@@ -831,25 +864,34 @@ func _on_save_pressed() -> void:
 				"foreground": levl.get_node("foreground").get_tile_map_data_as_array(),
 				"objects": get_object_data(levl.get_node("Player Area"))
 			}
-		
-	var save_path = "user://save_data.tres"
+	var scene_name = path.get_file().get_basename()	
+	var save_path = "user://dungeon_save_data/%s.tres" % scene_name
 	var error = ResourceSaver.save(custom_data, save_path)
 	
 	if error == OK:
-		print("save successful")
+		print("save data successful")
 	else:
-		print("save failed")
-
-### loads all levels with prior save data	
-func _on_load_pressed() -> void:
-	#for lev in Global.level_data:
-		#main.get_node(lev + "/Player Area").objective = Global.level_data[lev]['objective']
-		#main.get_node(lev + "/Background").set_tile_map_data_from_array(Global.level_data[lev]['background'])
-		#main.get_node(lev + "/Player Area").set_tile_map_data_from_array(Global.level_data[lev]['playerArea'])
-		#main.get_node(lev + "/foreground").set_tile_map_data_from_array(Global.level_data[lev]['foreground'])
-		#load_object_data(lev)
+		print("save data failed")
 	
-	var load_path = "user://save_data.tres"
+###
+### Load button	
+###
+func _on_load_pressed() -> void:
+	$loadFileDialog.access = FileDialog.ACCESS_USERDATA
+	$loadFileDialog.mode = FileDialog.FILE_MODE_OPEN_FILE
+	$loadFileDialog.popup_centered()
+
+
+func _on_load_file_dialog_file_selected(path: String) -> void:
+	
+	get_tree().change_scene_to_file(path)
+		
+	# get the corresponding level data for chosen dungeon
+	var scene_name = path.get_file().get_basename()
+	Global.load_path = "user://dungeon_save_data/%s.tres" % scene_name
+	
+	
+	var load_path = Global.load_path
 	
 	if ResourceLoader.exists(load_path):
 		var loaded_data = ResourceLoader.load(load_path)
@@ -877,24 +919,9 @@ func _on_load_pressed() -> void:
 				level.get_node("foreground").set_tile_map_data_from_array(level_data["foreground"])	
 				
 				
-				### adding all the interactive objects back into tilemaplayer
-				for object in level_data["objects"].keys():
-					if object.begins_with("coin"):
-						Global.level_dict[level_name]["coins"] += 1
-						var instance  = coin.instantiate()
-						main.get_node(level_name + '/Player Area').add_child(instance, true)
-						instance.position = level_data["objects"][object]["position"]
-					elif object.begins_with("chest"):
-						Global.level_dict[level_name]["chests"] += 1
-						var instance  = chest.instantiate()
-						main.get_node(level_name + '/Player Area').add_child(instance, true)
-						instance.position = level_data["objects"][object]["position"]
-					elif object.begins_with("slime"):
-						Global.level_dict[level_name]["enemies"] += 1
-						var instance  = slime.instantiate()
-						main.get_node(level_name + '/Player Area').add_child(instance, true)
-						instance.position = level_data["objects"][object]["position"]
-						
+				# adding all the interactive objects back into tilemaplayer
+				load_object_data(level_name)
+			
 						
 				print("load successful")
 		else:
@@ -902,16 +929,17 @@ func _on_load_pressed() -> void:
 			
 	else:
 		print("No data file found")
+	pass # Replace with function body.	
 
-func add_level_button(new_level):
-	var dungeon_levels =  $Level_menu/GridContainer3  #button_group.get_node("/Level_menu/GridContainer3")
+func add_level_button(add_level):
+	var dungeon_levels =  $Level_menu/GridContainer3 
 	button = Button.new()
 	
 	dungeon_levels.add_child(button)
-	button.text = new_level.name
-	new_level.visible = false
+	button.text = add_level.name
+	add_level.visible = false
 	Global.level_array.append(button.text)
-	new_level.get_node("Player Area").collision_enabled = false
+	add_level.get_node("Player Area").collision_enabled = false
 	button.pressed.connect(_on_level_select.bind(button.text))
 	button.mouse_entered.connect(self._mouse_enter)
 	button.mouse_exited.connect(self._mouse_exit)
@@ -931,7 +959,7 @@ func get_object_data(tilemaplayer: TileMapLayer)->Dictionary:
 ### loads the object_data into their respective levels and Player Areas
 # objects will need added to this as we add them into the system
 func load_object_data(lev):
-	#for lev in Global.level_data.keys():
+	
 		for object in Global.level_data.get(lev).get("objects").keys():
 			if object.begins_with("coin"):
 				var instance = coin.instantiate()
@@ -962,23 +990,7 @@ func _on_save_level_pressed():
 		"foreground": main.get_node(Global.level.name + "/foreground").get_tile_map_data_as_array(),
 		"objects": get_object_data(main.get_node(Global.level.name + "/Player Area"))
 		}
-	#var custom_data = CustomData.new()
-	#
-	#custom_data.level_data = Global.level_data
-	#var save_path = "user://custom_data.tres"
-	#print(custom_data)
-	#if custom_data is Resource:
-		#var error = ResourceSaver.save(save_path, custom_data)
-		#
-		#if error == OK:
-			#print("Save successful")
-		#
-		#else:
-			#print("Save failed")
-	#else:
-		#print("custom_data is not recognized as a Resource")
-
-	pass
+	
 
 func _on_load_level_pressed():
 	main.get_node(Global.level.name + "/Player Area").objective = Global.level_data[Global.level.name]['objective']
@@ -1033,3 +1045,45 @@ func _on_scroll_container_mouse_entered() -> void:
 
 func _on_scroll_container_mouse_exited() -> void:
 	object_cursor.can_place = true
+
+
+### Initial load if a file is chosen at load screen
+func _load_dungeon():
+	var load_path = Global.load_path
+	
+	if ResourceLoader.exists(load_path):
+		var loaded_data = ResourceLoader.load(load_path)
+		
+		if loaded_data is CustomData:
+			
+			for level_name in loaded_data.level_data.keys():
+				Global.level_dict[level_name] = {"coins": 0, "chests": 0, "enemies": 0}
+				Global.level_data = loaded_data.level_data
+				
+				var level_data = loaded_data.level_data[level_name]
+				
+				var level = main.get_node_or_null(level_name)
+				if level == null:
+					
+					level = level2.instantiate()
+					level.name = level_name
+					main.add_child(level)
+					add_level_button(level)
+					
+					
+				level.get_node("Player Area").objective = level_data["objective"]
+				level.get_node("Background").set_tile_map_data_from_array(level_data["background"])
+				level.get_node("Player Area").set_tile_map_data_from_array(level_data["playerArea"])
+				level.get_node("foreground").set_tile_map_data_from_array(level_data["foreground"])	
+				
+				
+				# adding all the interactive objects back into tilemaplayer
+				load_object_data(level_name)
+						
+						
+				print("load successful")
+		else:
+			print("Data is not expected type")
+			
+	else:
+		print("No data file found")

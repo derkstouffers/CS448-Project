@@ -1863,6 +1863,23 @@ item_1/text = "Defeat Your Way Through"
 item_1/checkable = 2
 item_1/id = 1
 
+[node name="loadFileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(500, 500)
+ok_button_text = "Open"
+file_mode = 0
+access = 1
+root_subfolder = "dungeon_save_files"
+
+[node name="saveFileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(500, 500)
+ok_button_text = "Save"
+access = 1
+root_subfolder = "dungeon_save_files"
+
 [connection signal="mouse_entered" from="Top_menu" to="." method="_on_top_menu_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu" to="." method="_on_top_menu_mouse_exited"]
 [connection signal="mouse_entered" from="Top_menu/GridContainer" to="." method="_on_grid_container_mouse_entered"]
@@ -2164,3 +2181,5 @@ item_1/id = 1
 [connection signal="id_pressed" from="ObjectiveSelector" to="." method="_on_objective_selector_id_pressed"]
 [connection signal="mouse_entered" from="ObjectiveSelector" to="." method="_on_objective_selector_mouse_entered"]
 [connection signal="mouse_exited" from="ObjectiveSelector" to="." method="_on_objective_selector_mouse_exited"]
+[connection signal="file_selected" from="loadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
+[connection signal="file_selected" from="saveFileDialog" to="." method="_on_save_file_dialog_file_selected"]

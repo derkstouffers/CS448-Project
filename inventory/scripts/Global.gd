@@ -1,5 +1,7 @@
 extends Node
 
+var dungeon_loaded = false
+var load_path = ""
 var playing = false
 var player_count = 0
 

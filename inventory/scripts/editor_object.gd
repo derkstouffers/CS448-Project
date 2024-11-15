@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 				
 				new_item.global_position = Global.playerArea.selected_tile ## grid snap for object that isn't from tileset
 								
-			if(current_item != null and can_place and Input.is_action_just_pressed("mb_right")):
+			if(can_place and Input.is_action_just_pressed("mb_right")):
 				### remove interactive objects placed in level specifically the Player Area
 				
 				for child in Global.playerArea.get_children():
