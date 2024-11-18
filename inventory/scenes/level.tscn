@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://cb3lrjvf7tumy"]
+[gd_scene load_steps=29 format=3 uid="uid://cb3lrjvf7tumy"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_1u046"]
 [ext_resource type="Texture2D" uid="uid://cj0r8vg2u4dso" path="res://assets/interactive/Ladder.png" id="7_vpnal"]
+[ext_resource type="PackedScene" uid="uid://cjjvl7pftkr0u" path="res://scenes/scene_transition_rect.tscn" id="9_52y08"]
 [ext_resource type="Texture2D" uid="uid://bv34ra6v38oig" path="res://assets/ground_walls/Spawnpoint Block Animation.png" id="16_l0ecj"]
 [ext_resource type="Script" path="res://scripts/player_area.gd" id="17_a5wc3"]
 [ext_resource type="Texture2D" uid="uid://sug4lrk2vtv1" path="res://assets/ground_walls/ground_walls.png" id="64_llk8u"]
@@ -341,3 +342,5 @@ script = ExtResource("17_a5wc3")
 
 [node name="foreground" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_b7lgr")
+
+[node name="SceneTransitionRect" parent="." instance=ExtResource("9_52y08")]

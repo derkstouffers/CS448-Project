@@ -17,3 +17,7 @@ func transition_to(next_scene := next_scene_path):
 	anim_player.play("fade")
 	await anim_player.animation_finished
 	get_tree().change_scene_to_file(next_scene)
+
+func transition():
+	anim_player.play("fade")
+	await anim_player.animation_finished

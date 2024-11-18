@@ -30,13 +30,11 @@ func _process(delta: float) -> void:
 	if Global.playing and has_node("dwarf"):
 		
 		if objectives(objective):
-			#await get_tree().create_timer(2.0).timeout
+			#await get_tree().create_timer(0.5).timeout
 			go_to_next_level()
 	elif Global.playing == false:
-		for lev in Global.level_dict:
-			Global.level_dict[lev] = {"coins" : 0, "chests": 0, "enemies": 0}
 		Global.coins = 0
-	pass
+	
 
 
 
@@ -52,7 +50,7 @@ func objectives(quest : int):
 			return true
 		return false
 ###
-### Changing levels within play. THERE IS A BUG IF YOU GO BACK TO EDIT AFTER REACHING A LATER LEVEL IN PLAY MODE THEN START FROM LEVEL 1 AGAIN AND TRY TO GO TO THE NEXT LEVEL
+### Changing levels within play. 
 ###
 
 func go_to_next_level() -> void:
@@ -62,31 +60,27 @@ func go_to_next_level() -> void:
 	if level_count == Global.i:
 		## GAME OVER REACHED END OF LAST LEVEL MADE RETURN TO EDIT MODE
 		
+		
+		button_group._load_dungeon()
+		
 		## RETURN TO EDIT MODE AT LEVEL 1
-		Global.playing = false
-		top_menu.visible = true
-		level_menu.visible = true
-		layer_menu.visible = true
-		block_menu.visible = true
-		mini_map.visible = true
-		edit.visible = false
-		quest_tracker.visible = false
+		button_group._on_edit_pressed()
+
 		
 		Global.level.visible = false
 		var level_return = main.get_node("/root/main/level")
 		Global.level = level_return
 		level_return.visible = true
 		
-		### change cameras back to editing camera
+		#### change cameras back to editing camera
 		camera.enabled = true
 		if Global.player_count > 0:
 			Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 			Global.player_count -= 1
+		
 		Global.i = 1
 		
 	
-		# fix block collision issues from one level to the next
-		Global.playerArea.collision_enabled = false
 		
 		
 		### set the level to be drawn in 
@@ -94,6 +88,8 @@ func go_to_next_level() -> void:
 		Global.playerArea = level_return.get_node("Player Area")
 		Global.foreground = level_return.get_node("foreground")
 		Global.playerArea.collision_enabled = true
+		
+		
 		
 		
 
@@ -106,6 +102,7 @@ func go_to_next_level() -> void:
 		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 		Global.player_count -= 1
 		
+		
 		## remove collision from previous level
 		Global.playerArea.collision_enabled = false
 		
@@ -114,10 +111,10 @@ func go_to_next_level() -> void:
 		
 		
 		## get and set next level
-		
 		next_level = main.get_node(Global.level_array[Global.i])
 		next_level.visible = true
 		Global.level = next_level
+		button_group._on_load_level_pressed()
 		
 	
 		## add player to new level 
@@ -127,7 +124,7 @@ func go_to_next_level() -> void:
 		Global.playerArea = next_level.get_node('Player Area')
 		Global.playerArea.collision_enabled = true
 		objective = Global.playerArea.objective
-
+		
 		Global.playerArea.add_child(player)
 		
 		## set position for where player will enter new level
@@ -138,9 +135,9 @@ func go_to_next_level() -> void:
 		if Global.player_count == 1:
 			#camera.enabled = false
 			next_level.get_node('Player Area/dwarf').get_child(2).enabled = true
-	
+		
 		### increment i to access the next level in the global array of levels
 		Global.i += 1
-			
-	pass # Replace with function body.
+		
+		
 	

@@ -11,3 +11,11 @@ class_name CustomData
 		"objects": {}
 		}#level
 	}#level_data
+	
+@export var level_dict: Dictionary = {
+	"level": {
+		"coins" : 0,
+		"chests" : 0,
+		"enemies" : 0
+		}
+}

@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://b73ek76jsx1ok"]
+
+[ext_resource type="Script" path="res://scripts/ghost.gd" id="1_2qyfb"]
+[ext_resource type="Texture2D" uid="uid://bvnjb30ufh65p" path="res://Sprites/Ghost Float.png" id="1_l32n7"]
+
+[sub_resource type="Curve2D" id="Curve2D_8utkt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 118, 0, 0, 0, 0, 0, -1, -1)
+}
+point_count = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oembc"]
+atlas = ExtResource("1_l32n7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qv0ki"]
+atlas = ExtResource("1_l32n7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhsku"]
+atlas = ExtResource("1_l32n7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jnrt"]
+atlas = ExtResource("1_l32n7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0y7lg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oembc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qv0ki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhsku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jnrt")
+}],
+"loop": true,
+"name": &"ghost_float",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jldvw"]
+
+[node name="ghost" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_8utkt")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(0, -1)
+rotation = 0.00847437
+rotates = false
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+script = ExtResource("1_2qyfb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Path2D/PathFollow2D/CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_0y7lg")
+animation = &"ghost_float"
+frame_progress = 0.379307
+
+[node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/CharacterBody2D"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/CharacterBody2D/Area2D"]
+shape = SubResource("CapsuleShape2D_jldvw")

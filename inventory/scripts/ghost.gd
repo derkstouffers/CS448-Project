@@ -15,28 +15,21 @@ func _physics_process(delta: float) -> void:
 		if level == get_parent().get_parent().get_parent().get_parent().get_parent().name:
 			
 			# gravity
-			if not is_on_floor():
+			#if not is_on_floor():
 					
-				velocity += get_gravity() * delta
+			velocity += get_gravity() * delta
 					
 					
-			# Activates the made path for the slimes		
+			# Activates the made path for the ghosts		
 			path_follow.progress += speed * delta
 			
 			
-			$AnimatedSprite2D.play("bounce")
+			$AnimatedSprite2D.play("ghost_float")
 			
 			## based on this implementation we need this to have the gravity work
 			move_and_slide()
 
 			
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	$AnimatedSprite2D.play("hit")
-	queue_free()
-	Global.level_dict[Global.level.name]["enemies"] -= 1
-
 
 
 func _current_level():

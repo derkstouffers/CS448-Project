@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://clrvdmfbg0bne"]
+[gd_scene load_steps=87 format=3 uid="uid://clrvdmfbg0bne"]
 
 [ext_resource type="Script" path="res://scripts/button_group.gd" id="1_jed0n"]
 [ext_resource type="Texture2D" uid="uid://cuiaq8wwhnuil" path="res://characters/dwarf/Dwarf 1.png" id="2_jtfji"]
@@ -70,6 +70,7 @@
 [ext_resource type="Texture2D" uid="uid://dmji5bpkoxuvk" path="res://assets/Decor/Left Arrow Sign.png" id="61_cmpx2"]
 [ext_resource type="Texture2D" uid="uid://g7y11niaoykp" path="res://assets/Decor/Right Arrow Sign.png" id="62_veenw"]
 [ext_resource type="Texture2D" uid="uid://jfoxy882fe36" path="res://assets/Decor/Up Arrow Sign.png" id="63_dx0oq"]
+[ext_resource type="Texture2D" uid="uid://3nxucnhbts87" path="res://Sprites/Ghost.png" id="70_268lp"]
 
 [sub_resource type="Theme" id="Theme_ha7l0"]
 default_font = ExtResource("2_uuyxx")
@@ -138,7 +139,7 @@ offset_top = -15.0
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 6
+columns = 7
 
 [node name="Play" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
@@ -219,6 +220,17 @@ text = "Save Level"
 [node name="load_level" type="Button" parent="Top_menu/GridContainer"]
 layout_mode = 2
 text = "Load Level"
+
+[node name="objectives" type="OptionButton" parent="Top_menu/GridContainer"]
+layout_mode = 2
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "no objective"
+popup/item_1/text = "collect coins & chests"
+popup/item_1/id = 1
+popup/item_2/text = "defeat enemy sprites"
+popup/item_2/id = 2
 
 [node name="Layer_menu" type="ColorRect" parent="."]
 offset_left = 352.0
@@ -990,6 +1002,16 @@ layout_mode = 2
 size_flags_horizontal = 6
 tooltip_text = "Slime"
 icon = ExtResource("23_o1287")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="ghost" type="Button" parent="Block_menu/ScrollContainer/Sprite"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 6
+tooltip_text = "ghost"
+icon = ExtResource("70_268lp")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
@@ -1854,7 +1876,7 @@ label_settings = SubResource("LabelSettings_sfeuj")
 [node name="ObjectiveSelector" type="PopupMenu" parent="."]
 title = "Level Objectives"
 initial_position = 2
-size = Vector2i(225, 100)
+size = Vector2i(239, 100)
 borderless = false
 item_count = 2
 item_0/text = "Loot the Room"
@@ -1879,6 +1901,17 @@ size = Vector2i(500, 500)
 ok_button_text = "Save"
 access = 1
 root_subfolder = "dungeon_save_files"
+
+[node name="objectiveOverlay" type="CanvasLayer" parent="."]
+
+[node name="Container" type="Container" parent="objectiveOverlay"]
+offset_left = 355.0
+offset_top = 557.0
+offset_right = 1231.0
+offset_bottom = 583.0
+
+[node name="curr_level_objective" type="Label" parent="objectiveOverlay/Container"]
+layout_mode = 2
 
 [connection signal="mouse_entered" from="Top_menu" to="." method="_on_top_menu_mouse_entered"]
 [connection signal="mouse_exited" from="Top_menu" to="." method="_on_top_menu_mouse_exited"]
@@ -1906,6 +1939,7 @@ root_subfolder = "dungeon_save_files"
 [connection signal="mouse_exited" from="Top_menu/GridContainer/save_level" to="." method="_on_save_level_mouse_exited"]
 [connection signal="pressed" from="Top_menu/GridContainer/save_level" to="." method="_on_save_level_pressed"]
 [connection signal="pressed" from="Top_menu/GridContainer/load_level" to="." method="_on_load_level_pressed"]
+[connection signal="item_selected" from="Top_menu/GridContainer/objectives" to="." method="_on_objectives_item_selected"]
 [connection signal="mouse_entered" from="Layer_menu/GridContainer/Background" to="." method="_on_background_mouse_entered"]
 [connection signal="mouse_exited" from="Layer_menu/GridContainer/Background" to="." method="_on_background_mouse_exited"]
 [connection signal="pressed" from="Layer_menu/GridContainer/Background" to="." method="_on_background_pressed"]
@@ -2048,6 +2082,7 @@ root_subfolder = "dungeon_save_files"
 [connection signal="mouse_entered" from="Block_menu/ScrollContainer/Sprite/Slime" to="." method="_on_slime_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/ScrollContainer/Sprite/Slime" to="." method="_on_slime_mouse_exited"]
 [connection signal="pressed" from="Block_menu/ScrollContainer/Sprite/Slime" to="." method="_on_slime_pressed"]
+[connection signal="pressed" from="Block_menu/ScrollContainer/Sprite/ghost" to="." method="_on_ghost_pressed"]
 [connection signal="mouse_entered" from="Block_menu/ScrollContainer/Spawn Point/Spawn Block" to="." method="_on_spawn_block_mouse_entered"]
 [connection signal="mouse_exited" from="Block_menu/ScrollContainer/Spawn Point/Spawn Block" to="." method="_on_spawn_block_mouse_exited"]
 [connection signal="pressed" from="Block_menu/ScrollContainer/Spawn Point/Spawn Block" to="." method="_on_spawn_block_pressed"]

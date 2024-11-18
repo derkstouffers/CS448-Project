@@ -103,6 +103,7 @@ sprite_frames = SubResource("SpriteFrames_m88bf")
 animation = &"hit"
 
 [node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/slime" groups=["slime"]]
+monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Path2D/PathFollow2D/slime/Area2D"]
 position = Vector2(0, -1)

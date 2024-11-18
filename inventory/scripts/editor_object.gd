@@ -48,14 +48,30 @@ func _process(delta: float) -> void:
 				Global.playerArea.add_child(new_item, true)
 				
 				new_item.global_position = Global.playerArea.selected_tile ## grid snap for object that isn't from tileset
-								
+				
+				if new_item.name.begins_with("coin"):
+					Global.level_dict[Global.level.name]["coins"] += 1
+				if new_item.name.begins_with("chest"):
+					Global.level_dict[Global.level.name]["chests"] += 1
+				if new_item.name.begins_with("slime"):
+					Global.level_dict[Global.level.name]["enemies"] += 1
+				
+				print(Global.level_dict)				
 			if(can_place and Input.is_action_just_pressed("mb_right")):
 				### remove interactive objects placed in level specifically the Player Area
-				
+			
 				for child in Global.playerArea.get_children():
 					if child.has_method("get_position") and child.get_position() == Global.playerArea.selected_tile:
+						
+						if child.name.begins_with("coin"):
+							Global.level_dict[Global.level.name]["coins"] -= 1
+						if child.name.begins_with("chest"):
+							Global.level_dict[Global.level.name]["chests"] -= 1
+						if child.name.begins_with("slime"):
+							Global.level_dict[Global.level.name]["enemies"] -= 1
+							
 						child.queue_free()
-				
+				print(Global.level_dict)
 				
 		else:
 			if(can_place):
@@ -117,4 +133,3 @@ func move_editor():
 	global_position.x = clamp(global_position.x, limit_left, limit_right)
 	global_position.y = clamp(global_position.y, limit_top, limit_bottom)
 	
-	pass
