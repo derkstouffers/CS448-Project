@@ -20,7 +20,7 @@ func _on_area_entered(area: Area2D) -> void:
 		#await get_tree().create_timer(0.5).timeout
 		queue_free()
 
-	await get_tree().create_timer(1).timeout
+	#await get_tree().create_timer(1).timeout
 	$fireAttackAnimation.play("explosion")
 	await $fireAttackAnimation.animation_finished
 	queue_free()

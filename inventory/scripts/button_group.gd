@@ -17,8 +17,7 @@ extends CanvasLayer
 @onready var quest_tracker = button_group.get_node("Quest_Tracker")
 @onready var objectiveOverlay = button_group.get_node("objectiveOverlay")
 @onready var edit = button_group.get_node("Edit")
-@onready var ground = button_group.get_node("Block_menu/ScrollContainer/Ground")
-@onready var walls = button_group.get_node("Block_menu/ScrollContainer/Walls")
+@onready var building_blocks = button_group.get_node("Block_menu/ScrollContainer/building_blocks")
 @onready var hazards = button_group.get_node("Block_menu/ScrollContainer/Hazards")
 @onready var decor = button_group.get_node("Block_menu/ScrollContainer/Decor")
 @onready var interactive = button_group.get_node("Block_menu/ScrollContainer/Interactive")
@@ -74,7 +73,7 @@ func _ready() -> void:
 	grand_children(self)
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Global.playing == false:
 		update_coins_gained(0)
 	## Only getting Player Layer map data for now
@@ -234,31 +233,28 @@ func _on_clear_popup() -> void:
 	if Global.player_count > 0:
 		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
 		Global.player_count -= 1
+		
+	Global.level_dict[Global.level.name]["coins"] = 0
+	Global.level_dict[Global.level.name]["chests"] = 0
+	Global.level_dict[Global.level.name]["enemies"] = 0
+	
+	print(Global.level_dict)
+	
 
 ###
 ### BLOCK MENU
 ###
 func _on_ground_pressed() -> void:
-	walls.visible = false
-	ground.visible = true
+	building_blocks.visible = true
 	hazards.visible = false
 	decor.visible = false
 	interactive.visible = false
 	sprites.visible = false
 	spawn.visible = false
 
-func _on_walls_pressed() -> void:
-	ground.visible = false
-	walls.visible = true
-	hazards.visible = false
-	decor.visible = false
-	interactive.visible = false
-	sprites.visible = false
-	spawn.visible = false
 
 func _on_hazards_pressed() -> void:
-	ground.visible = false
-	walls.visible = false
+	building_blocks.visible = false
 	hazards.visible = true
 	decor.visible = false
 	interactive.visible = false
@@ -266,8 +262,7 @@ func _on_hazards_pressed() -> void:
 	spawn.visible = false
 
 func _on_decor_pressed() -> void:
-	ground.visible = false
-	walls.visible = false
+	building_blocks.visible = false
 	hazards.visible = false
 	decor.visible = true
 	interactive.visible = false
@@ -275,8 +270,7 @@ func _on_decor_pressed() -> void:
 	spawn.visible = false
 
 func _on_interactive_pressed() -> void:
-	ground.visible = false
-	walls.visible = false
+	building_blocks.visible = false
 	hazards.visible = false
 	decor.visible = false
 	interactive.visible = true
@@ -284,8 +278,7 @@ func _on_interactive_pressed() -> void:
 	spawn.visible = false
 
 func _on_sprite_pressed() -> void:
-	ground.visible = false
-	walls.visible = false
+	building_blocks.visible = false
 	hazards.visible = false
 	decor.visible = false
 	interactive.visible = false
@@ -293,8 +286,7 @@ func _on_sprite_pressed() -> void:
 	spawn.visible = false
 
 func _on_player_spawn_point_pressed() -> void:
-	ground.visible = false
-	walls.visible = false
+	building_blocks.visible = false
 	hazards.visible = false
 	decor.visible = false
 	interactive.visible = false
@@ -333,7 +325,7 @@ func _on_spawn_block_pressed() -> void:
 	Global.current_tile_coords = Vector2i(0,0)
 
 ###
-### GROUND BLOCKS
+### building_blocks BLOCKS
 ###
 
 func _on_stone_pressed() -> void:
@@ -480,10 +472,6 @@ func _on_stone_slab_pressed() -> void:
 	Global.current_item = null
 	Global.TileID = 0
 	Global.current_tile_coords = Vector2i(27,0)
-
-###
-### WALLS
-###
 
 func _on_beige_bricks_pressed() -> void:
 	Global.place_tile = true
@@ -725,7 +713,7 @@ func _on_coin_pressed() -> void:
 	Global.place_tile = false
 	Global.current_item = coin
 
-func update_coins_gained(gained_coins):
+func update_coins_gained(_gained_coins):
 	$Quest_Tracker/Container/coin_tracker.text = str(Global.coins)
 
 func _on_ladder_pressed() -> void:
@@ -1019,16 +1007,8 @@ func load_object_data(lev):
 				instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
 				pass
 
-### WORKING ON INDIVIDUAL SAVE AND LOAD
+### LOAD INDIVIDUAL LEVEL
 
-func _on_save_level_pressed():
-	Global.level_data[Global.level.name] = {
-		"objective": main.get_node(Global.level.name + "/Player Area").objective,
-		"background": main.get_node(Global.level.name + "/Background").get_tile_map_data_as_array(), 
-		"playerArea" : main.get_node(Global.level.name + "/Player Area").get_tile_map_data_as_array(),
-		"foreground": main.get_node(Global.level.name + "/foreground").get_tile_map_data_as_array(),
-		"objects": get_object_data(main.get_node(Global.level.name + "/Player Area"))
-		}
 	
 
 func _on_load_level_pressed():
@@ -1037,7 +1017,8 @@ func _on_load_level_pressed():
 	main.get_node(Global.level.name + "/Player Area").set_tile_map_data_from_array(Global.level_data[Global.level.name]['playerArea'])
 	main.get_node(Global.level.name + "/foreground").set_tile_map_data_from_array(Global.level_data[Global.level.name]['foreground'])
 	load_object_data(Global.level.name)
-	
+
+# CHECK IF DIRECTORIES FOR SAVING AND LOADING DUNGEON DATA EXIST	
 func folder_exists(folder_name: String)->void:
 	var folder_path = "user://" + folder_name
 	var dir = DirAccess.open(folder_path)

@@ -33,7 +33,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !Global.playing:
 		
 		global_position = get_global_mouse_position()
@@ -119,13 +119,13 @@ func remove_tile():
 		
 
 func move_editor():
-	if Input.is_action_pressed("w"):
+	if Input.is_action_pressed("jump"):
 		editor.global_position.y -= cam_spd
-	if Input.is_action_pressed("a"):
+	if Input.is_action_pressed("left"):
 		editor.global_position.x -= cam_spd
-	if Input.is_action_pressed("s"):
+	if Input.is_action_pressed("down"):
 		editor.global_position.y += cam_spd
-	if Input.is_action_pressed("d"):
+	if Input.is_action_pressed("right"):
 		editor.global_position.x += cam_spd
 	
 	# Clamp the new position within the defined limits

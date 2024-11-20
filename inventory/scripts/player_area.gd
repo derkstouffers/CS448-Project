@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var tile = local_to_map(get_global_mouse_position())
 	selected_tile = map_to_local(tile)
 	

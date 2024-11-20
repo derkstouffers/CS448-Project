@@ -12,8 +12,8 @@ default_font = ExtResource("3_mrbl0")
 script = ExtResource("1_h7er3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1250.0
-offset_bottom = 648.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 texture = ExtResource("1_oilvo")
 expand_mode = 1
 
@@ -26,8 +26,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -85.5
 offset_top = -97.0
-offset_right = 85.5
-offset_bottom = 97.0
+offset_right = 84.5
+offset_bottom = 93.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_pi1fa")
