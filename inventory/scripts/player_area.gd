@@ -124,7 +124,7 @@ func go_to_next_level() -> void:
 		Global.playerArea = next_level.get_node('Player Area')
 		Global.playerArea.collision_enabled = true
 		objective = Global.playerArea.objective
-		
+
 		Global.playerArea.add_child(player)
 		
 		## set position for where player will enter new level

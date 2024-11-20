@@ -40,6 +40,7 @@ const slime = preload("res://scenes/slime.tscn")
 const ghost = preload("res://scenes/ghost.tscn")
 const wizard = preload("res://scenes/wizard.tscn")
 const witch = preload("res://scenes/witch.tscn")
+const ladder = preload("res://scenes/ladder.tscn")
 const empty_dungeon = preload("res://scenes/main.tscn")
 
 
@@ -105,6 +106,9 @@ func grand_children(node: Node) -> void:
 ###
 
 func _on_play_pressed() -> void:
+	if !ResourceLoader.exists(Global.load_path):
+		_on_save_pressed()
+	_on_save_file_dialog_file_selected(Global.load_path)
 	if Global.playerArea.get_used_cells_by_id(4).size() < 1:
 		error_window.visible = true
 		
@@ -117,6 +121,8 @@ func _on_play_pressed() -> void:
 			
 			for object in Global.level_data.get(level_).get("objects").keys():
 				main.get_node(level_ + "/Player Area").remove_child(main.get_node(level_ + "/Player Area").get_node(object))
+				if object.begins_with("dwarf"):
+					Global.player_count -= 1
 			
 		_on_load_level_pressed()		
 		Global.playing = true
@@ -723,10 +729,12 @@ func update_coins_gained(gained_coins):
 	$Quest_Tracker/Container/coin_tracker.text = str(Global.coins)
 
 func _on_ladder_pressed() -> void:
-	Global.place_tile = true
-	Global.current_item = null
-	Global.TileID = 5
-	Global.current_tile_coords = Vector2i(0,0)
+	#Global.place_tile = true
+	#Global.current_item = null
+	#Global.TileID = 5
+	#Global.current_tile_coords = Vector2i(0,0)
+	Global.place_tile = false
+	Global.current_item = ladder
 
 @onready var chest = preload("res://scenes/chest.tscn")
 func _on_chest_pressed() -> void:	
@@ -852,7 +860,8 @@ func _on_save_pressed() -> void:
 	$saveFileDialog.popup_centered()
 
 func _on_save_file_dialog_file_selected(path: String) -> void:
-	
+	folder_exists("dungeon_save_files")
+	folder_exists("dungeon_save_data")
 	# Save Scene
 	var new_dungeon = PackedScene.new()
 	new_dungeon.pack(self.get_parent())		
@@ -892,7 +901,7 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 	var scene_name = path.get_file().get_basename()	
 	var save_path = "user://dungeon_save_data/%s.tres" % scene_name
 	var error = ResourceSaver.save(custom_data, save_path)
-	
+	Global.load_path = save_path
 	if error == OK:
 		print("save data successful")
 		Global.level_data = custom_data.level_data
@@ -1004,10 +1013,10 @@ func load_object_data(lev):
 				main.get_node(lev + "/Player Area").add_child(instance, true)
 				instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
 			elif object.begins_with("ladder"):
-				#var instance = ladder.instantiate()
-				#main.get_node(lev + '/Player Area').add_child(instance, true)
-				##print(Global.level_data.get(lev).get("objects").get(object)["position"])
-				#instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
+				var instance = ladder.instantiate()
+				main.get_node(lev + '/Player Area').add_child(instance, true)
+				#print(Global.level_data.get(lev).get("objects").get(object)["position"])
+				instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
 				pass
 
 ### WORKING ON INDIVIDUAL SAVE AND LOAD
@@ -1029,6 +1038,18 @@ func _on_load_level_pressed():
 	main.get_node(Global.level.name + "/foreground").set_tile_map_data_from_array(Global.level_data[Global.level.name]['foreground'])
 	load_object_data(Global.level.name)
 	
+func folder_exists(folder_name: String)->void:
+	var folder_path = "user://" + folder_name
+	var dir = DirAccess.open(folder_path)
+	if dir == null:
+		dir = DirAccess.open("user://")
+		if dir != null:
+			dir.make_dir(folder_name)
+			print("Folder created at: ", folder_path)
+		else:
+			print("Failed to open user:// directory")
+	else:
+		print("folder already exists")
 	
 
 ###

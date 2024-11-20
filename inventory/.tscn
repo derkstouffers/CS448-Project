@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="AudioStream" path="res://assets/audio/Viking Folk Music Pack/Loops/wav/4. Frostbound Horizons.wav" id="1_7w7qf"]
+[ext_resource type="PackedScene" path="res://scenes/level.tscn" id="2_m4vdr"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="3_iqove"]
+[ext_resource type="Script" path="res://scripts/editor_object.gd" id="4_1qbjf"]
+[ext_resource type="PackedScene" path="res://scenes/button_group.tscn" id="5_rapi5"]
+[ext_resource type="Script" path="res://scripts/button_group.gd" id="6_gnyaj"]
+
+[node name="main" type="Node2D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_7w7qf")
+autoplay = true
+
+[node name="level" type="Node2D" parent="." instance=ExtResource("2_m4vdr")]
+script = ExtResource("3_iqove")
+playing = false
+
+[node name="editor_object" type="Node2D" parent="."]
+position = Vector2(0.926563, 27.3805)
+script = ExtResource("4_1qbjf")
+cam_spd = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="editor_object"]
+
+[node name="button_group" type="CanvasLayer" parent="." instance=ExtResource("5_rapi5")]
+script = ExtResource("6_gnyaj")
+
+[node name="cam_container" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="cam_container"]
+position = Vector2(578, 325)
+limit_left = -1000
+limit_top = -1000
+limit_right = 1500
+limit_bottom = 1000
+limit_smoothed = true

@@ -42,6 +42,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _current_level():
 	
 	for lev in Global.level_array:
-		if get_node("/root/main/" + lev + "/Player Area").has_node("dwarf"):
+		if get_node("/root/main/" + lev + "/Player Area").has_node("dwarf") or get_node("/root/main/" + lev + "/Player Area").has_node("wizard") or get_node("/root/main/" + lev + "/Player Area").has_node("witch"):
 			level = lev
 			#print(level)

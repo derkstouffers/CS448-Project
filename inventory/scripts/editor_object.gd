@@ -1,7 +1,7 @@
 extends Node2D
 
 var can_place = true
-var is_panning = true
+
 
 @onready var level = get_node("/root/main/level")
 @onready var editor = get_node("/root/main/cam_container")
@@ -29,7 +29,7 @@ func _ready() -> void:
 	Global.background = background
 	Global.playerArea = playerArea
 	Global.foreground = foreground
-	pass # Replace with function body.
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 				if new_item.name.begins_with("slime"):
 					Global.level_dict[Global.level.name]["enemies"] += 1
 				
-				print(Global.level_dict)				
+				#print(Global.level_dict)				
 			if(can_place and Input.is_action_just_pressed("mb_right")):
 				### remove interactive objects placed in level specifically the Player Area
 			
@@ -71,7 +71,7 @@ func _process(delta: float) -> void:
 							Global.level_dict[Global.level.name]["enemies"] -= 1
 							
 						child.queue_free()
-				print(Global.level_dict)
+				#print(Global.level_dict)
 				
 		else:
 			if(can_place):
@@ -89,15 +89,14 @@ func _process(delta: float) -> void:
 		
 		move_editor()
 		
-		is_panning = Input.is_action_pressed("mb_middle")
-	pass
+
 
 
 func place_tile():
 	if Global.backgroundLayer:
 		var mousepos = Global.background.local_to_map(get_global_mouse_position())
 		Global.background.set_cell(Vector2i(mousepos.x, mousepos.y), Global.TileID, Global.current_tile_coords)
-		pass
+		
 	elif Global.playerLayer:
 		var mousepos = Global.playerArea.local_to_map(get_global_mouse_position())
 		Global.playerArea.set_cell(Vector2i(mousepos.x, mousepos.y), Global.TileID, Global.current_tile_coords)
@@ -109,15 +108,15 @@ func remove_tile():
 	if Global.backgroundLayer:
 		var mousepos = Global.background.local_to_map(get_global_mouse_position())
 		Global.background.set_cell(Vector2i(mousepos.x, mousepos.y), -1)
-		pass
+		
 	elif Global.playerLayer:
 		var mousepos = Global.playerArea.local_to_map(get_global_mouse_position())
 		Global.playerArea.set_cell(Vector2i(mousepos.x, mousepos.y), -1)
-		pass
+		
 	elif Global.foregroundLayer:
 		var mousepos = Global.foreground.local_to_map(get_global_mouse_position())
 		Global.foreground.set_cell(Vector2i(mousepos.x, mousepos.y), -1)
-		pass
+		
 
 func move_editor():
 	if Input.is_action_pressed("w"):
