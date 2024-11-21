@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b365ptyl2j4um"]
 
 [ext_resource type="Script" path="res://scripts/load_screen.gd" id="1_h7er3"]
-[ext_resource type="Texture2D" uid="uid://d37cb774sgfu4" path="res://assets/backgrounds/game_background_4.png" id="1_oilvo"]
+[ext_resource type="Texture2D" uid="uid://c663lr5snxjnr" path="res://assets/backgrounds/Starry Mountains Home Screen.png" id="2_vbge8"]
 [ext_resource type="FontFile" uid="uid://dfnj0s4uiru6a" path="res://assets/ui_ux/Bungee-Regular.ttf" id="3_mrbl0"]
 [ext_resource type="PackedScene" uid="uid://cjjvl7pftkr0u" path="res://scenes/scene_transition_rect.tscn" id="4_rqmlc"]
 
@@ -14,7 +14,7 @@ script = ExtResource("1_h7er3")
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("1_oilvo")
+texture = ExtResource("2_vbge8")
 expand_mode = 1
 
 [node name="BoxContainer" type="BoxContainer" parent="TextureRect"]

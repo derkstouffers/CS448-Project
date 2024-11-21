@@ -1774,9 +1774,9 @@ text = "+"
 
 [node name="GridContainer2" type="GridContainer" parent="Level_menu"]
 layout_mode = 0
-offset_left = 767.0
+offset_left = 1483.0
 offset_top = 5.0
-offset_right = 790.0
+offset_right = 1508.0
 offset_bottom = 55.0
 
 [node name="delete_level" type="Button" parent="Level_menu/GridContainer2"]
