@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 	var tile = local_to_map(get_global_mouse_position())
 	selected_tile = map_to_local(tile)
 	
-	if Global.playing and has_node("dwarf"):
+	if Global.playing and has_node("dwarf") or has_node("wizard") or has_node("witch"):
 		
 		if objectives(objective):
 			#await get_tree().create_timer(0.5).timeout
@@ -75,7 +75,12 @@ func go_to_next_level() -> void:
 		#### change cameras back to editing camera
 		camera.enabled = true
 		if Global.player_count > 0:
-			Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
+			if Global.playerArea.has_node("dwarf"):
+				Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
+			elif Global.playerArea.has_node("wizard"):
+				Global.playerArea.remove_child(Global.playerArea.get_node("wizard"))
+			elif Global.playerArea.has_node("witch"):
+				Global.playerArea.remove_child(Global.playerArea.get_node("witch"))
 			Global.player_count -= 1
 		
 		Global.i = 1

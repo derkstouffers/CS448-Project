@@ -308,11 +308,22 @@ func _on_edit_pressed() -> void:
 	quest_tracker.visible = false
 	Global.playing = false
 	
-	
+	_on_clear_popup()
 	### change cameras back to editing camera
 	camera.enabled = true
 	if Global.player_count > 0:
-		Global.playerArea.get_node("dwarf").get_child(2).enabled = false
+		if Global.playerArea.has_node("dwarf"):
+			Global.playerArea.get_node("dwarf").get_child(2).enabled = false
+			Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
+		elif Global.playerArea.has_node("wizard"):
+			Global.playerArea.get_node("wizard").get_child(2).enabled = false
+			Global.playerArea.remove_child(Global.playerArea.get_node("wizard"))
+		elif Global.playerArea.has_node("witch"):
+			Global.playerArea.get_node("witch").get_child(2).enabled = false
+			Global.playerArea.remove_child(Global.playerArea.get_node("witch"))
+		Global.player_count -= 1
+	
+	_load_dungeon()
 
 ###
 ### PLAYER SPAWN BLOCK
@@ -982,7 +993,8 @@ func get_object_data(tilemaplayer: TileMapLayer)->Dictionary:
 ### loads the object_data into their respective levels and Player Areas
 # objects will need added to this as we add them into the system
 func load_object_data(lev):
-	
+		#print(Global.level_data.get(lev))
+		#print(Global.level_dict)
 		for object in Global.level_data.get(lev).get("objects").keys():
 			if object.begins_with("coin"):
 				var instance = coin.instantiate()
