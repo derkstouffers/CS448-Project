@@ -16,7 +16,9 @@ extends TileMapLayer
 @export var objective = 0
 
 var selected_tile
-const player1 = preload("res://scenes/dwarf.tscn")
+const dwarf = preload("res://scenes/dwarf.tscn")
+const wizard = preload("res://scenes/wizard.tscn")
+const witch = preload("res://scenes/witch.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -58,10 +60,9 @@ func go_to_next_level() -> void:
 	var next_level
 	
 	if level_count == Global.i:
-		## GAME OVER REACHED END OF LAST LEVEL MADE RETURN TO EDIT MODE
+		## GAME OVER REACHED END OF LAST LEVEL, RETURN TO EDIT MODE
 		
 		
-		button_group._load_dungeon()
 		
 		## RETURN TO EDIT MODE AT LEVEL 1
 		button_group._on_edit_pressed()
@@ -94,6 +95,9 @@ func go_to_next_level() -> void:
 		Global.foreground = level_return.get_node("foreground")
 		Global.playerArea.collision_enabled = true
 		
+		# reset objective and its overlay for next play through
+		objective = Global.playerArea.objective
+		button_group.objectiveOverlay.get_node("Container/curr_level_objective").text = button_group.objective_overlay(objective)
 		
 		
 		
@@ -102,10 +106,19 @@ func go_to_next_level() -> void:
 	
 	elif level_count > Global.i:
 		### GO TO NEXT LEVEL 
-		
+		var player
 		## remove player from previous level
-		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
-		Global.player_count -= 1
+		if Global.player_count > 0:
+			if Global.playerArea.has_node("dwarf"):
+				player = "dwarf"
+				Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
+			elif Global.playerArea.has_node("wizard"):
+				player = "wizard"
+				Global.playerArea.remove_child(Global.playerArea.get_node("wizard"))
+			elif Global.playerArea.has_node("witch"):
+				player = "witch"
+				Global.playerArea.remove_child(Global.playerArea.get_node("witch"))
+			Global.player_count -= 1
 		
 		
 		## remove collision from previous level
@@ -121,28 +134,50 @@ func go_to_next_level() -> void:
 		Global.level = next_level
 		button_group._on_load_level_pressed()
 		
-	
-		## add player to new level 
-		var player = player1.instantiate()
+		
+		var char
+		## add player to new level
+		if player == "dwarf": 
+			char = dwarf.instantiate()
+		elif player == "wizard":
+			char = wizard.instantiate()
+		elif player == "witch":
+			char = witch.instantiate()
 
 		## enable collision mesh for new level
 		Global.playerArea = next_level.get_node('Player Area')
 		Global.playerArea.collision_enabled = true
 		objective = Global.playerArea.objective
+		button_group.objectiveOverlay.get_node("Container/curr_level_objective").text = button_group.objective_overlay(objective)
+		#button_group.objectiveOverlay.visible = true
 
-		Global.playerArea.add_child(player)
+		Global.playerArea.add_child(char)
 		
 		## set position for where player will enter new level
 		## need to probably make it variable for each level that can be placed by user
-		Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5)))
+		
+		if Global.playerArea.has_node("dwarf"):
+			Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5)))
+		elif Global.playerArea.has_node("wizard"):
+			Global.playerArea.get_node("wizard").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5)))
+		elif Global.playerArea.has_node("witch"):
+			Global.playerArea.get_node("witch").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5)))
+				
+		
 		
 		Global.player_count += 1
 		if Global.player_count == 1:
 			#camera.enabled = false
-			next_level.get_node('Player Area/dwarf').get_child(2).enabled = true
+			if next_level.has_node("Player Area/dwarf"):
+				next_level.get_node('Player Area/dwarf').get_child(2).enabled = true
+			elif next_level.has_node("Player Area/wizard"):
+				next_level.get_node('Player Area/wizard').get_child(2).enabled = true
+			elif next_level.has_node("Player Area/witch"):
+				next_level.get_node('Player Area/witch').get_child(2).enabled = true
 		
 		### increment i to access the next level in the global array of levels
 		Global.i += 1
+		
 		
 		
 	

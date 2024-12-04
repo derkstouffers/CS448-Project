@@ -1,31 +1,32 @@
 [gd_scene load_steps=7 format=3]
 
-[ext_resource type="AudioStream" path="res://assets/audio/Viking Folk Music Pack/Loops/wav/4. Frostbound Horizons.wav" id="1_mu0jk"]
-[ext_resource type="PackedScene" path="res://scenes/level.tscn" id="2_nb3nv"]
-[ext_resource type="Script" path="res://scripts/level.gd" id="3_y5dbf"]
-[ext_resource type="Script" path="res://scripts/editor_object.gd" id="4_0wac4"]
-[ext_resource type="PackedScene" path="res://scenes/button_group.tscn" id="5_ewrmg"]
-[ext_resource type="Script" path="res://scripts/button_group.gd" id="6_opxwk"]
+[ext_resource type="AudioStream" path="res://assets/audio/Viking Folk Music Pack/Loops/wav/4. Frostbound Horizons.wav" id="1_o644y"]
+[ext_resource type="PackedScene" path="res://scenes/level.tscn" id="2_iuplt"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="3_2y7km"]
+[ext_resource type="Script" path="res://scripts/editor_object.gd" id="4_85poo"]
+[ext_resource type="PackedScene" path="res://scenes/button_group.tscn" id="5_sxsdi"]
+[ext_resource type="Script" path="res://scripts/button_group.gd" id="6_1pm3o"]
 
 [node name="main" type="Node2D"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_mu0jk")
+stream = ExtResource("1_o644y")
 autoplay = true
 
-[node name="level" type="Node2D" parent="." instance=ExtResource("2_nb3nv")]
-script = ExtResource("3_y5dbf")
+[node name="level" type="Node2D" parent="." instance=ExtResource("2_iuplt")]
+visible = false
+script = ExtResource("3_2y7km")
 playing = false
 
 [node name="editor_object" type="Node2D" parent="."]
-position = Vector2(-352.028, -185.422)
-script = ExtResource("4_0wac4")
+position = Vector2(-383.215, -186.221)
+script = ExtResource("4_85poo")
 cam_spd = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="editor_object"]
 
-[node name="button_group" type="CanvasLayer" parent="." instance=ExtResource("5_ewrmg")]
-script = ExtResource("6_opxwk")
+[node name="button_group" type="CanvasLayer" parent="." instance=ExtResource("5_sxsdi")]
+script = ExtResource("6_1pm3o")
 
 [node name="cam_container" type="Node2D" parent="."]
 

@@ -1917,6 +1917,7 @@ access = 1
 root_subfolder = "dungeon_save_files"
 
 [node name="objectiveOverlay" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Container" type="Container" parent="objectiveOverlay"]
 offset_left = 417.0

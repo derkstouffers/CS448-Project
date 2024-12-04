@@ -108,27 +108,42 @@ func _on_play_pressed() -> void:
 	if !ResourceLoader.exists(Global.load_path):
 		_on_save_pressed()
 	_on_save_file_dialog_file_selected(Global.load_path)
-	if Global.playerArea.get_used_cells_by_id(4).size() < 1:
-		error_window.visible = true
-		
-	else:
+	
+	var spawn_pts_present = true
+	
+	if Global.level_array.size() >= 1:
+		for lev in Global.level_array:
+			if main.get_node(lev).get_node("Player Area").get_used_cells_by_id(4).size() < 1:
+				_on_edit_pressed()
+				error_window.visible = true
+				spawn_pts_present = false
+				
+				
+	if spawn_pts_present:
+
 		for level_ in Global.level_dict.keys():
-			
+					
 			main.get_node(level_ + "/Background").clear()
 			main.get_node(level_ + "/Player Area").clear()
 			main.get_node(level_ + "/foreground").clear()
 			
+			
+			## I think that because I am not removing the object data from the Global.level_data when this adds in more objects in the load, it doubles the number of objects in the Global.level_data? FIXME		
 			for object in Global.level_data.get(level_).get("objects").keys():
 				main.get_node(level_ + "/Player Area").remove_child(main.get_node(level_ + "/Player Area").get_node(object))
+				
 				if object.begins_with("dwarf"):
 					Global.player_count -= 1
-			
-		_on_load_level_pressed()		
-		Global.playing = true
 		
+
+					
+		_on_load_level_pressed()	
+
+		Global.playing = true
+				
 		if Global.player_count < 1:
 			player_select_window.visible = true
-			
+					
 		top_menu.visible = false
 		block_menu.visible = false
 		layer_menu.visible = false
@@ -136,17 +151,17 @@ func _on_play_pressed() -> void:
 		all_blocks.visible = false
 		mini_map.visible = false
 		edit.visible = true
-		
+		objectiveOverlay.visible = true
 		quest_tracker.visible = true
-		
+				
 		for lev in Global.level_array:
 			if lev == Global.level.name:
 				Global.playerArea.collision_enabled = true
 			else:
 				main.get_node(lev).get_node("Player Area").collision_enabled = false
-		
-		
-		## Shift to player camera if player already placed in world
+				
+				
+				## Shift to player camera if player already placed in world
 		if Global.player_count == 1:
 			camera.enabled = false
 			Global.playerArea.get_node("dwarf").get_child(2).enabled = true
@@ -225,20 +240,27 @@ func _on_clear_popup() -> void:
 	Global.playerArea.clear()
 	Global.foreground.clear()
 	
-	# remove interactive objects
+	# remove interactive objects from current level clicked
 	for object in Global.level_data.get(Global.level.name).get("objects").keys():
 		Global.playerArea.remove_child(Global.playerArea.get_node(object))
 	
 	# remove player	
 	if Global.player_count > 0:
-		Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
-		Global.player_count -= 1
+		if Global.playerArea.has_node("dwarf"):
+			Global.playerArea.remove_child(Global.playerArea.get_node("dwarf"))
+			Global.player_count -= 1
+		if Global.playerArea.has_node("wizard"):
+			Global.playerArea.remove_child(Global.playerArea.get_node("wizard"))
+			Global.player_count -= 1
+		if Global.playerArea.has_node("witch"):
+			Global.playerArea.remove_child(Global.playerArea.get_node("witch"))
+			Global.player_count -= 1
 		
 	Global.level_dict[Global.level.name]["coins"] = 0
 	Global.level_dict[Global.level.name]["chests"] = 0
 	Global.level_dict[Global.level.name]["enemies"] = 0
 	
-	print(Global.level_dict)
+	#print(Global.level_dict)
 	
 
 ###
@@ -306,9 +328,20 @@ func _on_edit_pressed() -> void:
 	mini_map.visible = true
 	edit.visible = false
 	quest_tracker.visible = false
+	objectiveOverlay.visible = false
 	Global.playing = false
 	
-	_on_clear_popup()
+	for lev in Global.level_array:
+		main.get_node(lev).get_node("Background").clear()
+		main.get_node(lev).get_node("Player Area").clear()
+		main.get_node(lev).get_node("foreground").clear()
+		
+		# remove interactive objects
+		
+		for object in Global.level_data.get(lev).get("objects").keys():
+			main.get_node(lev).get_node("Player Area").remove_child(main.get_node(lev).get_node("Player Area").get_node(object))
+	
+		
 	### change cameras back to editing camera
 	camera.enabled = true
 	if Global.player_count > 0:
@@ -323,7 +356,9 @@ func _on_edit_pressed() -> void:
 			Global.playerArea.remove_child(Global.playerArea.get_node("witch"))
 		Global.player_count -= 1
 	
+	
 	_load_dungeon()
+
 
 ###
 ### PLAYER SPAWN BLOCK
@@ -728,10 +763,6 @@ func update_coins_gained(_gained_coins):
 	$Quest_Tracker/Container/coin_tracker.text = str(Global.coins)
 
 func _on_ladder_pressed() -> void:
-	#Global.place_tile = true
-	#Global.current_item = null
-	#Global.TileID = 5
-	#Global.current_tile_coords = Vector2i(0,0)
 	Global.place_tile = false
 	Global.current_item = ladder
 
@@ -777,7 +808,7 @@ func _on_add_level_pressed() -> void:
 	### Give functionality to button
 	button.text = new_level.get_name()
 	Global.level_array.append(button.text)
-	Global.level_dict[button.text] = {"coins" : 0, "chests": 0, "enemies": 0} ## testing a different version with dictionary
+	Global.level_dict[button.text] = {"coins" : 0, "chests": 0, "enemies": 0} 
 	Global.level.visible = false
 	new_level.visible = true
 	
@@ -805,7 +836,7 @@ func _on_level_select(level_name):
 	## make level selected visible and previous level hidden
 	Global.level.visible = false
 	level_select.visible = true
-	objectiveOverlay.visible = true
+	
 	
 	# fix block collision issues from one level to the next
 	Global.playerArea.collision_enabled = false
@@ -833,7 +864,7 @@ func _on_level_1_pressed() -> void:
 	Global.level.visible = false
 	level1.visible = true
 	Global.playerArea.collision_enabled = false
-	objectiveOverlay.visible = true
+	
 	
 	Global.level =  level1
 	Global.background = get_node("/root/main/level/Background")
@@ -881,8 +912,8 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 	custom_data.level_data = {}
 	custom_data.level_dict = {}
 	
-	for levl in get_tree().get_root().get_child(1).get_children():
-		#print(get_tree().get_root().get_child(1).get_children())
+	for levl in main.get_children():#get_tree().get_root().get_child(1).get_children():
+		
 		if levl.name.begins_with("level"):
 			custom_data.level_data[levl.name] = {
 				"objective": levl.get_node("Player Area").objective,
@@ -903,6 +934,7 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 	Global.load_path = save_path
 	if error == OK:
 		print("save data successful")
+		Global.level_data = {}
 		Global.level_data = custom_data.level_data
 	else:
 		print("save data failed")
@@ -931,10 +963,14 @@ func _on_load_file_dialog_file_selected(path: String) -> void:
 		var loaded_data = ResourceLoader.load(load_path)
 		
 		if loaded_data is CustomData:
+			Global.level_dict = {}
+			Global.level_data = {}
+			Global.level_dict = loaded_data.level_dict #{"coins": 0, "chests": 0, "enemies": 0}
+			Global.level_data = loaded_data.level_data
+			
 			
 			for level_name in loaded_data.level_data.keys():
-				Global.level_dict = loaded_data.level_dict#{"coins": 0, "chests": 0, "enemies": 0}
-				Global.level_data = loaded_data.level_data
+				
 				
 				var level_data = loaded_data.level_data[level_name]
 				
@@ -993,8 +1029,7 @@ func get_object_data(tilemaplayer: TileMapLayer)->Dictionary:
 ### loads the object_data into their respective levels and Player Areas
 # objects will need added to this as we add them into the system
 func load_object_data(lev):
-		#print(Global.level_data.get(lev))
-		#print(Global.level_dict)
+
 		for object in Global.level_data.get(lev).get("objects").keys():
 			if object.begins_with("coin"):
 				var instance = coin.instantiate()
@@ -1015,9 +1050,8 @@ func load_object_data(lev):
 			elif object.begins_with("ladder"):
 				var instance = ladder.instantiate()
 				main.get_node(lev + '/Player Area').add_child(instance, true)
-				#print(Global.level_data.get(lev).get("objects").get(object)["position"])
 				instance.position = Global.level_data.get(lev).get("objects").get(object)["position"]
-				pass
+			
 
 ### LOAD INDIVIDUAL LEVEL
 
@@ -1055,7 +1089,6 @@ func _on_objective_selector_id_pressed(id: int) -> void:
 	if id == 1:
 		Global.playerArea.objective = 2
 	
-	objectiveOverlay.visible = true
 	$objectiveOverlay/Container/curr_level_objective.text = objective_overlay(Global.playerArea.objective)
 	$Top_menu/GridContainer/objectives.select(Global.playerArea.objective)
 
@@ -1105,10 +1138,15 @@ func _load_dungeon():
 		var loaded_data = ResourceLoader.load(load_path)
 		
 		if loaded_data is CustomData:
+			Global.level_dict = {}
+			Global.level_data = {}
+			Global.level_dict = loaded_data.level_dict  #[level_name] = {"coins": 0, "chests": 0, "enemies": 0}
+		
+			
+			Global.level_data = loaded_data.level_data
 			
 			for level_name in loaded_data.level_data.keys():
-				Global.level_dict = loaded_data.level_dict#[level_name] = {"coins": 0, "chests": 0, "enemies": 0}
-				Global.level_data = loaded_data.level_data
+				
 				
 				var level_data = loaded_data.level_data[level_name]
 				
@@ -1132,7 +1170,7 @@ func _load_dungeon():
 				
 				
 						
-			objectiveOverlay.visible = true
+			
 			$objectiveOverlay/Container/curr_level_objective.text = objective_overlay(Global.playerArea.objective)
 			$Top_menu/GridContainer/objectives.select(Global.playerArea.objective)			
 			print("load successful")
@@ -1161,7 +1199,5 @@ func _on_objectives_item_selected(index: int) -> void:
 	elif index == 0:
 		Global.playerArea.objective = 0
 	
-	
-	objectiveOverlay.visible = true
 	$objectiveOverlay/Container/curr_level_objective.text = objective_overlay(Global.playerArea.objective)
 	
