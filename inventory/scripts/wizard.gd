@@ -1,3 +1,10 @@
+"""
+	Wizard character
+	
+	If the user is in play mode, gives the character the ability to interact with objects, attacks, and have mobility.
+
+"""
+
 extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 
@@ -31,7 +38,6 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	
 		var direction := Input.get_axis("left", "right")
 		if direction:
@@ -49,7 +55,7 @@ func _physics_process(delta: float) -> void:
 			
 			
 		
-		
+		# attack button pressed (space bar) creates an instance of the attack object, gives it directionality and position based on character.
 		if Input.is_action_just_pressed("attack"):
 			var fire_attack = fireball.instantiate()
 			
@@ -65,12 +71,13 @@ func _physics_process(delta: float) -> void:
 				Global.playerArea.add_child(fire_attack)
 				fire_attack.position.x = Global.playerArea.get_node("wizard").position.x  - 15
 				fire_attack.position.y = Global.playerArea.get_node("wizard").position.y
-			
+		
+		# lets player movement happen	
 		move_and_slide()	
 		
 
 		
-
+# checks interaction between wizard and slime (not doing anything right now)
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group('slime'):
 		print("collided")

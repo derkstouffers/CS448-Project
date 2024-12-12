@@ -1,3 +1,12 @@
+"""
+	playerArea tilemaplayer
+	This is the layer in which the character can interact with tiles, objects
+	
+	checks the current objective for playerArea the character is located
+	if character completes current playerArea objective, moves character to next level or exits to edit mode
+"""
+
+
 extends TileMapLayer
 
 @onready var main = get_node("/root/main")
@@ -24,22 +33,27 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# when playing checks if a character is present, if they are then checks if they have completed the chosen objectives, 
+# if objective completed should transition to the next level
 func _process(_delta: float) -> void:
+	
+	# used for the grid snapping of objects being placed/removed interacts with editor_object script 
 	var tile = local_to_map(get_global_mouse_position())
 	selected_tile = map_to_local(tile)
 	
+	
+	# checks game mode, and if character is present, if true checks if level objective has been completed 
 	if Global.playing and has_node("dwarf") or has_node("wizard") or has_node("witch"):
 		
 		if objectives(objective):
-			#await get_tree().create_timer(0.5).timeout
 			go_to_next_level()
+			
 	elif Global.playing == false:
 		Global.coins = 0
 	
 
 
-
+## checks what the current objective is and if it is complete returns true
 func objectives(quest : int):
 	
 	if quest == 1:
@@ -147,14 +161,15 @@ func go_to_next_level() -> void:
 		## enable collision mesh for new level
 		Global.playerArea = next_level.get_node('Player Area')
 		Global.playerArea.collision_enabled = true
+		
+		## get objective for new level
 		objective = Global.playerArea.objective
 		button_group.objectiveOverlay.get_node("Container/curr_level_objective").text = button_group.objective_overlay(objective)
-		#button_group.objectiveOverlay.visible = true
-
+		
+		# add player to new level
 		Global.playerArea.add_child(char)
 		
-		## set position for where player will enter new level
-		## need to probably make it variable for each level that can be placed by user
+		## Player position set to spawn block (tile_id: 4)
 		
 		if Global.playerArea.has_node("dwarf"):
 			Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5)))
@@ -167,7 +182,7 @@ func go_to_next_level() -> void:
 		
 		Global.player_count += 1
 		if Global.player_count == 1:
-			#camera.enabled = false
+			# activates the camera to focus on the player
 			if next_level.has_node("Player Area/dwarf"):
 				next_level.get_node('Player Area/dwarf').get_child(2).enabled = true
 			elif next_level.has_node("Player Area/wizard"):

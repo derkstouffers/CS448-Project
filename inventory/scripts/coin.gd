@@ -1,3 +1,13 @@
+"""
+	coin object
+	
+	registers when a character enters the area of the coin, then adds 1 to the number of coins collected by character.
+	Reduces the number of coins registered within the log for number of different objects present in a level,
+	used for checking if level objective is completed 
+"""
+
+
+
 extends Node2D
 
 

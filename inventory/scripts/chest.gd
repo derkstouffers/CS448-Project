@@ -1,3 +1,12 @@
+"""
+	chest object
+	
+	registers when a character enters the area of the chest, activates the chest animation,
+	then assigns a random amount of coins between 0 and 100 to the character.
+	Reduces the number of chests registered within the log for number of different objects present in a level,
+	used for checking if level objective is completed 
+"""
+
 extends Node2D
 
 

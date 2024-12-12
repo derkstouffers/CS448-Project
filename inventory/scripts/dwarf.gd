@@ -1,3 +1,12 @@
+"""
+	Dwarf character
+	
+	If the user is in play mode, gives the character the ability to interact with objects, attacks, and have mobility.
+
+"""
+
+
+
 extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 
@@ -25,6 +34,7 @@ func _physics_process(delta: float) -> void:
 			if velocity.y >= 2500:
 				Global.playerArea.get_node("dwarf").position = Global.playerArea.map_to_local((Vector2i(Global.playerArea.get_used_cells_by_id(4)[0].x, Global.playerArea.get_used_cells_by_id(4)[0].y - 5)))
 		
+		# attempts to make the character only able to climb up and down on ladder while in ladder area without gravity affecting the character FIXME
 		if on_ladder:
 			if Input.is_action_pressed("jump"):
 				velocity.y = -SPEED*delta*10
@@ -39,7 +49,6 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	
 		var direction := Input.get_axis("left", "right")
 		if direction:
@@ -56,7 +65,7 @@ func _physics_process(delta: float) -> void:
 			
 			
 		
-		
+		# attack button pressed (space bar) creates an instance of the attack object, gives it directionality and position based on character.
 		if Input.is_action_pressed("attack"):
 			var fire_attack = fireball.instantiate()
 			

@@ -1,3 +1,12 @@
+"""
+	slime object
+	
+	if in playing mode and slime is in the current level being played:
+		slime follows predetermined path (moves back and forth)
+		if fireball enters slime area2D slime is defeated 
+"""
+
+
 extends CharacterBody2D
 
 @onready var object_cursor = get_node("/root/main/editor_object")
@@ -26,22 +35,22 @@ func _physics_process(delta: float) -> void:
 			
 			$AnimatedSprite2D.play("bounce")
 			
-			## based on this implementation we need this to have the gravity work
+			## allows the movement of character to work
 			move_and_slide()
 
 			
 
-
+# checks for anything interacting with slime's area2D, slime dies and is removed from enemy count for current level for objective completion check
 func _on_area_2d_area_entered(_area: Area2D) -> void:
-	$AnimatedSprite2D.play("hit")
+	
 	queue_free()
 	Global.level_dict[Global.level.name]["enemies"] -= 1
 
 
-
+# checks if slime is in the current level being played 
 func _current_level():
 	
 	for lev in Global.level_array:
 		if get_node("/root/main/" + lev + "/Player Area").has_node("dwarf") or get_node("/root/main/" + lev + "/Player Area").has_node("wizard") or get_node("/root/main/" + lev + "/Player Area").has_node("witch"):
 			level = lev
-			#print(level)
+			

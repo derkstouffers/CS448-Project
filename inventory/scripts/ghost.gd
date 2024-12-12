@@ -1,3 +1,9 @@
+"""
+	Ghost object
+	
+	not finished, should function similar to slime but has bug 
+"""
+
 extends CharacterBody2D
 
 @onready var object_cursor = get_node("/root/main/editor_object")
