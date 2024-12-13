@@ -8,6 +8,8 @@ DungeonSmith: Senior Project FALL24
 
   Our goal is for this to be used by kids age 6 and up, so they can have a simple, fun, and interactive introduction to game design.
 
+  To run properly, make sure you are in the load_screen node, before pressing run or f6
+
 CONTROLS:
 EDIT MODE:
   CAMERA: ARROW KEYS

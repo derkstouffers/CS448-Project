@@ -53,7 +53,6 @@ const empty_dungeon = preload("res://scenes/main.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
 	
 	Global.gained_coins.connect(update_coins_gained)
 	if !Global.dungeon_loaded:
